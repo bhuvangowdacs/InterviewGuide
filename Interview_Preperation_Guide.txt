@@ -1,0 +1,2253 @@
+
+
+✅ Q1. Can you explain your experience with Java and Spring Boot in developing backend systems?
+⭐ Strong Interview Answer
+
+“In my experience as a Java backend developer, I have worked extensively with Core Java, Java 8+ features, and Spring Boot to build scalable and maintainable backend systems. 
+I have developed multiple RESTful APIs using Spring Boot modules such as Spring Web, Spring Data JPA, and Spring Security.
+
+I have designed backend modules including user management, authentication, and business workflows. I commonly use Hibernate/JPA for ORM mapping and optimize queries using pagination, 
+lazy loading, and proper indexing.
+
+I have also integrated microservices using REST APIs, applied exception handling, DTO–Entity mapping, and followed clean code practices like SOLID principles. 
+In terms of deployment, I have deployed Spring Boot applications on AWS using EC2, RDS, and Elastic Beanstalk, and have experience packaging applications using Maven and Docker.”
+
+#######################################################################################################################################################################################
+
+✅ Q2. How have you utilized Docker and Kubernetes in your previous projects?
+⭐ Strong Interview Answer
+
+“In my recent projects, I have used Docker to containerize Spring Boot applications by writing Dockerfiles and creating lightweight images. 
+This ensured consistent environments across development, testing, and production. I pushed images to Docker Hub or AWS ECR as part of the CI/CD pipeline.
+
+For orchestration, I worked with Kubernetes, where I deployed containers using Deployments, Services, and ConfigMaps. 
+I managed rollouts/rollbacks and used Horizontal Pod Autoscaler for scaling. I have also used kubectl commands for debugging pods, checking logs, and monitoring resource usage. 
+This combination of Docker and Kubernetes helped achieve reliability, scalability, and zero-downtime deployments.”
+
+#######################################################################################################################################################################################
+
+✅ Q3. Can you discuss your experience with CI/CD processes and tools like Jenkins and AWS?
+⭐ Strong Interview Answer
+
+“I have hands-on experience implementing CI/CD pipelines using Jenkins. I created CI pipelines that automatically triggered on Git commits, executed Maven builds, and ran unit tests. 
+I configured Jenkins to generate artifacts and push them to S3 or Docker registries.
+
+For CD, I set up pipelines that deployed artifacts to AWS EC2, Elastic Beanstalk, or EKS clusters using automated scripts. 
+I have worked with Jenkins plugins like Git, Maven, Docker, and AWS CLI. As part of automation, I monitored build logs, handled failures, and improved deployment speed by 
+caching layers and optimizing pipeline stages.
+
+This CI/CD setup significantly improved deployment consistency and reduced manual effort in our workflow.”
+
+#######################################################################################################################################################################################
+
+✅ Q4. What strategies do you employ to ensure high-quality code and effective communication within your team?
+⭐ Strong Interview Answer
+
+“To ensure high-quality code, I follow clean coding practices such as proper naming, modular methods, and SOLID principles. 
+I regularly use code reviews, static code analysis tools (like SonarQube), and unit testing frameworks like JUnit and Mockito.
+
+I write meaningful test cases and follow CI pipelines that fail fast on code smells or coverage issues. 
+I also conduct peer review sessions to discuss improvements and share knowledge.
+
+For team communication, I participate actively in daily standups, sprint planning, and retrospective meetings. 
+I use tools like Jira, Slack, and Confluence to maintain transparency. I always try to discuss changes early with teammates to avoid blockers and ensure smooth collaboration.”
+
+
+
+
+
+
+#######################################################################################################################################################################################
+
+
+
+SECTION 1: Personal & HR Round Questions
+1. Tell me about yourself.
+
+Answer:
+
+I’m a Java backend developer with around 2.5 years of hands-on experience building RESTful APIs and microservices using Spring Boot, Hibernate, and MySQL.
+I’ve worked on real-world projects like a Doctor Appointment Booking System and an E-commerce backend, where I handled features like authentication, scheduling, and payment integration.
+I’m passionate about writing clean, maintainable code, following best practices, and continuously learning — recently I’ve been exploring Spring Security and AWS for backend deployments.
+
+2. Why do you want to join our company?
+
+Answer:
+
+I’ve followed your company’s work in scalable backend systems and I’m really impressed with the focus on innovation and product quality.
+I’m looking for an environment where I can contribute to meaningful backend development challenges and also grow my skills with experienced peers — and I believe your company’s tech stack and culture align perfectly with that.
+
+3. What are your strengths and weaknesses?
+
+Answer:
+
+My biggest strength is my problem-solving mindset — I approach complex issues logically and don’t hesitate to deep-dive into debugging.
+I also have strong collaboration skills, which help when working with cross-functional teams.
+As for a weakness, earlier I tended to focus too long on optimizing code before completing other priorities, but I’ve improved by balancing optimization with timely delivery.
+
+4. Tell me about a challenge you faced in your project and how you handled it.
+
+Answer:
+
+In one of my projects, we faced a performance issue — API response time was too high due to inefficient database queries.
+I used Hibernate logs to identify N+1 query problems and optimized them using fetch joins and caching. This reduced response time by nearly 40%.
+I also documented the fix and discussed it with the team to prevent similar issues in future sprints.
+
+5. How do you handle tight deadlines or pressure?
+
+Answer:
+
+I prioritize tasks based on impact and deadlines, break down work into smaller goals, and communicate early if there’s any dependency.
+I’ve learned that transparent communication and a calm, methodical approach are the best ways to handle pressure while maintaining code quality.
+
+6. Why are you looking for a change?
+
+Answer:
+
+I’ve learned a lot in my current role, especially about backend architecture and API design, but I feel ready for more complex challenges and a faster-paced environment.
+I’m looking for a company where I can contribute to large-scale systems and also grow into a more design-oriented backend role.
+
+7. What motivates you as a Java developer?
+
+Answer:
+
+I’m motivated by solving backend problems that directly impact users — like improving API speed, designing scalable services, or automating backend tasks.
+Every time I deploy a stable, optimized feature to production, it gives me a real sense of achievement.
+
+8. How do you stay updated with new technologies?
+
+Answer:
+
+I regularly follow Java and Spring communities on GitHub and Reddit, read Medium articles, and take online courses on topics like microservices, Docker, and cloud deployment.
+I also experiment with side projects to practice what I learn.
+
+9. Where do you see yourself in the next 3 years?
+
+Answer:
+
+In the next 3 years, I see myself as a Senior Backend Developer or Team Lead, contributing to system design decisions and mentoring junior developers while still being hands-on with Java and backend tech.
+
+10. What are your salary expectations?
+
+Answer:
+
+Based on my experience and market standards, I’m expecting a fair and competitive package that reflects my skills and contributions.
+I’m also open to discussion depending on the overall growth opportunities.
+
+🔹 SECTION 2: Managerial Round (Technical + Behavioral)
+1. How do you ensure code quality in your projects?
+
+Answer:
+
+I follow clean code principles, use meaningful naming conventions, and break logic into smaller reusable methods.
+I also write unit tests using JUnit and Mockito, perform peer code reviews, and use SonarQube for code quality analysis.
+
+2. Explain a time when your decision improved a project’s performance.
+
+Answer:
+
+In our appointment booking app, repeated DB calls were slowing the dashboard load time.
+I proposed using Redis caching for frequently accessed data. After implementing it, response time improved drastically, and the load on MySQL reduced significantly.
+
+3. How do you handle conflicts in a team?
+
+Answer:
+
+I believe in open communication. I try to understand both perspectives and focus on what’s best for the project rather than personal opinions.
+If required, I bring in the lead to mediate — but I prefer resolving issues collaboratively and respectfully.
+
+4. Have you ever missed a deadline? How did you manage it?
+
+Answer:
+
+It happened once when we underestimated the time needed for API testing.
+I immediately informed the project manager, re-prioritized tasks, and worked extra hours to ensure minimal delay.
+I also updated our future sprint estimations based on that learning.
+
+5. How do you handle code reviews and feedback?
+
+Answer:
+
+I see feedback as an opportunity to improve. During reviews, I focus on understanding the reasoning behind suggestions and applying them consistently.
+I also give constructive feedback to peers — focusing on readability, performance, and maintainability.
+
+🔹 SECTION 3: Wrap-Up / Exit Round Questions
+1. Why should we hire you?
+
+Answer:
+
+I bring a solid foundation in Java backend development, a strong problem-solving mindset, and a proven record of delivering production-ready APIs.
+I’m adaptable, continuously learning, and I believe I can contribute effectively to both individual and team goals.
+
+2. Do you have any questions for us?
+
+Good questions to ask:
+
+How does your backend architecture scale for high traffic?
+
+What are the main challenges your backend team is currently solving?
+
+How do you measure success in this role?
+
+
+
+#######################################################################################################################################################################################
+
+
+Java 8 Features – Interview Questions & Answers
+
+Q: What are the main features introduced in Java 8?
+A: Lambda Expressions, Functional Interfaces, Streams API, Default and Static Methods in Interfaces,
+Optional Class, Date and Time API, and Nashorn Engine.
+Q: What is a Lambda Expression?
+A: A short block of code that takes parameters and returns a value. Enables functional programming and
+replaces anonymous classes.
+Q: What is a Functional Interface?
+A: An interface with exactly one abstract method. Examples include Runnable, Callable, Comparator. Can
+be annotated with @FunctionalInterface.
+Q: What are Default and Static Methods in Interfaces?
+A: Default methods use the 'default' keyword, allowing backward compatibility. Static methods belong to the
+interface itself.
+Q: What is the Streams API and why is it used?
+A: Used for processing collections in a functional style using operations like filter, map, and reduce.
+Q: What is the difference between map() and flatMap()?
+A: map() transforms each element, while flatMap() flattens nested structures into a single stream.
+
+
+
+#######################################################################################################################################################################################
+
+
+
+Q: What is the Optional class and why is it used?
+A: To handle null values safely and avoid NullPointerExceptions. It represents optional values explicitly.
+Q: What is the difference between forEach() and map()?
+A: forEach() performs an action on elements, map() transforms elements and returns a new stream.
+Q: How can you filter and collect data using Streams?
+A: By chaining filter() and collect() methods. Example: names.stream().filter(n ->
+n.startsWith('V')).collect(Collectors.toList()).
+Q: Explain Predicate, Function, Consumer, and Supplier interfaces.
+A: Predicate: returns boolean; Function: transforms data; Consumer: processes data without returning;
+Supplier: provides data without input.
+Q: What is the difference between Stream and Collection?
+A: Collection stores data, Stream processes data. Streams are computed on demand and not reusable.
+Q: Can Streams be reused?
+A: No. Once a terminal operation is executed, the stream is closed and cannot be reused.
+Q: What are Intermediate and Terminal Operations in Streams?
+A: Intermediate: filter, map, sorted; Terminal: collect, forEach, count.
+Q: What is the difference between findFirst() and findAny()?
+A: findFirst() returns the first element, findAny() returns any element and is optimized for parallel streams.
+Q: How can you create a Stream in Java 8?
+A: Using Stream.of(), Arrays.asList().stream(), or Stream.iterate().limit()
+
+#######################################################################################################################################################################################
+
+
+Managerial round (4th round):
+
+1) In a scenario, one lift is in 6th floor and other is in 4th fllor and user presses the button in 5th floor. Write an algorithm covering all cases
+
+2) Scenario in project which was challenging technicallly
+
+3) Why should i hire you?
+
+4) Tell me about the company 
+
+5) Any more questions you want to ask?
+
+6) Tell me something fun about yourself
+
+7) Why did you resign from your last company?
+
+
+
+Algorithm ChooseLift(liftA_floor, liftB_floor, user_floor):
+    Input: 
+        liftA_floor → current floor of Lift A
+        liftB_floor → current floor of Lift B
+        user_floor → floor where user pressed the button
+
+    Output:
+        Which lift (A or B) should move to the user_floor
+
+    Steps:
+    1. Calculate distanceA = abs(liftA_floor - user_floor)
+    2. Calculate distanceB = abs(liftB_floor - user_floor)
+
+    3. If distanceA < distanceB:
+           return "Lift A"
+       Else if distanceB < distanceA:
+           return "Lift B"
+       Else:
+           // Both lifts are equidistant
+           // Apply tie-breaker rule
+           If liftA_idle_time > liftB_idle_time:
+               return "Lift A"
+           Else if liftB_idle_time > liftA_idle_time:
+               return "Lift B"
+           Else:
+               // If both are idle for same duration
+               return "Lift A"  // default choice
+			   
+			   
+#######################################################################################################################################################################################
+
+
+
+
+| Feature            | HashMap    | TreeMap        |
+| ------------------ | ---------- | -------------- |
+| Ordering           | No order   | Sorted order   |
+| Performance        | Faster     | Slower         |
+| Null Key           | Allowed    | Not allowed    |
+| Order Guarantee    | No         | Yes            |
+| Internal Structure | Hash table | Red-Black Tree |
+
+
+
+#######################################################################################################################################################################################
+
+
+| Feature              | LinkedHashMap                  | TreeMap                    |
+| -------------------- | ------------------------------ | -------------------------- |
+| Ordering             | Insertion / Access order       | Sorted by keys             |
+| Performance          | Faster (O(1))                  | Slower (O(log n))          |
+| Null Key             | Allowed                        | Not allowed                |
+| Underlying Structure | Hash table + DLL               | Red-Black Tree             |
+| Best For             | Caching, predictable iteration | Sorted maps, range queries |
+
+
+#######################################################################################################################################################################################
+
+
+| Feature   | HashMap         | LinkedHashMap              |
+| --------- | --------------- | -------------------------- |
+| Ordering  | No order        | Insertion/access order     |
+| Speed     | Fastest         | Slightly slower            |
+| Null Key  | Allowed         | Allowed                    |
+| Structure | Hash table      | Hash table + linked list   |
+| Best For  | General purpose | Predictable order / caches |
+
+
+
+#######################################################################################################################################################################################
+
+
+| Feature       | HashSet     | LinkedHashSet            | TreeSet        |
+| ------------- | ----------- | ------------------------ | -------------- |
+| Order         | No order    | Insertion order          | Sorted order   |
+| Performance   | Fastest     | Slightly slower          | Slowest        |
+| Null Allowed  | Yes         | Yes                      | No             |
+| Underlying DS | Hash table  | Hash table + Linked list | Red-Black Tree |
+| Duplicates    | Not allowed | Not allowed              | Not allowed    |
+
+
+#######################################################################################################################################################################################
+
+
+| Feature     | HashMap     | LinkedHashMap            | TreeMap        |
+| ----------- | ----------- | ------------------------ | -------------- |
+| Order       | None        | Insertion / Access order | Sorted order   |
+| Performance | Fastest     | Slightly slower          | Slowest        |
+| Null Key    | Allowed     | Allowed                  | Not allowed    |
+| Structure   | Hash table  | Hash table + DLL         | Red-Black Tree |
+| Best For    | Fast lookup | Predictable order        | Sorted keys    |
+
+
+
+#######################################################################################################################################################################################
+
+
+⭐ What is Stream API?
+
+Stream API is a feature introduced in Java 8 that allows processing of collections in a declarative and functional style using operations like filter, map, and reduce.
+It provides a pipeline of operations where intermediate operations are lazy and terminal operations produce the final result.
+
+⭐ Important Properties
+
+Not a data structure → doesn’t store elements
+Functional → uses lambda expressions
+Lazy evaluation → intermediate operations run only when terminal op is called
+Can be parallel → parallelStream()
+Doesn’t modify original collection
+
+⭐ Types of Operations
+
+✔ Intermediate → returns Stream
+filter(), map(), sorted(), limit(), skip(), distinct()
+
+✔ Terminal → ends stream
+forEach(), collect(), reduce(), count(), anyMatch(), findFirst()
+
+⭐ Pipeline Example
+collection.stream() → filter() → map() → collect()
+
+
+#######################################################################################################################################################################################
+
+VIRTUSA Interview Questions:-
+
+I recently attended the Virtusa Java Developer (1 - 3 YOE) AI Technical Round, and it was one of the most practical interviews I’ve taken.
+
+The questions were topic-wise, focusing on both theory + scenario-based reasoning across:
+
+1️⃣ArrayList vs LinkedList
+
+2️⃣Overloading vs Overriding
+
+3️⃣Optional.of(), Optional.ofNullable(), Optional.empty()
+
+4️⃣Spring Framework vs Spring Boot
+
+5️⃣@Component vs @Service vs @Repository
+
+7️⃣REST API basics, HTTP methods
+
+7️⃣@RequestParam vs @PathVariable
+
+8️⃣Java Streams coding
+Coding Task: Print employee names with salary > 55,000 using Streams
+(I completed both technical and coding parts strongly.)
+
+I didn’t perform enough in the scenario-based questions, so I couldn’t clear this round. But overall, it was a great learning experience, and I’m glad I performed well technically.
+
+
+✅ ArrayList vs LinkedList (Theory + Scenario)
+
+| Feature                    | ArrayList                | LinkedList                         |
+| -------------------------- | ------------------------ | ---------------------------------- |
+| **Underlying DS**          | Dynamic array            | Doubly linked list                 |
+| **Access/Indexing**        | Very fast (O(1))         | Slow (O(n))                        |
+| **Insert/Delete (middle)** | Slow (shifting elements) | Fast (just pointer update)         |
+| **Memory**                 | Less memory              | More memory (prev & next pointers) |
+
+
+Scenario Questions
+
+Scenario 1: You need to retrieve elements frequently. Which one?
+👉 ArrayList, because random access is O(1).
+
+Scenario 2: You need to insert/delete many elements in the middle. Which?
+👉 LinkedList, because no shifting needed.
+
+Scenario 3: Add at end frequently?
+Both work, but ArrayList is generally preferred due to cache locality.
+
+----------------------------------------------------------------------
+
+✅ Overloading vs Overriding (Theory + Scenario)
+
+Overloading
+
+Same method name
+Different parameter list
+Happens at compile time (static binding)
+
+Overriding
+
+Same method signature in parent & child
+Happens at runtime (dynamic binding)
+Uses polymorphism (runtime behavior)
+
+Scenario Questions
+
+Scenario 1: Logging framework has multiple log() methods accepting String, int, Object. What concept?
+👉 Overloading.
+
+Scenario 2: Child class changes logic of parent class method. What?
+👉 Overriding.
+
+Scenario 3: When does JVM decide which overridden method to call?
+👉 At runtime, based on the actual object (dynamic dispatch).
+
+------------------------------------------------------------------
+
+✅ Optional.of() vs Optional.ofNullable() vs Optional.empty()
+
+Optional.of(value)
+
+Throws NullPointerException if value is null
+Use when you are sure the value is NON-NULL.
+
+Optional.ofNullable(value)
+
+Accepts both null and non-null
+Null → Optional.empty()
+
+Optional.empty()
+
+Returns an empty Optional
+Used when you want to explicitly return no value
+
+Scenario
+
+Scenario: You fetch user email from DB which might be null. Which one?
+👉 ofNullable(email)
+
+Scenario: You want to guarantee mandatory fields (e.g., id).
+👉 Optional.of(id)
+
+-----------------------------------------------------------------
+
+✅ Spring Framework vs Spring Boot
+
+Spring Framework
+
+Traditional way
+Requires manual configuration (XML / Java config)
+No embedded server
+More boilerplate
+
+Spring Boot
+
+Provides auto-configuration
+Embedded Tomcat/Jetty
+Production-ready features (actuator, metrics)
+Faster development with less configuration
+
+Scenario
+
+Scenario: Build microservices quickly with embedded server
+👉 Spring Boot
+
+Scenario: You are working on legacy monolithic apps with XML configs
+👉 Spring Framework
+
+--------------------------------------------------------------------
+
+✅ @Component vs @Service vs @Repository
+
+All are stereotype annotations and create beans.
+
+@Component
+
+Generic component
+Used for general-purpose beans
+
+@Service
+
+Business logic layer
+Marks business services
+Helps clarity + AOP (transactional, logging)
+
+@Repository
+
+DAO layer
+Converts DB exceptions into Spring DataAccessException
+
+Scenario
+
+Scenario: Class performing business calculations?
+👉 @Service
+
+Scenario: Class interacting with DB (CRUD)?
+👉 @Repository
+
+Scenario: Utility class?
+👉 @Component
+
+------------------------------------------------------------
+
+✅ REST API Basics + HTTP Methods (Scenario)
+
+HTTP Methods
+
+| Method     | Meaning                |
+| ---------- | ---------------------- |
+| **GET**    | Fetch data             |
+| **POST**   | Create resource        |
+| **PUT**    | Update entire resource |
+| **PATCH**  | Partial update         |
+| **DELETE** | Delete resource        |
+
+Scenario
+
+Scenario: Update only employee email
+👉 PATCH
+
+Scenario: Creating new order
+👉 POST
+
+Scenario: Get list of all products
+👉 GET
+
+Scenario: Delete user by ID
+👉 DELETE
+
+--------------------------------------------------------------
+
+✅ @RequestParam vs @PathVariable (Scenario-based)
+@RequestParam
+
+Comes from query params
+Optional mostly
+
+Example:
+GET /products?category=shoes
+
+@PathVariable
+
+Part of URL path
+Mandatory
+
+Example:
+GET /products/10
+
+Scenario Questions
+
+Scenario: Search products by category?
+👉 Use @RequestParam("category")
+
+Scenario: Get user by ID?
+👉 Use @PathVariable("id")
+
+Scenario: Pagination: ?page=2&size=10
+👉 @RequestParam
+
+------------------------------------------------------------
+
+✅ Java Streams Coding Task
+Requirement:
+
+Print employee names with salary > 55,000
+
+Model Answer
+employees.stream()
+        .filter(e -> e.getSalary() > 55000)
+        .map(Employee::getName)
+        .forEach(System.out::println);
+		
+Scenario Variation
+
+Scenario: Return list of employee names sorted by salary descending
+List<String> result = employees.stream()
+        .filter(e -> e.getSalary() > 55000)
+        .sorted((a, b) -> Double.compare(b.getSalary(), a.getSalary()))
+        .map(Employee::getName)
+        .toList();
+
+Scenario: Count employees above salary
+long count = employees.stream()
+        .filter(e -> e.getSalary() > 55000)
+        .count();
+
+
+#######################################################################################################################################################################################
+
+
+
+
+
+Custom Software Engineer
+Job Description
+Project Role : Custom Software Engineer
+Project Role Description : Develop custom software solutions to design, code, and enhance components across systems or applications. 
+Use modern frameworks and agile practices to deliver scalable, high-performing solutions tailored to specific business needs.
+Must have skills : Spring Boot
+Good to have skills : NA
+Minimum 3 year(s) of experience is required
+Educational Qualification : 15 years full time education
+
+Summary: As an Application Developer, you will design, build, and configure applications to meet business process and application requirements. 
+A typical day involves collaborating with team members to understand project needs, developing application features, 
+and ensuring that the applications function seamlessly to support business objectives. 
+You will engage in problem-solving discussions and contribute innovative ideas to enhance application performance and user experience. 
+Roles & Responsibilities: 
+- Expected to perform independently and become an SME. 
+- Required active participation/contribution in team discussions. 
+- Contribute in providing solutions to work related problems. 
+- Assist in the documentation of application processes and workflows. 
+- Collaborate with cross-functional teams to gather requirements and provide technical insights. 
+Professional & Technical Skills: 
+- Must To Have Skills: Proficiency in Spring Boot. 
+- Good To Have Skills: Experience with RESTful APIs. 
+- Familiarity with microservices architecture. 
+- Understanding of database management systems, particularly SQL. 
+- Experience with version control systems such as Git. 
+Additional Information: 
+- The candidate should have minimum 3 years of experience in Spring Boot. 
+- This position is based at our Bengaluru office. 
+- A 15 years full time education is required.
+
+
+
+
+
+
+Absolutely — I’ll prepare exact interview-focused material tailored for Accenture and specifically for the role Custom Software Engineer (Spring Boot).
+
+Below is a full preparation guide including:
+
+✅ Mandatory Spring Boot interview questions
+✅ REST API + Microservices + SQL + Git
+✅ Coding + scenario-based questions (Accenture asks these A LOT)
+✅ Behavioral + project discussion
+✅ Accenture-style question patterns
+
+⭐ ACCENTURE — Custom Software Engineer (Spring Boot)
+Complete Interview Preparation Guide
+🔵 SECTION 1 — Spring Boot Core Questions (Must-have)
+1. What is Spring Boot and why is it used?
+
+Auto-configuration
+
+Embedded server
+
+Production-ready features (Actuator, logging)
+
+Reduced boilerplate code
+
+Faster microservices development
+
+2. Explain Spring Boot Auto-configuration
+
+@EnableAutoConfiguration or @SpringBootApplication
+
+Uses presence of jar files + classpath scanning
+
+Auto-configures beans
+
+Can disable with:
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+
+3. Spring Boot Starter dependencies
+
+Example:
+
+spring-boot-starter-web
+
+spring-boot-starter-data-jpa
+
+spring-boot-starter-security
+
+Why? → Combines required dependencies into one.
+
+4. Difference: Spring vs Spring Boot
+Spring	Spring Boot
+Manual configuration	Auto-configured
+Requires external server	Embedded server
+Slow setup	Fast setup
+XML/Java configs	Opinionated defaults
+5. What happens when you start a Spring Boot app?
+
+SpringApplication.run()
+
+Starts IoC container
+
+Performs component scan
+
+Loads Beans
+
+Starts Embedded Tomcat
+
+Initializes Actuator (if added)
+
+6. Explain dependency injection in Spring
+
+Three ways:
+
+Constructor Injection (recommended)
+
+Setter Injection
+
+Field Injection (not recommended)
+
+Scenario:
+"How do you handle circular dependency?"
+→ Use constructor injection + restructure beans.
+
+🔵 SECTION 2 — Key Spring Annotations (Accenture always asks)
+@RestController vs @Controller
+
+RestController = Returns JSON
+
+Controller = Returns view (HTML/JSP)
+
+@Autowired
+
+DI through constructor injection preferred.
+
+@Service vs @Repository vs @Component
+
+Service → Business logic
+
+Repository → DB layer + Exception translation
+
+Component → Generic bean
+
+@RequestParam vs @PathVariable
+
+Query param vs URL path value
+
+🔵 SECTION 3 — REST APIs (Good-to-have)
+1. HTTP Methods
+
+GET → read
+
+POST → create
+
+PUT → full update
+
+PATCH → partial update
+
+DELETE → delete
+
+2. Status Codes
+
+200 OK
+
+201 Created
+
+400 Bad Request
+
+401 Unauthorized
+
+404 Not Found
+
+500 Internal Server Error
+
+3. Exception Handling
+
+Use:
+
+@ControllerAdvice
+public class GlobalExceptionHandler { }
+
+4. Validation
+@PostMapping("/save")
+public ResponseEntity<?> save(@Valid @RequestBody User user)
+
+🔵 SECTION 4 — Microservices Basics
+1. What is a microservice?
+
+Small, independent services
+
+Own database
+
+Communicate using REST/Kafka
+
+2. Advantages
+
+Scalability
+
+Independent deployment
+
+Fault isolation
+
+3. Service Discovery
+
+Eureka Server / Consul
+
+4. API Gateway
+
+Zuul / Spring Cloud Gateway
+
+5. Feign Client
+
+Used for service-to-service communication.
+
+🔵 SECTION 5 — SQL Basics (Accenture tests this)
+1. Write a query to fetch employees with salary > 50000
+SELECT * FROM Employee WHERE salary > 50000;
+
+2. INNER JOIN Example
+SELECT e.name, d.name 
+FROM Employee e 
+JOIN Department d ON e.dept_id = d.id;
+
+3. GROUP BY
+SELECT department, COUNT(*) 
+FROM Employee 
+GROUP BY department;
+
+4. Find duplicate records
+SELECT name, COUNT(*) 
+FROM Employee 
+GROUP BY name 
+HAVING COUNT(*) > 1;
+
+5. Delete vs Truncate
+
+Delete → removes data, logs individually
+
+Truncate → removes all data, faster, cannot rollback
+
+🔵 SECTION 6 — Git
+Must know commands
+git clone
+git checkout -b feature/login
+git add .
+git commit -m "Added login flow"
+git push origin feature/login
+git pull
+git merge
+git rebase
+
+Scenario
+
+"What if two developers modify same file?"
+→ Conflict → resolve → commit → push.
+
+🔵 SECTION 7 — Coding Round (Accenture Typical)
+1. Java Streams — Filter employees > 55000
+employees.stream()
+        .filter(e -> e.getSalary() > 55000)
+        .map(Employee::getName)
+        .forEach(System.out::println);
+
+2. Remove duplicates from list
+list.stream().distinct().toList();
+
+3. Convert list to map
+Map<Integer, String> map = 
+    list.stream()
+        .collect(Collectors.toMap(User::getId, User::getName));
+
+4. Sort list of objects by salary
+employees.stream()
+        .sorted(Comparator.comparing(Employee::getSalary).reversed())
+        .toList();
+
+🔵 SECTION 8 — Scenario-Based Questions (VERY IMPORTANT)
+
+Accenture focuses on how you think, not just syntax.
+
+Scenario 1: API is taking too long. What do you do?
+
+Check DB query performance
+
+Add caching (Redis)
+
+Reduce unnecessary object mapping
+
+Use pagination
+
+Use async processing
+
+Scenario 2: Multiple microservices need to authenticate user
+
+Use:
+
+API Gateway for authentication
+
+JWT tokens
+
+Centralized auth service
+
+Scenario 3: Database update must be atomic
+
+Use:
+
+@Transactional
+
+ACID properties
+
+Rollback for exceptions
+
+Scenario 4: How do you handle failure in service-to-service calls?
+
+Retry mechanism
+
+Circuit breaker (Resilience4j)
+
+Fallback methods
+
+🔵 SECTION 9 — Behavioral (Accenture Style)
+
+They ALWAYS ask:
+
+1. Tell me about your current project
+
+Prepare in STAR format:
+
+Situation
+
+Task
+
+Action
+
+Result
+
+2. Explain a challenging problem you solved
+
+Pick any:
+✔ Deadlock issue
+✔ Performance issue
+✔ Database optimization
+✔ Refactoring monolithic to microservice
+
+3. How do you handle conflicts?
+
+Communication
+
+Clarifying requirements
+
+Finding common ground
+
+Aligning with business goals
+
+🔵 SECTION 10 — Your Resume Talking Points
+
+Prepare:
+
+✔ 1–2 Spring Boot projects
+✔ REST API development explanation
+✔ Database work you did
+✔ CI/CD knowledge (even basics: Jenkins, Docker)
+
+🟢 Want me to create a mock interview for you?
+
+I can ask:
+
+30 technical questions
+
+10 scenario-based
+
+10 coding questions
+
+HR + behavioral
+
+Just say “Start mock interview” and I'll begin.
+
+
+
+
+#######################################################################################################################################################################################
+
+
+
+coding questions for java interview for accenture type of companies for 3 year experince
+ChatGPT said:
+
+Below are realistic, Accenture-style Java + Spring Boot coding questions tailored for 3 years of experience, along with sample answers, difficulty tags, and what interviewers expect.
+
+✅ Java + Spring Boot Coding Questions (3 Years Experience — Accenture-Style)
+🔹 SECTION 1 — CORE JAVA CODING QUESTIONS
+1️⃣ Reverse a String without using reverse()
+
+Difficulty: Easy
+Expectation: Use loop/StringBuilder
+
+Question
+
+Write a method to reverse a string without using built-in reverse().
+
+✔ Sample Answer
+public String reverse(String s) {
+    String rev = "";
+    for (int i = s.length() - 1; i >= 0; i--) {
+        rev += s.charAt(i);
+    }
+    return rev;
+}
+
+2️⃣ Find second highest number in an array
+
+Difficulty: Medium
+Expectation: Sorting or single-pass logic
+
+public int secondHighest(int[] arr) {
+    int max = Integer.MIN_VALUE, second = Integer.MIN_VALUE;
+
+    for (int n : arr) {
+        if (n > max) {
+            second = max;
+            max = n;
+        } else if (n > second && n != max) {
+            second = n;
+        }
+    }
+    return second;
+}
+
+3️⃣ Check if String has balanced parentheses
+
+Difficulty: Medium
+Expectation: Stack usage
+
+public boolean isBalanced(String s) {
+    Stack<Character> st = new Stack<>();
+
+    for (char c : s.toCharArray()) {
+        if (c == '(') st.push(c);
+        else if (c == ')') {
+            if (st.isEmpty()) return false;
+            st.pop();
+        }
+    }
+    return st.isEmpty();
+}
+
+4️⃣ Remove duplicates from a list
+
+Difficulty: Easy → Medium
+
+List<Integer> unique = list.stream()
+                            .distinct()
+                            .collect(Collectors.toList());
+
+5️⃣ Count occurrences of each word in a String
+
+Difficulty: Medium
+Expectation: HashMap + String split
+
+Map<String, Integer> map = new HashMap<>();
+
+for (String word : str.split(" ")) 
+    map.put(word, map.getOrDefault(word, 0) + 1);
+
+6️⃣ Find frequency of characters using Streams
+
+Difficulty: Medium
+Expectation: Streams + groupingBy
+
+Map<Character, Long> freq = str.chars()
+      .mapToObj(c -> (char)c)
+      .collect(Collectors.groupingBy(c -> c, Collectors.counting()));
+
+7️⃣ Sort list of Employees by salary
+
+Difficulty: Medium
+Expectation: Comparator + Streams
+
+list.stream()
+    .sorted(Comparator.comparing(Employee::getSalary))
+    .forEach(System.out::println);
+
+8️⃣ Detect palindrome
+public boolean isPalindrome(String s) {
+    return s.equals(new StringBuilder(s).reverse().toString());
+}
+
+🔹 SECTION 2 — SPRING BOOT CODING QUESTIONS
+9️⃣ Write a simple REST endpoint that returns list of users
+@RestController
+public class UserController {
+
+    @GetMapping("/users")
+    public List<String> getUsers() {
+        return List.of("Bhuvan", "John", "Sam");
+    }
+}
+
+🔟 Validate request body using @Valid
+@PostMapping("/save")
+public ResponseEntity<?> save(@Valid @RequestBody User user, BindingResult result) {
+    if (result.hasErrors()) {
+        return ResponseEntity.badRequest().body(result.getAllErrors());
+    }
+    return ResponseEntity.ok("Saved");
+}
+
+1️⃣1️⃣ Write an exception handler (Global)
+@RestControllerAdvice
+public class GlobalException {
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handle(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                             .body(ex.getMessage());
+    }
+}
+
+1️⃣2️⃣ Filtering data using Streams in Controller
+@GetMapping("/even")
+public List<Integer> getEvenNums() {
+    return List.of(1,2,3,4,5,6)
+               .stream()
+               .filter(n -> n % 2 == 0)
+               .toList();
+}
+
+1️⃣3️⃣ Spring Boot: Convert Entity → DTO
+UserDTO dto = modelMapper.map(user, UserDTO.class);
+
+1️⃣4️⃣ JPA Query: Find users by city
+@Query("SELECT u FROM User u WHERE u.city = :city")
+List<User> findByCity(@Param("city") String city);
+
+1️⃣5️⃣ Write PATCH API to update only specified fields
+@PatchMapping("/user/{id}")
+public User update(@PathVariable int id, @RequestBody Map<String,Object> fields) {
+    User u = repo.findById(id).orElseThrow();
+    fields.forEach((k,v) -> {
+        Field field = ReflectionUtils.findField(User.class, k);
+        field.setAccessible(true);
+        ReflectionUtils.setField(field, u, v);
+    });
+    return repo.save(u);
+}
+
+
+@PatchMapping("/user/{id}")
+public User update(@PathVariable int id, @RequestBody Map<String, Object> fields){
+
+User userGot = repo.findById(id).orElseThrow();
+
+fields.stream().forEach((k,v) -> {
+Field field = ReflectionUtils(User.class, k);
+field.setAccessible(true);
+ReflectionUtils.setField(field, userGot, v);
+});
+
+return repo.save(userGot);
+
+}
+
+
+🔹 SECTION 3 — SQL + DSA Interview Coding Questions
+1️⃣6️⃣ Find employees with highest salary department-wise
+SELECT name, salary, department
+FROM Employee e
+WHERE salary = (
+   SELECT MAX(salary)
+   FROM Employee
+   WHERE department = e.department
+);
+
+1️⃣7️⃣ Two Sum Problem
+public int[] twoSum(int[] nums, int target) { //nums = [2,7,11,15], target = 9
+    Map<Integer, Integer> map = new HashMap<>();
+
+    for (int i = 0; i < nums.length; i++) {
+        int diff = target - nums[i];          //9-2=7, 9-7=2, 9-11=-2, 9-15=-6
+        if (map.containsKey(diff)) {
+            return new int[] { map.get(diff), i };
+        }
+        map.put(nums[i], i);                  //(2,0),(7,1),(11,2), (15,3)
+    }
+    return new int[]{};
+}
+
+1️⃣8️⃣ Move all zeros to end of array
+public void moveZeros(int[] arr) {
+    int index = 0;
+    for (int num : arr)
+        if (num != 0) arr[index++] = num;
+
+    while (index < arr.length)
+        arr[index++] = 0;
+}
+
+🔹 BONUS — ACCENTURE TYPICAL ROUND 2 CODING QUESTIONS
+1️⃣9️⃣ Given a list of strings, return only unique & sorted by length
+list.stream()
+    .distinct()
+    .sorted(Comparator.comparing(String::length))
+    .toList();
+
+2️⃣0️⃣ Print words which start with 'A' or 'a'
+list.stream()
+    .filter(s -> s.toLowerCase().startsWith("a"))
+    .toList();
+	
+	
+	
+	
+#######################################################################################################################################################################################
+	
+	
+	
+	
+	
+SECTION — Solutions (1..40)
+
+Note: many helper snippets assume simple inputs (non-null). For linked-list problems I use a small ListNode class:
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int v){ val = v; }
+}
+
+1) Two Sum (HashMap, O(n))
+public static int[] twoSum(int[] nums, int target) {
+    Map<Integer,Integer> map = new HashMap<>();
+    for (int i=0;i<nums.length;i++){
+        int need = target - nums[i];
+        if (map.containsKey(need)) return new int[]{map.get(need), i};
+        map.put(nums[i], i);
+    }
+    return new int[]{};
+}
+// Time O(n), Space O(n)
+
+2) Reverse a String (iterative, recursion, StringBuilder)
+
+Iterative:
+
+public static String reverseIter(String s){
+    StringBuilder sb = new StringBuilder();
+    for (int i = s.length()-1; i>=0; i--) sb.append(s.charAt(i));
+    return sb.toString();
+}
+// Time O(n), Space O(n)
+
+
+Recursive:
+
+public static String reverseRec(String s){
+    if (s.isEmpty()) return s;
+    return reverseRec(s.substring(1)) + s.charAt(0);
+}
+// Time O(n^2) due to substring; avoid in interviews
+
+
+Using StringBuilder:
+
+public static String reverseSB(String s){ return new StringBuilder(s).reverse().toString(); }
+// Time O(n)
+
+3) Second Highest Number in Array (single pass)
+public static Integer secondHighest(int[] arr){
+    if (arr.length < 2) return null;
+    int max = Integer.MIN_VALUE, second = Integer.MIN_VALUE;
+    for (int n: arr){
+        if (n > max){ second = max; max = n; }
+        else if (n > second && n != max) second = n;
+    }
+    return (second==Integer.MIN_VALUE)? null : second;
+}
+// Time O(n), Space O(1)
+
+4) Check Palindrome (case-insensitive)
+public static boolean isPalindrome(String s){
+    int l=0, r=s.length()-1;
+    while (l<r){
+        if (Character.toLowerCase(s.charAt(l)) != Character.toLowerCase(s.charAt(r))) return false;
+        l++; r--;
+    }
+    return true;
+}
+// Time O(n), Space O(1)
+
+5) Remove Duplicates From List (HashSet & Streams)
+
+Using LinkedHashSet (preserve order):
+
+public static <T> List<T> removeDup(List<T> list){
+    return new ArrayList<>(new LinkedHashSet<>(list));
+}
+// Time O(n), Space O(n)
+
+
+Using Streams:
+
+public static <T> List<T> removeDupStream(List<T> list){
+    return list.stream().distinct().collect(Collectors.toList());
+}
+
+6) Count Word Frequency in Sentence
+public static Map<String,Integer> wordFreq(String s){
+    Map<String,Integer> m = new HashMap<>();
+    for (String w : s.split("\\s+")){
+        if (w.isEmpty()) continue;
+        m.put(w, m.getOrDefault(w,0)+1);
+    }
+    return m;
+}
+// Time O(n) tokens, Space O(vocab)
+
+7) Count Character Occurrences (Map & Streams)
+
+Map approach:
+
+public static Map<Character,Integer> charFreq(String s){
+    Map<Character,Integer> m = new HashMap<>();
+    for (char c: s.toCharArray()) m.put(c, m.getOrDefault(c,0)+1);
+    return m;
+}
+
+
+Streams:
+
+public static Map<Character, Long> charFreqStream(String s){
+    return s.chars().mapToObj(c->(char)c)
+            .collect(Collectors.groupingBy(c->c, Collectors.counting()));
+}
+
+8) Sort Employees by Salary (Comparator)
+
+Assume Employee {String name; double salary;}
+
+public static List<Employee> sortBySalary(List<Employee> list){
+    return list.stream().sorted(Comparator.comparingDouble(Employee::getSalary)).collect(Collectors.toList());
+}
+// Time O(n log n)
+
+9) Find Missing Number in Array (1..n) — sum formula
+public static int missingNumber(int[] nums){ // nums length = n-1, contains 1..n with one missing
+    int n = nums.length + 1;
+    long sum = (long)n*(n+1)/2;
+    for (int x: nums) sum -= x;
+    return (int)sum;
+}
+// Time O(n), Space O(1)
+
+10) First Non-Repeated Character
+public static Character firstNonRepeated(String s){
+    Map<Character,Integer> m = new LinkedHashMap<>();
+    for (char c: s.toCharArray()) m.put(c, m.getOrDefault(c,0)+1);
+    for (Map.Entry<Character,Integer> e: m.entrySet()) if (e.getValue()==1) return e.getKey();
+    return null;
+}
+// Time O(n), Space O(1..alphabet)
+
+11) Balanced Parentheses (stack)
+public static boolean isBalanced(String s){
+    Deque<Character> st = new ArrayDeque<>();
+    for (char c: s.toCharArray()){
+        if (c=='(' || c=='{' || c=='[') st.push(c);
+        else {
+            if (st.isEmpty()) return false;
+            char p = st.pop();
+            if ((c==')' && p!='(') || (c=='}' && p!='{') || (c==']' && p!='[')) return false;
+        }
+    }
+    return st.isEmpty();
+}
+// Time O(n)
+
+12) Merge Two Sorted Arrays (merge step)
+public static int[] mergeSorted(int[] a, int[] b){
+    int i=0,j=0,k=0;
+    int[] res = new int[a.length + b.length];
+    while(i<a.length && j<b.length) res[k++] = (a[i]<=b[j]) ? a[i++] : b[j++];
+    while(i<a.length) res[k++] = a[i++];
+    while(j<b.length) res[k++] = b[j++];
+    return res;
+}
+// Time O(n+m)
+
+13) Move All Zeros To End (stable)
+public static void moveZeros(int[] arr){
+    int idx=0;
+    for (int v: arr) if (v!=0) arr[idx++]=v;
+    while (idx < arr.length) arr[idx++]=0;
+}
+// Time O(n), Space O(1)
+
+14) Longest Word in a Sentence
+public static String longestWord(String s){
+    String[] parts = s.split("\\s+");
+    String ans="";
+    for (String p: parts) if (p.length() > ans.length()) ans = p;
+    return ans;
+}
+// Time O(n)
+
+15) Find Duplicate Elements in Array/List
+
+Using HashSet:
+
+public static Set<Integer> findDuplicates(int[] arr){
+    Set<Integer> seen = new HashSet<>(), dup = new HashSet<>();
+    for (int v: arr) {
+        if (!seen.add(v)) dup.add(v);
+    }
+    return dup;
+}
+// Time O(n)
+
+16) Check If Two Strings Are Anagrams
+
+Using frequency:
+
+public static boolean areAnagrams(String a, String b){
+    if (a.length() != b.length()) return false;
+    int[] freq = new int[256];
+    for (int i=0;i<a.length();i++){
+        freq[a.charAt(i)]++;
+        freq[b.charAt(i)]--;
+    }
+    for (int f: freq) if (f!=0) return false;
+    return true;
+}
+// Time O(n), Space O(1)
+
+17) Reverse Each Word in a Sentence
+public static String reverseEachWord(String s){
+    String[] parts = s.split(" ");
+    for (int i=0;i<parts.length;i++){
+        parts[i] = new StringBuilder(parts[i]).reverse().toString();
+    }
+    return String.join(" ", parts);
+}
+// Time O(n)
+
+18) Fibonacci Series up to N (iterative)
+public static List<Integer> fibUpToN(int n){
+    List<Integer> res = new ArrayList<>();
+    if (n<=0) return res;
+    res.add(0);
+    if (n==1) return res;
+    res.add(1);
+    while (true){
+        int a = res.get(res.size()-2), b = res.get(res.size()-1);
+        if (a + b > n) break;
+        res.add(a+b);
+    }
+    return res;
+}
+// Time O(k) where k is count of elements <= n
+
+19) GCD and LCM
+public static int gcd(int a, int b){ return b==0? a : gcd(b, a%b); }
+public static long lcm(int a, int b){ return (long)a / gcd(a,b) * b; }
+// Time O(log min(a,b))
+
+20) Rotate Array by K (right rotation) — reverse approach
+public static void rotate(int[] arr, int k){
+    int n = arr.length;
+    k %= n;
+    reverse(arr, 0, n-1);
+    reverse(arr, 0, k-1);
+    reverse(arr, k, n-1);
+}
+private static void reverse(int[] a, int l, int r){
+    while (l<r){ int t=a[l]; a[l++]=a[r]; a[r--]=t; }
+}
+// Time O(n), Space O(1)
+
+21) Remove All Whitespaces From String
+public static String removeSpaces(String s){
+    return s.replaceAll("\\s+","");
+}
+// Time O(n)
+
+22) Convert Roman Numeral to Integer
+public static int romanToInt(String s){
+    Map<Character,Integer> m = Map.of('I',1,'V',5,'X',10,'L',50,'C',100,'D',500,'M',1000);
+    int sum=0;
+    for (int i=0;i<s.length();i++){
+        int val = m.get(s.charAt(i));
+        if (i+1 < s.length() && val < m.get(s.charAt(i+1))) sum -= val;
+        else sum += val;
+    }
+    return sum;
+}
+// Time O(n)
+
+23) Find Peak Element (local maxima — binary search)
+
+Find index i where arr[i] > neighbors (assume such exists).
+
+public static int findPeak(int[] a){
+    int l=0, r=a.length-1;
+    while (l<r){
+        int mid = (l+r)/2;
+        if (a[mid] > a[mid+1]) r = mid;
+        else l = mid+1;
+    }
+    return l;
+}
+// Time O(log n)
+
+24) Implement Custom Stack Using Array
+class MyStack {
+    private int[] data;
+    private int top = -1;
+    public MyStack(int capacity){ data = new int[capacity]; }
+    public void push(int v){ if (top+1==data.length) throw new RuntimeException("Full"); data[++top]=v;}
+    public int pop(){ if (top==-1) throw new RuntimeException("Empty"); return data[top--];}
+    public int peek(){ if (top==-1) throw new RuntimeException("Empty"); return data[top];}
+    public boolean isEmpty(){ return top==-1; }
+}
+
+25) Implement Queue Using Two Stacks
+class MyQueue {
+    Deque<Integer> in = new ArrayDeque<>(), out = new ArrayDeque<>();
+    public void enqueue(int v){ in.push(v); }
+    private void shift(){ if (out.isEmpty()) while(!in.isEmpty()) out.push(in.pop()); }
+    public int dequeue(){ shift(); if (out.isEmpty()) throw new NoSuchElementException(); return out.pop(); }
+    public int peek(){ shift(); return out.peek(); }
+    public boolean isEmpty(){ return in.isEmpty() && out.isEmpty(); }
+}
+
+
+Amortized O(1) per op.
+
+26) Find Common Elements Between Two Arrays
+
+Using sets:
+
+public static Set<Integer> common(int[] a, int[] b){
+    Set<Integer> s = new HashSet<>();
+    for (int x: a) s.add(x);
+    Set<Integer> res = new HashSet<>();
+    for (int y: b) if (s.contains(y)) res.add(y);
+    return res;
+}
+// Time O(n+m)
+
+27) Reverse a LinkedList (Iterative + Recursive)
+
+Iterative:
+
+public static ListNode reverseIter(ListNode head){
+    ListNode prev = null, cur = head;
+    while (cur != null){
+        ListNode nxt = cur.next;
+        cur.next = prev;
+        prev = cur;
+        cur = nxt;
+    }
+    return prev;
+}
+// Time O(n)
+
+
+Recursive:
+
+public static ListNode reverseRec(ListNode head){
+    if (head==null || head.next==null) return head;
+    ListNode newHead = reverseRec(head.next);
+    head.next.next = head;
+    head.next = null;
+    return newHead;
+}
+
+28) Detect Loop in LinkedList (Floyd’s cycle)
+public static boolean hasCycle(ListNode head){
+    ListNode slow = head, fast = head;
+    while (fast!=null && fast.next!=null){
+        slow = slow.next; fast = fast.next.next;
+        if (slow==fast) return true;
+    }
+    return false;
+}
+// Time O(n), Space O(1)
+
+29) Remove Loop from LinkedList
+
+Find meeting point then start of loop:
+
+public static void removeLoop(ListNode head){
+    ListNode slow=head, fast=head;
+    boolean found=false;
+    while (fast!=null && fast.next!=null){
+        slow=slow.next; fast=fast.next.next;
+        if (slow==fast){ found=true; break; }
+    }
+    if (!found) return;
+    slow = head;
+    if (slow==fast) {
+        while (fast.next != slow) fast = fast.next;
+    } else {
+        while (slow.next != fast.next){ slow = slow.next; fast = fast.next; }
+    }
+    fast.next = null;
+}
+// Time O(n)
+
+30) Find Middle Element in LinkedList (slow-fast)
+public static ListNode middleNode(ListNode head){
+    ListNode slow=head, fast=head;
+    while (fast!=null && fast.next!=null){
+        slow = slow.next; fast = fast.next.next;
+    }
+    return slow;
+}
+// Time O(n)
+
+31) Check If a Number is Prime
+
+Simple trial division:
+
+public static boolean isPrime(int n){
+    if (n<=1) return false;
+    if (n<=3) return true;
+    if (n%2==0 || n%3==0) return false;
+    for (int i=5;i*i<=n;i+=6){
+        if (n%i==0 || n%(i+2)==0) return false;
+    }
+    return true;
+}
+// Time ~ O(sqrt(n))
+
+32) Sieve of Eratosthenes — All primes up to N
+public static List<Integer> sieve(int n){
+    boolean[] isPrime = new boolean[n+1];
+    Arrays.fill(isPrime, true);
+    isPrime[0]=isPrime[1]=false;
+    for (int p=2;p*p<=n;p++) if (isPrime[p]){
+        for (int q=p*p;q<=n;q+=p) isPrime[q]=false;
+    }
+    List<Integer> res = new ArrayList<>();
+    for (int i=2;i<=n;i++) if (isPrime[i]) res.add(i);
+    return res;
+}
+// Time O(n log log n)
+
+33) Binary Search (iterative)
+public static int binarySearch(int[] a, int key){
+    int l=0, r=a.length-1;
+    while (l<=r){
+        int mid = l + (r-l)/2;
+        if (a[mid]==key) return mid;
+        else if (a[mid] < key) l = mid+1;
+        else r = mid-1;
+    }
+    return -1;
+}
+// Time O(log n)
+
+34) Bubble / Selection / Insertion Sort (brief)
+
+Bubble:
+
+public static void bubbleSort(int[] a){
+    int n=a.length;
+    for (int i=0;i<n-1;i++){
+        boolean swapped=false;
+        for (int j=0;j<n-1-i;j++){
+            if (a[j] > a[j+1]) { int t=a[j]; a[j]=a[j+1]; a[j+1]=t; swapped=true; }
+        }
+        if (!swapped) break;
+    }
+}
+
+
+Selection:
+
+public static void selectionSort(int[] a){
+    for (int i=0;i<a.length;i++){
+        int min=i;
+        for (int j=i+1;j<a.length;j++) if (a[j]<a[min]) min=j;
+        int t=a[i]; a[i]=a[min]; a[min]=t;
+    }
+}
+
+
+Insertion:
+
+public static void insertionSort(int[] a){
+    for (int i=1;i<a.length;i++){
+        int key = a[i], j=i-1;
+        while (j>=0 && a[j] > key){ a[j+1]=a[j]; j--; }
+        a[j+1]=key;
+    }
+}
+
+
+All are O(n^2) worst-case.
+
+35) Kadane’s Algorithm — max subarray sum
+public static int kadane(int[] a){
+    int maxSoFar = a[0], maxEnding = a[0];
+    for (int i=1;i<a.length;i++){
+        maxEnding = Math.max(a[i], maxEnding + a[i]);
+        maxSoFar = Math.max(maxSoFar, maxEnding);
+    }
+    return maxSoFar;
+}
+// Time O(n)
+
+36) Longest Common Prefix in Array of Strings
+public static String longestCommonPrefix(String[] strs){
+    if (strs==null || strs.length==0) return "";
+    String prefix = strs[0];
+    for (int i=1;i<strs.length;i++){
+        while (!strs[i].startsWith(prefix)) {
+            prefix = prefix.substring(0, prefix.length()-1);
+            if (prefix.isEmpty()) return "";
+        }
+    }
+    return prefix;
+}
+// Time O(S) where S is sum of chars
+
+37) Remove Vowels From String
+public static String removeVowels(String s){
+    return s.replaceAll("(?i)[aeiou]", "");
+}
+// Time O(n)
+
+38) Swap Two Numbers Without Temp
+public static void swap(int[] arr, int i, int j){
+    if (i==j) return;
+    arr[i] = arr[i] + arr[j];
+    arr[j] = arr[i] - arr[j];
+    arr[i] = arr[i] - arr[j];
+}
+// Works for ints without overflow; safer: XOR swap with caution.
+
+39) Convert Integer to Binary (without Integer.toBinaryString)
+public static String intToBinary(int n){
+    if (n==0) return "0";
+    StringBuilder sb = new StringBuilder();
+    while (n!=0){
+        sb.append(n&1);
+        n >>>= 1; // unsigned shift for positive handling
+    }
+    return sb.reverse().toString();
+}
+// Time O(#bits)
+
+40) Print Diamond / Patterns (example: diamond of n rows)
+public static void printDiamond(int n){
+    for (int i=1;i<=n;i++){
+        for (int s=0;s<n-i;s++) System.out.print(" ");
+        for (int j=0;j<2*i-1;j++) System.out.print("*");
+        System.out.println();
+    }
+    for (int i=n-1;i>=1;i--){
+        for (int s=0;s<n-i;s++) System.out.print(" ");
+        for (int j=0;j<2*i-1;j++) System.out.print("*");
+        System.out.println();
+    }
+}
+// Prints a diamond of height 2*n - 1
+
+
+
+
+#######################################################################################################################################################################################
+
+
+
+“In Spring Boot, we define DB credentials in application.properties or application.yml.
+Spring Boot automatically uses these properties to configure a DataSource and connection pool using HikariCP.
+We can also externalize credentials using environment variables, Spring Cloud Config, or Vault so that passwords are not hard-coded in the codebase.”
+
+
+
+
+| Layer            | Annotation                        | Purpose              |
+| ---------------- | --------------------------------- | -------------------- |
+| Controller Layer | `@RestController` / `@Controller` | Handle API calls     |
+| Service Layer    | `@Service`                        | Business logic       |
+| Repository Layer | `@Repository`                     | DB operations        |
+| Utility Layer    | `@Component`                      | Helper classes       |
+| Config Layer     | `@Bean`                           | Custom bean creation |
+
+
+“@Component, @Service, @Repository, and @Controller are stereotype annotations used for auto-detection.
+@Service is a specialized type of @Component used for business logic.
+@Bean is used inside @Configuration classes to manually define beans, especially for third-party classes that Spring cannot scan automatically.”
+
+
+
+
+JPQL
+
+@Query("Select e from Employee e where e.emailId=:x")
+Optional<Employee> search(@Param("x") String emailID);
+
+Native SQL Query
+
+@Query("Select * from Employee where email_Id = ?1", nativeQuery=true)
+Optional<Employee> searchN(String emailID);
+
+
+######################################################################################################################################################################################
+
+
+Profile in Spring Boot:-
+------------------------
+
+In Spring Boot, a profile is a way to group configuration and activate specific settings for different environments such as:
+
+dev (development)
+test
+stage/qa
+prod (production)
+
+Profiles allow you to run the same application with different settings without modifying code.
+
+
+🔧 How Profiles Work in Spring Boot
+1️⃣ Define Profile-specific Property Files
+
+Spring Boot automatically loads files named as:
+
+application-dev.properties
+application-prod.properties
+application-test.properties
+
+Example:
+
+application-dev.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/devdb
+spring.datasource.username=devuser
+
+application-prod.properties
+spring.datasource.url=jdbc:mysql://prod.server.com/proddb
+spring.datasource.username=produser
+
+2️⃣ Activate a Profile
+A) Using application.properties
+spring.profiles.active=dev
+
+B) In application.yaml
+spring:
+  profiles:
+    active: dev
+	
+	
+Spring Boot Profile = Separate configuration for different environments.
+It helps avoid changing code when deploying to dev/test/prod.
+Just switch the profile → app picks correct configuration.
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+When a @Configuration class has two or more @Bean methods returning the same type, Spring needs help to know which bean you want to inject / call explicitly.
+
+There are 3 main ways to call or inject a specific bean.
+
+✅ 1. Use @Qualifier (Most Common Way)
+
+If both beans have the same return type, give them names and use @Qualifier to pick the right one.
+
+Example @Configuration class
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public DataSource mysqlDataSource() {
+        return new DataSource("mysql");
+    }
+
+    @Bean
+    public DataSource postgresDataSource() {
+        return new DataSource("postgres");
+    }
+}
+
+Inject second bean explicitly
+@Autowired
+@Qualifier("postgresDataSource")
+private DataSource dataSource;
+
+
+✔ This will inject postgresDataSource bean only.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Here are multiple ways to find the maximum salary from an Employee table, depending on SQL and Java requirements.
+Assuming table name = Employee, column = salary.
+
+✅ 1. Simple SQL Query
+SELECT MAX(salary) AS max_salary
+FROM Employee;
+
+✅ 2. Find Employee(s) with the Maximum Salary
+
+If you want the employee details who earns the highest salary:
+
+SELECT *
+FROM Employee
+WHERE salary = (SELECT MAX(salary) FROM Employee);
+
+✅ 3. Using GROUP BY (if required per department)
+SELECT department, MAX(salary) AS max_salary
+FROM Employee
+GROUP BY department;
+
+✅ 4. Using ORDER BY (Another method)
+SELECT salary
+FROM Employee
+ORDER BY salary DESC
+LIMIT 1;
+
+(Works in MySQL/PostgreSQL)
+
+✅ 5. Using Java Stream API (if Employee is a Java List)
+➤ Max salary:
+OptionalDouble maxSalary = employees.stream()
+    .mapToDouble(Employee::getSalary)
+    .max();
+
+➤ Employee with max salary:
+Employee emp = employees.stream()
+    .max(Comparator.comparing(Employee::getSalary))
+    .orElse(null);
+	
+	
+	
+######################################################################################################################################################################################
+
+
+
+Spring AOP:-
+-------------
+
+Spring AOP (Aspect-Oriented Programming) is a powerful Spring feature that allows you to add cross-cutting behavior—like logging, security, transactions, performance 
+monitoring—without changing your business logic.
+
+It helps you write cleaner, modular, and maintainable code.
+
+
+🔍 What is Spring AOP?
+
+👉 Spring AOP lets you apply some common logic at specific points during method execution — before, after, or around methods — without modifying the actual methods.
+
+This common logic is called an Aspect.
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Great — here are Detailed, Interview-Ready Answers (Option B) for all 25 final-round questions tailored to Accenture’s Custom Software Engineer role (3 years experience, Spring Boot, microservices, REST, agile).
+
+These answers are polished, professional, and realistic — perfect for HR + Managerial rounds.
+
+⸻
+
+✅ 1. Tell me about yourself.
+
+Answer:
+“I have a little over 3 years of experience as a Java Backend Developer, primarily working with Spring Boot, REST APIs, and microservices-based applications. In my current project, I design and develop custom modules like authentication, data processing workflows, and integration services.
+I work closely in an Agile environment, participate in sprint planning, story refinement, and ensure that every feature I deliver meets functional as well as performance expectations.
+I focus strongly on writing clean code, reusable components, and ensuring proper exception handling, validations, and logging.
+I am looking for an opportunity at Accenture because I want to work on large-scale enterprise applications, learn from global teams, and grow in a structured engineering environment.”
+
+⸻
+
+✅ 2. Why do you want to join Accenture?
+
+Answer:
+“I want to join Accenture because it is one of the few companies where technology, process, and innovation come together.
+Accenture works on large-scale enterprise digital transformation projects, and I want to contribute to such impactful work.
+I’m also interested in Accenture’s strong culture of continuous learning, global exposure, and structured career growth.
+A role like Custom Software Engineer gives me the platform to work on modern frameworks, cloud-native development, and scalable solutions — which aligns perfectly with my career goals.”
+
+⸻
+
+✅ 3. Tell me about a conflict you had in your team and how you resolved it.
+
+Answer:
+“In one of my sprints, a teammate and I disagreed on the approach for building a complex validation module. Instead of debating further, I proposed that we analyze both approaches with pros and cons and check the performance impact.
+We discussed it openly, involved the lead, and finally merged both ideas to create a more optimized structure.
+This taught me the importance of data-driven decision-making, respecting others’ ideas, and keeping the team’s goal above personal preference.”
+
+⸻
+
+✅ 4. A situation where you took complete ownership.
+
+Answer:
+“In my last release, a production API was failing intermittently. I took ownership, analyzed logs, added temporary debug metrics, identified a connection pool misconfiguration, and fixed it.
+I coordinated with QA, DevOps, and business users to validate the fix and monitored the service post-deployment.
+The issue was resolved without impacting the SLA. This strengthened my confidence in taking ownership and driving a task end-to-end.”
+
+⸻
+
+✅ 5. How did you handle sudden requirement changes?
+
+Answer:
+“When requirements changed mid-sprint due to a client priority shift, I communicated the impact clearly — effort increase, possible spillovers, and testing load.
+We re-prioritized stories, split tasks, and aligned with the Product Owner.
+By maintaining transparency and adapting quickly, our team still delivered critical features without compromising quality.”
+
+⸻
+
+✅ 6. What motivates you?
+
+Answer:
+“I’m motivated by solving real problems, improving system performance, and building features that add value to users.
+Learning new technologies and contributing to clean design and architecture also motivates me.”
+
+⸻
+
+✅ 7. Where do you see yourself in 2–3 years?
+
+Answer:
+“I see myself becoming a more complete backend engineer — handling architecture discussions, contributing to reusable components, and mentoring juniors.
+I want to grow towards a senior-engineer role with strong design and problem-solving skills.”
+
+⸻
+
+✅ 8. Are you comfortable with agile ceremonies and client interaction?
+
+Answer:
+“Yes. In my current team, I actively participate in grooming, sprint planning, daily standups, demos, and retrospectives.
+I’m also comfortable explaining technical issues to functional teams and clients in a simple manner.”
+
+⸻
+
+⭐ Managerial / Execution Questions
+
+✅ 9. Describe your project architecture.
+
+Answer:
+“My current project follows a microservices architecture built using Spring Boot.
+Each service follows a clean layered structure — controller → service → repository → entity/DTO.
+We use REST APIs for communication, Spring Data JPA for persistence, and JWT for security.
+PostgreSQL is our primary database, and we use Redis for caching frequently accessed data.
+We deploy using Docker and manage environments through CI/CD pipelines.”
+
+⸻
+
+✅ 10. Biggest technical challenge you solved.
+
+Answer:
+“We once faced performance issues where an API was taking 3–4 seconds. After profiling, I identified excessive DB calls due to nested loops.
+I optimized queries, introduced caching, and restructured the service logic.
+The response time dropped to under 300 ms.
+This improved user experience and reduced server load significantly.”
+
+⸻
+
+✅ 11. How do you ensure code quality?
+
+Answer:
+“I follow clean coding practices, use meaningful naming, proper layering, DTOs for request/response, and avoid duplications.
+We use SonarQube, code reviews, and unit tests.
+I also ensure proper validation, exception handling, and logging standards.”
+
+⸻
+
+✅ 12. How do you collaborate with QA/DevOps teams?
+
+Answer:
+“I share build details, coordinate test scenarios, help QA understand complex flows, and fix bugs proactively.
+With DevOps, I work on environment issues, logs, configuration changes, and deployment assistance.”
+
+⸻
+
+✅ 13. Handling deadlines.
+
+Answer:
+“I break tasks into smaller parts, prioritize critical paths, avoid unnecessary rework, and communicate risks early.
+This helps me deliver even under pressure.”
+
+⸻
+
+✅ 14. Handling production issues.
+
+Answer:
+“I follow a structured approach:
+	1.	Check logs and alerts
+	2.	Identify scope and impact
+	3.	Apply quick workaround if possible
+	4.	Fix root cause
+	5.	Deploy fix through pipeline
+	6.	Monitor after deployment
+	7.	Document the issue
+This ensures both speed and long-term reliability.”
+
+⸻
+
+⭐ Role-Fit Questions (Spring Boot, REST, Microservices)
+
+✅ 15. How do you design a scalable REST API?
+
+Answer:
+“I focus on statelessness, pagination, caching, proper indexing at DB level, asynchronous processing where needed, and splitting large features into smaller services.
+I also use DTOs, versioning, and structured logging.”
+
+⸻
+
+✅ 16. API best practices?
+
+Answer:
+	•	Proper request/response DTOs
+	•	Validation using annotations
+	•	Global exception handling (ControllerAdvice)
+	•	Meaningful status codes
+	•	Authentication & authorization
+	•	Idempotency for PUT/DELETE
+	•	Pagination for large data sets
+
+⸻
+
+✅ 17. How do you secure a Spring Boot application?
+
+Answer:
+“I use Spring Security, JWT tokens, role-based access, password encoding, and secure headers.
+I also avoid exposing sensitive data and ensure proper input validation to prevent injection attacks.”
+
+⸻
+
+✅ 18. Which Spring Boot areas are you strong in?
+
+Answer:
+“REST API development, Spring Data JPA, exception handling, request validation, microservices patterns, and performance optimization.”
+
+⸻
+
+✅ 19. Microservices example.
+
+Answer:
+“I worked on splitting a monolithic module into three microservices — auth, order, and payment.
+Each service had separate databases, communicated over REST, and had independent deployments.
+This improved scalability and simplified maintenance.”
+
+⸻
+
+✅ 20. Custom solution you built end-to-end.
+
+Answer:
+“I built a workflow management module where users submit requests, and the system routes them based on rules.
+I designed the APIs, DB structure, validations, and caching logic.
+It reduced manual processing time by 60%.”
+
+⸻
+
+⭐ HR Closing Questions
+
+✅ 21. What is your current CTC and expected CTC?
+
+Answer:
+Give your real figure.
+For expected:
+“I’m looking for a fair hike in line with industry standards for my experience.”
+
+⸻
+
+✅ 22. Notice period?
+
+Answer:
+“My notice period is ___ days.
+I can try to negotiate or buy out depending on project urgency.”
+
+⸻
+
+✅ 23. Relocation / work model?
+
+Answer:
+“Yes, I’m open to the company’s project requirements.”
+
+⸻
+
+✅ 24. When can you join?
+
+Answer:
+“Immediately after serving my notice period.
+If needed, I can join earlier with partial transition.”
+
+⸻
+
+✅ 25. Do you have any questions for us?
+
+Answer:
+“Yes, I would like to know:
+	•	What kind of projects does the Custom Software Engineering team work on?
+	•	What does success look like in the first 3 months for this role?”
+
+⸻
+
+✅ Done!
+
+These are detailed, polished, HR-approved answers you can use directly in your final Accenture interview.
+
+
+
+######################################################################################################################################################################################
+
+
+

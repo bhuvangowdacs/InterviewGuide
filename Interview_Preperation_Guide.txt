@@ -631,6 +631,10 @@ long count = employees.stream()
         .filter(e -> e.getSalary() > 55000)
         .count();
 
+Sort list of objects by salary
+employees.stream()
+        .sorted(Comparator.comparing(Employee::getSalary).reversed())
+        .toList();
 
 #######################################################################################################################################################################################
 
@@ -1840,6 +1844,20 @@ Native SQL Query
 Optional<Employee> searchN(String emailID);
 
 
+
+Odd numbers sorted (ascending)
+List<Integer> numbers = Arrays.asList(67, 10, 45, 25, 20, 6, 90, 40);
+
+
+List<Integer> oddSorted =
+        numbers.stream()
+               .filter(n -> n % 2 != 0) // keep odd numbers
+               .sorted()                 // sort ascending
+               .collect(Collectors.toList());
+
+System.out.println(oddSorted); // [25, 45, 67]
+
+
 ######################################################################################################################################################################################
 
 
@@ -2247,7 +2265,1690 @@ These are detailed, polished, HR-approved answers you can use directly in your f
 
 
 
+
 ######################################################################################################################################################################################
+
+
+
+
+“When a request comes in, Spring Security intercepts it using a filter chain. The authentication filter extracts credentials or JWT and passes them to the AuthenticationManager, 
+which uses AuthenticationProviders to validate the user. If authentication succeeds, the user details are stored in the SecurityContext. Then authorization checks ensure the user 
+has access to the endpoint. If everything is valid, the request proceeds to the controller. Otherwise, Spring returns 401/403 using ExceptionTranslationFilter.”
+
+Client Request
+     ↓
+Spring Security Filter Chain
+     ↓
+Authentication Filter (Username/Password or JWT)
+     ↓
+AuthenticationManager
+     ↓
+AuthenticationProvider (validates credentials/token)
+     ↓
+If OK → SecurityContextHolder stores user authentication
+     ↓
+Authorization Check (roles/permissions)
+     ↓
+Controller Method
+     ↓
+Response Back through Filter Chain
+     ↓
+Client
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
+The NOW application was created with an object-oriented technology: it guarantees the dynamic integration of business processes and their traceability. The program can plan and control each phase of the production process, starting from the fibres to the final product. Finally, it collects, analyzes data and monitors every single movement.
+
+Business intelligence
+Workflow
+Finance
+Sales
+Planning
+Quality
+MCM
+CAMS
+Vendor Portal
+Customer Portal
+Costing
+Base
+Production
+Activity management
+Cats
+Sales app
+CRM
+Human resources
+Purchasing
+Inventory & Logistics
+Plant maintenance
+MQM
+PDM
+
+
+
+Network Oriented World
+
+NOW is a family of management software composed of innovative functions and modules developed to help textile and fashion companies, regardless of their size. A solution capable of meeting the new demands of the sector such as a wide variety of products, short delivery times and lower costs. Datatex NOW ERP is characterized by great flexibility, able to adapt to every aspect of the business processes.
+
+Supply Chain | Scheduling | IOT | Products | Finance & HR |Web Applications| Integrations
+
+
+
+
+
+Our Vision
+Datatex aims to be the best I.T technology partner for the textile and apparel industry, by enhancing the productivity and the efficiency of our customers business.
+
+Our Mission
+Our goal is to empower our customer’s businesses by providing the best textile and apparel planning and scheduling functions, comprehensive and accurate costing functionalities specific for their needs.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
+Here’s a clear, interview-friendly explanation of Circuit Breaker (Resilience4j) with examples and how it works in Spring Boot.
+
+✅ What is a Circuit Breaker (Resilience4j)?
+
+A Circuit Breaker is a resilience pattern used in microservices to prevent continuous calls to a failing downstream service.
+It helps your system fail fast, recover gracefully, and avoid cascading failures.
+
+Resilience4j is a lightweight Java library that provides fault-tolerance patterns such as:
+
+CircuitBreaker
+
+Retry
+
+RateLimiter
+
+Bulkhead
+
+TimeLimiter
+
+🎯 Why do we need a Circuit Breaker?
+
+Imagine Service A → calls Service B.
+If Service B becomes slow or goes down:
+
+Service A will also become slow
+
+Thread pools will fill up
+
+Entire system may crash
+
+Circuit Breaker stops calling Service B after detecting failures and gives a fallback response instead.
+
+🔌 Circuit Breaker States
+4
+1️⃣ Closed (Normal State)
+
+Calls flow normally
+
+Failures are counted
+
+If failure rate reaches threshold → Opens.
+
+2️⃣ Open (Failure State)
+
+No calls are allowed to downstream
+
+Immediately returns fallback
+
+Gives the system time to recover
+
+After waitDuration → moves to Half-Open.
+
+3️⃣ Half-Open (Testing State)
+
+Allows limited trial calls
+
+If they succeed → back to Closed
+
+If they fail → back to Open
+
+⚙️ Resilience4j Circuit Breaker in Spring Boot
+@CircuitBreaker(name = "productService", fallbackMethod = "fallbackProduct")
+public Product getProduct(String id) {
+    return webClient.get()
+        .uri("http://inventory-service/products/" + id)
+        .retrieve()
+        .bodyToMono(Product.class)
+        .block();
+}
+
+public Product fallbackProduct(String id, Throwable ex) {
+    return new Product(id, "Default Product", 0);
+}
+
+🛠️ Configuration (application.yml)
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        failure-rate-threshold: 50       # % of failures to open the CB
+        slow-call-rate-threshold: 50
+        slow-call-duration-threshold: 2s
+        minimum-number-of-calls: 10      # evaluate after 10 calls
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+
+📌 Example Scenario
+Service B Status	Circuit Breaker State	Behavior
+Responding fine	Closed	Calls allowed
+Slow or failing 50%+	Open	Immediate fallback
+After 5 seconds	Half-Open	Allows few test calls
+Test calls successful	Closed	Normal calls continue
+🧠 Simple Analogy
+
+Circuit breaker works like a home electrical fuse:
+
+Too much load? → Fuse trips → Prevents damage
+
+After some time → You try turning it on again
+
+Same logic, but for microservice calls.
+
+📌 When to Use Circuit Breaker?
+
+Use it when:
+
+✔ Calling unreliable external APIs
+✔ Calling slow downstream microservices
+✔ Calling databases or ML services with unpredictable latency
+
+Avoid when:
+
+❌ The call is very fast and always reliable
+❌ Overhead of monitoring is unnecessary
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
+✅ What is DB Indexing?
+
+Database Indexing is a technique used to speed up data retrieval from a table.
+
+An index works like the index of a book:
+
+Without index: you scan every page → slow (full table scan)
+
+With index: you jump directly to the page → fast (indexed lookup)
+
+So indexing improves SELECT query performance.
+
+🔍 Visual Understanding
+4
+
+Most databases (MySQL, Postgres, Oracle) internally use a B-Tree index, which allows logarithmic search time (O(log n)) instead of scanning entire rows.
+
+🧠 Why do we need an index?
+
+Without an index, the database must check each row one by one:
+
+SELECT * FROM employees WHERE emp_id = 101;
+
+
+If emp_id is not indexed, DB will scan the whole table — slow for large data.
+
+If emp_id is indexed, DB jumps directly to the matching record — much faster.
+
+📌 Where are indexes used?
+
+Indexes help with columns used in:
+
+WHERE conditions
+
+JOIN conditions
+
+ORDER BY / GROUP BY
+
+Searching large tables
+
+Foreign keys and primary keys
+
+Example:
+
+CREATE INDEX idx_employee_name ON employees(name);
+
+⚙️ Types of Indexes
+1️⃣ Primary Key Index
+
+Automatically created for primary key → unique, fast lookups.
+
+2️⃣ Unique Index
+
+Guarantees no duplicate values.
+
+3️⃣ Non-unique (Normal) Index
+
+Speeds up searches but allows duplicates.
+
+4️⃣ Composite Index (multiple columns)
+
+Example:
+
+CREATE INDEX idx_emp_name_dept ON employees(name, department);
+
+5️⃣ Full-text Index
+
+Used for text search (e.g., articles, blog search).
+
+📉 Downside of Indexing
+
+Indexes improve read speed, but slow down writes:
+
+INSERT
+
+UPDATE
+
+DELETE
+
+Because DB must update the index also.
+
+So too many indexes = slow writes + heavy storage usage.
+
+⭐ Interview-Ready One-Line Answer
+
+DB indexing is a data structure used by databases to speed up searching and querying by allowing faster lookups, similar to an index in a book.
+
+🔥 Real-time example (Microservices / Backend)
+
+If you have an orders table with 10 million rows:
+
+If you frequently search by order_id or customer_id, indexing those columns can reduce query time from seconds to milliseconds.
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
+✅ What is Idempotency?
+
+Idempotency means:
+
+Performing the same operation multiple times has the same effect as performing it once.
+
+Even if the client retries the request due to a timeout or network issue, the final state on the server remains unchanged.
+
+
+
+📝 One-Line Interview Definition
+
+Idempotency ensures that retrying an operation does not change the final result beyond the initial execution.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Redis is a fast, in-memory data store commonly used as:
+
+Cache
+
+Database
+
+Message broker
+
+Distributed lock manager
+
+Here’s a clean, interview-ready explanation:
+
+🔥 What is Redis?
+
+Redis (Remote Dictionary Server) is an open-source, in-memory key–value store known for very high performance. Because data is stored in RAM, Redis is extremely fast (sub-millisecond latency).
+
+⭐ Why is Redis used?
+1. Caching
+
+To reduce database load and speed up responses.
+Example: caching user sessions, token validations, product lists, etc.
+
+2. Session storage
+
+Used in distributed systems for centralized session management.
+
+3. Message queues / pub-sub
+
+Redis has built-in Pub/Sub, Streams, and Lists so it can act like a lightweight message broker.
+
+4. Rate limiting
+
+API rate limiting, login attempt throttling, OTP sending limit, etc.
+
+5. Distributed locks
+
+To safely handle shared resources in microservices.
+
+6. Leaderboard counters
+
+Because Redis supports atomic increments (INCR, DECR).
+
+📦 Data structures supported
+
+Redis is not just key–value strings. It supports:
+
+String
+
+List
+
+Set
+
+Sorted Set (ZSet)
+
+Hash
+
+Bitmap
+
+HyperLogLog
+
+Streams
+
+Geospatial indexes
+
+This makes Redis suitable for many real-time use cases.
+
+⚙️ Persistence modes (important)
+
+Redis is in-memory, but supports persistence:
+
+Type	Meaning
+RDB	Snapshot storage (periodic)
+AOF	Append-only log (writes every command)
+RDB + AOF	Most reliable
+🚀 Performance
+
+Redis can handle millions of requests per second because:
+
+Data is stored in RAM
+
+Single-threaded event loop (no lock overhead)
+
+Optimized data structures
+
+📌 Example use in Spring Boot (common interview question)
+Writing
+redisTemplate.opsForValue().set("user:1", "Bhuvan");
+
+Reading
+String name = redisTemplate.opsForValue().get("user:1");
+
+Expiry (cache)
+redisTemplate.opsForValue().set("otp:9876", "1234", 5, TimeUnit.MINUTES);
+
+🧠 Simple definition (one-line)
+
+Redis is a high-performance in-memory key-value store used for caching, message queues, and real-time processing in distributed applications.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
+Great question — this is the MOST important part of JWT security.
+
+Let’s understand what happens if someone steals (fishes/phishes) a JWT token and how real systems protect against it.
+
+🛑 If someone steals your JWT token — they can act as you
+
+Because JWT is:
+
+stateless
+
+self-contained
+
+Whoever has the token → is considered the user until token expires.
+
+BUT…
+There are STRONG ways to prevent and handle this.
+
+🔐 1. Short Expiry Access Token (Best Practice)
+
+Make JWT token valid for 5–15 minutes only.
+
+So even if hacker steals it:
+→ They can use it only for few minutes.
+
+Example:
+
+exp: now + 10 minutes
+
+🔑 2. Use Refresh Tokens (Secure)
+
+Flow:
+
+Access token = short validity
+
+Refresh token = long validity (7–30 days)
+
+Refresh token is stored in HttpOnly Cookie (cannot be read by JavaScript → avoids XSS)
+
+If access token is stolen → its lifetime is very short.
+
+If refresh token is stolen → backend can detect misuse (see next point).
+
+🛑 3. Store Refresh Tokens in Database → Allow Revocation
+
+This is how 99% real systems handle token theft.
+
+When user logs in, you store:
+
+userId | refreshToken | deviceInfo | expiration
+
+
+If suspicious activity happens:
+
+User logs out
+
+Token is used from strange device
+
+Too many refresh attempts from different IPs
+
+You mark token as revoked.
+
+Then hacker’s refresh token becomes useless.
+
+🕵️ 4. Rotate Refresh Tokens (Highly Secure)
+
+Every time user uses refresh token:
+
+Backend generates a new refresh token
+
+Invalidates the old one
+
+So if a hacker steals an old token →
+it becomes invalid as soon as user refreshes.
+
+This prevents replay attacks.
+
+🌐 5. Use HTTPS ALWAYS
+
+If your API uses HTTP, then:
+
+Token travels in plain text
+
+Anyone on same network can read it
+
+Using tools like Wireshark
+
+With HTTPS, tokens are encrypted during transmission.
+
+🛡️ 6. Use HttpOnly Cookies instead of localStorage
+
+If JWT is stored in localStorage:
+→ It can be stolen via XSS attack
+
+Use HttpOnly + Secure cookie, which JavaScript cannot access.
+
+Set-Cookie: jwt=xxx; HttpOnly; Secure; SameSite=Strict;
+
+👁️‍🗨️ 7. Device/IP Based Detection
+
+Backend can check:
+
+IP address
+
+User agent / device fingerprint
+
+If a token suddenly comes from another device/location → block it.
+
+🧨 Example: What happens if someone steals my JWT and sends a request?
+❌ If using only long-lived JWT:
+
+Hacker can access until token expires → BAD DESIGN.
+
+✔ If using short-lived JWT + refresh tokens:
+
+Hacker gets ~10 min window only.
+
+✔ If using refresh token rotation:
+
+Once real user’s token rotates → hacker’s becomes invalid.
+
+✔ If backend tracks refresh tokens:
+
+You can instantly revoke the token.
+
+🎯 How modern applications protect against stolen tokens
+Mechanism	Protection
+Access token lifespan = 5–15 minutes	Limits hacker usage window
+Refresh token stored in HttpOnly Cookie	Prevents XSS theft
+Refresh token rotation	Blocks replay attacks
+Revoke token in DB	Immediately invalidate stolen tokens
+HTTPS	Prevents network sniffing
+IP/device verification	Detects unusual logins
+⭐ Summary (Best Explanation)
+
+If JWT is stolen → hacker can use it.
+But real systems reduce the damage using:
+
+Short-lived tokens
+
+Secure HttpOnly cookies
+
+Refresh token rotation
+
+Token revocation in DB
+
+HTTPS
+
+Device/IP checks
+
+So stolen token becomes useless very quickly.
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Nice — below is a complete, ready-to-read Spring Boot implementation that demonstrates a secure JWT setup with:
+
+Short-lived access tokens (JWT)
+
+Long-lived refresh tokens stored in DB (so you can revoke/inspect)
+
+Refresh token rotation (issue a new refresh token on each refresh and invalidate the old one)
+
+Refresh token delivered in an HttpOnly cookie (safer than localStorage)
+
+OncePerRequestFilter to validate access token on every request
+
+Login, refresh, logout endpoints
+
+You can copy/paste and adapt to your project. I kept the code focused and commented so you can drop it into a typical Spring Boot setup.
+
+1) Maven dependencies (pom.xml)
+<dependencies>
+  <!-- Spring Boot starters -->
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+  </dependency>
+
+  <!-- JJWT (JSON Web Token) -->
+  <dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-api</artifactId>
+    <version>0.11.5</version>
+  </dependency>
+  <dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-impl</artifactId>
+    <version>0.11.5</version>
+    <scope>runtime</scope>
+  </dependency>
+  <dependency>
+    <groupId>io.jsonwebtoken</groupId>
+    <artifactId>jjwt-jackson</artifactId>
+    <version>0.11.5</version>
+    <scope>runtime</scope>
+  </dependency>
+</dependencies>
+
+2) Application properties (example)
+server.port=8080
+
+spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=update
+
+jwt.secret=ReplaceWithASecureRandomLongSecretKeyThatIsAtLeast32Bytes!
+jwt.access-expiration-minutes=10
+jwt.refresh-expiration-days=30
+
+
+Important: use a strong secret (>= 32 bytes). In production store secrets in vault/ENV.
+
+3) Entities
+User (simplified)
+@Entity
+@Table(name = "users")
+public class User {
+    @Id @GeneratedValue
+    private Long id;
+    @Column(unique = true, nullable = false)
+    private String username;
+    private String password; // hashed (BCrypt)
+    private String roles; // comma separated or use a join table in real apps
+
+    // constructors, getters, setters
+}
+
+RefreshToken
+@Entity
+@Table(name = "refresh_tokens")
+public class RefreshToken {
+    @Id @GeneratedValue
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String token;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private Instant expiryDate;
+
+    private String deviceInfo; // optional: device, ip, user-agent
+
+    // constructors, getters, setters
+}
+
+4) Repositories
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
+}
+
+public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long> {
+    Optional<RefreshToken> findByToken(String token);
+    void deleteByUser(User user);
+}
+
+5) JWT Utility / TokenService
+@Service
+public class JwtService {
+    private final SecretKey key;
+    private final Duration accessTokenValidity;
+    private final Duration refreshTokenValidity;
+
+    public JwtService(@Value("${jwt.secret}") String secret,
+                      @Value("${jwt.access-expiration-minutes}") long accessMinutes,
+                      @Value("${jwt.refresh-expiration-days}") long refreshDays) {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        this.accessTokenValidity = Duration.ofMinutes(accessMinutes);
+        this.refreshTokenValidity = Duration.ofDays(refreshDays);
+    }
+
+    public String generateAccessToken(User user) {
+        Instant now = Instant.now();
+        return Jwts.builder()
+                .setSubject(user.getUsername())
+                .claim("roles", user.getRoles())
+                .setIssuedAt(Date.from(now))
+                .setExpiration(Date.from(now.plus(accessTokenValidity)))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+    // For refresh tokens we typically use a random opaque token (not JWT), but you can also issue JWT refresh tokens.
+    // Here we will generate a secure random string.
+    public String generateRefreshTokenString() {
+        return UUID.randomUUID().toString() + "-" + Base64.getUrlEncoder()
+                .encodeToString(SecureRandom.getSeed(16));
+    }
+
+    public boolean validateAccessToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
+        } catch (JwtException e) {
+            return false;
+        }
+    }
+
+    public String extractUsername(String token) {
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build()
+                .parseClaimsJws(token).getBody();
+        return claims.getSubject();
+    }
+
+    public Instant getAccessTokenExpiry(String token) {
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build()
+                .parseClaimsJws(token).getBody();
+        return claims.getExpiration().toInstant();
+    }
+
+    public Instant refreshTokenExpiryInstant() {
+        return Instant.now().plus(refreshTokenValidity);
+    }
+}
+
+
+Note: refresh tokens are stored in DB as opaque tokens (not JWT) — simpler to revoke and rotate.
+
+6) Authentication Controller (login / refresh / logout)
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    private final AuthenticationManager authenticationManager; // configure bean or use DaoAuthenticationProvider
+    private final UserRepository userRepo;
+    private final RefreshTokenRepository refreshRepo;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthController(AuthenticationManager am, UserRepository ur,
+                          RefreshTokenRepository rr, JwtService js, PasswordEncoder pe) {
+        this.authenticationManager = am;
+        this.userRepo = ur;
+        this.refreshRepo = rr;
+        this.jwtService = js;
+        this.passwordEncoder = pe;
+    }
+
+    record LoginRequest(String username, String password) {}
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest req, HttpServletResponse response) {
+        // authenticate
+        Authentication auth = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(req.username(), req.password())
+        );
+
+        User user = userRepo.findByUsername(req.username()).orElseThrow();
+        String accessToken = jwtService.generateAccessToken(user);
+
+        // create refresh token entry
+        String refreshString = jwtService.generateRefreshTokenString();
+        RefreshToken rt = new RefreshToken();
+        rt.setToken(refreshString);
+        rt.setUser(user);
+        rt.setExpiryDate(jwtService.refreshTokenExpiryInstant());
+        rt.setDeviceInfo("login-from-unknown"); // attach user-agent/ip
+        refreshRepo.save(rt);
+
+        // set HttpOnly cookie for refresh token
+        Cookie cookie = new Cookie("refreshToken", refreshString);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true); // set true in prod (HTTPS)
+        cookie.setPath("/"); 
+        cookie.setMaxAge((int)Duration.between(Instant.now(), rt.getExpiryDate()).getSeconds());
+        cookie.setSameSite("Lax"); // or Strict
+        response.addCookie(cookie);
+
+        Map<String, Object> resp = Map.of("accessToken", accessToken, "username", user.getUsername());
+        return ResponseEntity.ok(resp);
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<?> refresh(HttpServletRequest request, HttpServletResponse response) {
+        // read refresh token cookie
+        String refreshToken = extractRefreshTokenFromCookie(request);
+        if (refreshToken == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        var optional = refreshRepo.findByToken(refreshToken);
+        if (optional.isEmpty()) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        RefreshToken stored = optional.get();
+        if (stored.getExpiryDate().isBefore(Instant.now())) {
+            refreshRepo.delete(stored);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        // rotate: remove old token & create new one
+        refreshRepo.delete(stored);
+
+        User user = stored.getUser();
+        String newRefreshString = jwtService.generateRefreshTokenString();
+        RefreshToken newRt = new RefreshToken();
+        newRt.setToken(newRefreshString);
+        newRt.setUser(user);
+        newRt.setExpiryDate(jwtService.refreshTokenExpiryInstant());
+        newRt.setDeviceInfo(stored.getDeviceInfo());
+        refreshRepo.save(newRt);
+
+        // set new cookie
+        Cookie cookie = new Cookie("refreshToken", newRefreshString);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge((int)Duration.between(Instant.now(), newRt.getExpiryDate()).getSeconds());
+        cookie.setSameSite("Lax");
+        response.addCookie(cookie);
+
+        // new access token
+        String newAccessToken = jwtService.generateAccessToken(user);
+        return ResponseEntity.ok(Map.of("accessToken", newAccessToken));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+        String refreshToken = extractRefreshTokenFromCookie(request);
+        if (refreshToken != null) {
+            refreshRepo.findByToken(refreshToken).ifPresent(refreshRepo::delete);
+        }
+        // Remove cookie
+        Cookie cookie = new Cookie("refreshToken", "");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return ResponseEntity.ok(Map.of("message", "logged out"));
+    }
+
+    private String extractRefreshTokenFromCookie(HttpServletRequest request) {
+        if (request.getCookies() == null) return null;
+        for (Cookie c : request.getCookies()) {
+            if ("refreshToken".equals(c.getName())) return c.getValue();
+        }
+        return null;
+    }
+}
+
+7) JWT Authentication Filter (validates access token on each request)
+@Component
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;
+
+    public JwtAuthenticationFilter(JwtService jwtService, UserDetailsService uds) {
+        this.jwtService = jwtService;
+        this.userDetailsService = uds;
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+            throws ServletException, IOException {
+
+        final String authHeader = request.getHeader("Authorization");
+        String jwt = null;
+        String username = null;
+
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            jwt = authHeader.substring(7);
+            try {
+                if (jwtService.validateAccessToken(jwt)) {
+                    username = jwtService.extractUsername(jwt);
+                }
+            } catch (JwtException ex) {
+                // invalid token — continue to 401 later if necessary
+            }
+        }
+
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails ud = userDetailsService.loadUserByUsername(username);
+            UsernamePasswordAuthenticationToken authToken =
+                new UsernamePasswordAuthenticationToken(ud, null, ud.getAuthorities());
+            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            SecurityContextHolder.getContext().setAuthentication(authToken);
+        }
+
+        chain.doFilter(request, response);
+    }
+}
+
+8) Security Configuration
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    private final JwtAuthenticationFilter jwtFilter;
+    private final UserDetailsService userDetailsService;
+
+    public SecurityConfig(JwtAuthenticationFilter f, UserDetailsService uds) {
+        this.jwtFilter = f;
+        this.userDetailsService = uds;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable() // if using cookies for refresh, consider CSRF protection for state-changing endpoints
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .authorizeHttpRequests()
+                .requestMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated()
+            .and()
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+
+9) UserDetailsService (simple)
+@Service
+public class JpaUserDetailsService implements UserDetailsService {
+    private final UserRepository userRepo;
+    public JpaUserDetailsService(UserRepository r) { this.userRepo = r; }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User u = userRepo.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return org.springframework.security.core.userdetails.User
+                .withUsername(u.getUsername())
+                .password(u.getPassword())
+                .authorities(Arrays.stream(Optional.ofNullable(u.getRoles()).orElse("").split(","))
+                        .filter(s -> !s.isBlank())
+                        .map(SimpleGrantedAuthority::new).collect(Collectors.toList()))
+                .build();
+    }
+}
+
+10) Example usage & flow recap
+
+Login (/auth/login)
+
+Client posts username/password → server authenticates → issues short-lived access token and sets refresh token cookie (HttpOnly).
+
+API requests
+
+Client attaches Authorization: Bearer <access-token> on each request.
+
+Server validates token in JwtAuthenticationFilter on every request.
+
+Access token expires
+
+Client calls /auth/refresh (no body). The browser automatically sends the HttpOnly cookie with refresh token.
+
+Server validates stored refresh token, rotates it (delete old → create new), sets new refresh cookie, and returns a fresh access token.
+
+Logout or suspicious activity
+
+Call /auth/logout. Server deletes refresh token in DB and clears cookie. This revokes future refresh attempts (and because access tokens are short-lived, full access will end quickly).
+
+11) Important Security Notes (production)
+
+HTTPS mandatory — cookie & token must be transmitted securely.
+
+Use strong random secrets; rotate them if needed.
+
+Consider device / IP / fingerprinting for extra checks.
+
+Rate limit refresh attempts and login attempts to avoid brute force.
+
+Use CSRF protection if you store session-like state in cookies; for refresh endpoint a same-site cookie + CSRF token helps.
+
+Audit & logging suspicious refresh/login attempts.
+
+Limit scope of tokens (use scopes/claims to minimize damage).
+
+Rotate refresh tokens on every refresh (we implemented this).
+
+Invalidate all refresh tokens on password change.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Handling shared values in multithreading is one of the most important topics in Java because multiple threads accessing the same data can cause race conditions, data inconsistency, and visibility issues.
+
+Below is a clear, interview-oriented explanation with examples 👇
+
+1️⃣ The Problem: Shared Mutable State
+
+When multiple threads read/write the same variable, issues occur.
+
+Example (Problematic)
+class Counter {
+    int count = 0;
+
+    void increment() {
+        count++; // NOT thread-safe
+    }
+}
+
+
+If 2 threads call increment() simultaneously:
+
+Both may read count = 0
+
+Both write back count = 1
+❌ Expected = 2, Actual = 1
+
+2️⃣ Solutions to Handle Shared Values
+✅ 1. synchronized Keyword (Most Common)
+
+Ensures only one thread at a time can access the shared resource.
+
+Method-level synchronization
+class Counter {
+    private int count = 0;
+
+    synchronized void increment() {
+        count++;
+    }
+
+    synchronized int getCount() {
+        return count;
+    }
+}
+
+
+✔ Thread-safe
+❌ Slower due to locking
+
+✅ 2. synchronized Block (Preferred for Performance)
+
+Locks only the critical section, not the whole method.
+
+class Counter {
+    private int count = 0;
+
+    void increment() {
+        synchronized (this) {
+            count++;
+        }
+    }
+}
+
+
+✔ Better performance
+✔ Fine-grained locking
+
+✅ 3. volatile (For Visibility, NOT Atomicity)
+
+Ensures latest value is visible to all threads.
+
+class Shared {
+    volatile boolean running = true;
+}
+
+
+⚠️ volatile does NOT prevent race conditions
+
+❌ Not safe for:
+
+volatile int count; // count++ still unsafe
+
+
+✔ Use only when:
+
+One thread writes
+
+Others only read
+
+✅ 4. Atomic Variables (java.util.concurrent.atomic)
+
+Best for counters and simple shared values.
+
+import java.util.concurrent.atomic.AtomicInteger;
+
+class Counter {
+    AtomicInteger count = new AtomicInteger(0);
+
+    void increment() {
+        count.incrementAndGet();
+    }
+}
+
+
+✔ Lock-free
+✔ High performance
+✔ Thread-safe
+
+✅ 5. Locks (ReentrantLock) – Advanced Control
+
+More flexible than synchronized.
+
+import java.util.concurrent.locks.ReentrantLock;
+
+class Counter {
+    private int count = 0;
+    private final ReentrantLock lock = new ReentrantLock();
+
+    void increment() {
+        lock.lock();
+        try {
+            count++;
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+
+✔ Try-lock, fairness, interruptible
+❌ More code
+
+✅ 6. Thread-Local Variables (ThreadLocal)
+
+Each thread gets its own copy (no sharing at all).
+
+ThreadLocal<Integer> threadLocal =
+        ThreadLocal.withInitial(() -> 0);
+
+threadLocal.set(threadLocal.get() + 1);
+
+
+✔ No synchronization needed
+✔ Used in Spring (SecurityContext, Transactions)
+
+✅ 7. Immutable Objects (Best Design Approach)
+
+If data never changes, it’s automatically thread-safe.
+
+final class User {
+    private final String name;
+
+    User(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+
+✔ Safest
+✔ Recommended wherever possible
+
+3️⃣ When to Use What? (Interview Gold)
+Scenario	Best Option
+Simple counter	AtomicInteger
+Complex logic	synchronized / ReentrantLock
+Flag / config	volatile
+Per-thread data	ThreadLocal
+Read-heavy data	Immutable objects
+4️⃣ Common Interview Question
+
+❓ Does volatile make code thread-safe?
+👉 NO – It only guarantees visibility, not atomicity.
+
+5️⃣ One-Line Interview Answer
+
+“Shared values in multithreading are handled using synchronization mechanisms like synchronized, locks, atomic variables, volatile for visibility, thread-local storage for isolation, and immutable objects to avoid shared mutable state.”
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+package com.test;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class FirstNonRep {
+
+	public static Character firstNonRepeat(String input) {
+
+		if (input == null || input.isEmpty()) {
+			return '_';
+		}
+
+		Map<Character, Integer> map = new LinkedHashMap<>();
+
+		for (char ch : input.toCharArray()) {
+			map.put(ch, map.getOrDefault(ch, 0) + 1);
+		}
+
+		for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+			if (entry.getValue() == 1) {
+				return entry.getKey();
+			}
+		}
+		return '_';
+	}
+
+	public static void main(String[] args) {
+		System.out.println(firstNonRepeat("swiss"));
+	}
+
+}
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Here are the most common Semaphore interview questions (with clear, interview-ready answers) tailored for Java / backend developer interviews (3+ years).
+
+1️⃣ What is a Semaphore?
+
+Answer:
+A Semaphore is a concurrency control mechanism used to limit access to a shared resource by multiple threads.
+It maintains a set of permits. A thread must acquire a permit before accessing the resource and release it after use.
+
+In Java, it is provided by:
+
+java.util.concurrent.Semaphore
+
+2️⃣ Why do we need Semaphore when we already have synchronized?
+
+Answer:
+
+| synchronized             | Semaphore              |
+| ------------------------ | ---------------------- |
+| Allows **only 1 thread** | Allows **N threads**   |
+| Implicit lock            | Explicit permits       |
+| No fairness option       | Supports fairness      |
+| No tryAcquire            | tryAcquire() available |
+
+
+👉 Semaphore is used when we want to allow limited concurrent access, not just one thread.
+
+3️⃣ Types of Semaphores
+
+Answer:
+
+🔹 Binary Semaphore
+
+Has 1 permit
+
+Works like a mutex/lock
+
+Semaphore sem = new Semaphore(1);
+
+🔹 Counting Semaphore
+
+Has multiple permits
+
+Allows multiple threads
+
+Semaphore sem = new Semaphore(3);
+
+4️⃣ How Semaphore works internally?
+
+Answer:
+
+acquire() → decreases permit count
+
+release() → increases permit count
+
+If permits = 0 → thread blocks
+
+When permit released → waiting thread resumes
+
+5️⃣ Simple Java Example (Interview Favorite)
+Semaphore semaphore = new Semaphore(2); // 2 threads allowed
+
+public void accessResource() {
+    try {
+        semaphore.acquire();
+        System.out.println(Thread.currentThread().getName() + " acquired permit");
+        Thread.sleep(1000);
+    } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+    } finally {
+        semaphore.release();
+        System.out.println(Thread.currentThread().getName() + " released permit");
+    }
+}
+
+
+💡 At most 2 threads can execute the critical section.
+
+6️⃣ What is Fairness in Semaphore?
+
+Answer:
+Fair semaphore ensures FIFO order for threads waiting for permits.
+
+Semaphore semaphore = new Semaphore(2, true);
+
+
+true → Fair
+
+false → Non-fair (default, better performance)
+
+7️⃣ Difference between Semaphore and Mutex / Lock
+| Feature   | Semaphore       | Mutex / Lock     |
+| --------- | --------------- | ---------------- |
+| Permits   | Multiple        | One              |
+| Ownership | No owner thread | Owner thread     |
+| Release   | Any thread      | Only owner       |
+| Use case  | Resource pool   | Critical section |
+
+8️⃣ What happens if a thread releases without acquiring?
+
+Answer:
+Semaphore does not track ownership.
+So releasing without acquiring increases permits, which may cause bugs.
+
+👉 This is why Locks are safer for mutual exclusion.
+
+9️⃣ Semaphore vs CountDownLatch vs CyclicBarrier
+| Feature      | Semaphore    | CountDownLatch | CyclicBarrier       |
+| ------------ | ------------ | -------------- | ------------------- |
+| Purpose      | Limit access | Wait for tasks | Synchronize threads |
+| Reusable     | Yes          | No             | Yes                 |
+| Permit based | Yes          | No             | No                  |
+
+🔟 Real-World Use Cases (Important in Interviews)
+
+✅ Database connection pool
+✅ Thread pool limiting
+✅ Rate limiting
+✅ API throttling
+✅ Printer / resource sharing
+
+1️⃣1️⃣ Can Semaphore cause deadlock?
+
+Answer:
+Yes, if permits are not released or acquired in the wrong order.
+
+Example:
+
+semaphore.acquire();
+// exception occurs
+// release not called → deadlock
+
+
+✔ Always release in finally block.
+
+1️⃣2️⃣ tryAcquire() vs acquire()
+if (semaphore.tryAcquire()) {
+    // access resource
+    semaphore.release();
+}
+
+| acquire()          | tryAcquire()        |
+| ------------------ | ------------------- |
+| Blocks             | Non-blocking        |
+| Waits indefinitely | Returns immediately |
+
+1️⃣3️⃣ One-line Interview Answer (Strong)
+
+“Semaphore is used to control concurrent access to a shared resource by maintaining permits. Unlike synchronized, it allows multiple threads and supports fairness and non-blocking access.”
+
+🔥 Quick Interview Tip
+
+If interviewer asks:
+
+“Where did you use Semaphore in your project?”
+
+Say:
+
+“We used Semaphore to limit concurrent API calls / database connections to avoid resource exhaustion.”
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+In Java, exceptions can be thrown from methods in two main ways:
+
+1️⃣ Throwing an exception using throw
+
+Use throw inside the method body to explicitly throw an exception.
+
+✅ Example
+public void validateAge(int age) {
+    if (age < 18) {
+        throw new IllegalArgumentException("Age must be 18 or above");
+    }
+}
+
+
+📌 throw is used to actually throw an exception object.
+
+2️⃣ Declaring exceptions using throws
+
+Use throws in the method signature to declare exceptions that the method may pass to the caller.
+
+✅ Example
+public void readFile() throws IOException {
+    FileReader fr = new FileReader("data.txt");
+}
+
+
+📌 throws is used to declare exceptions, not throw them.
+
+🔁 Combining throw + throws
+public void withdraw(double amount) throws Exception {
+    if (amount <= 0) {
+        throw new Exception("Invalid withdrawal amount");
+    }
+}
+
+⚖ Checked vs Unchecked Exceptions
+✅ Checked Exceptions
+
+Must be handled or declared
+
+Extend Exception (except RuntimeException)
+
+public void connect() throws SQLException {
+    throw new SQLException("DB error");
+}
+
+✅ Unchecked Exceptions
+
+Extend RuntimeException
+
+No need to declare using throws
+
+public void divide(int a, int b) {
+    if (b == 0) {
+        throw new ArithmeticException("Cannot divide by zero");
+    }
+}
+
+🔄 Throwing one exception from another (Exception chaining)
+public void process() {
+    try {
+        readFile();
+    } catch (IOException e) {
+        throw new RuntimeException("Processing failed", e);
+    }
+}
+
+
+📌 Preserves root cause using exception chaining.
+
+🎯 Custom Exception Example (Interview favorite)
+class InsufficientBalanceException extends Exception {
+    public InsufficientBalanceException(String msg) {
+        super(msg);
+    }
+}
+
+public void withdraw(double balance, double amount)
+        throws InsufficientBalanceException {
+
+    if (amount > balance) {
+        throw new InsufficientBalanceException("Low balance");
+    }
+}
+
+🧠 Common Interview Questions
+❓ Can we throw checked exception without throws?
+
+❌ No — compile-time error
+
+❓ Can a method throw multiple exceptions?
+
+✅ Yes
+
+public void test() throws IOException, SQLException {}
+
+❓ Can we throw null?
+
+❌ No — NullPointerException
+
+📌 One-line Interview Answer
+
+In Java, exceptions are thrown using the throw keyword inside methods and declared using the throws keyword in the method signature.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Abstraction in Java means hiding implementation details and showing only essential features to the user.
+Java achieves abstraction mainly in two ways:
+
+1️⃣ Abstraction using Abstract Classes
+
+An abstract class is a class declared with the abstract keyword.
+
+🔹 Key points
+
+Can have abstract methods (without body)
+
+Can have concrete methods (with body)
+
+Can have fields, constructors
+
+A class can extend only one abstract class
+
+✅ Example
+abstract class Vehicle {
+    abstract void start();   // abstract method
+
+    void fuelType() {        // concrete method
+        System.out.println("Uses fuel");
+    }
+}
+
+class Car extends Vehicle {
+    @Override
+    void start() {
+        System.out.println("Car starts with key");
+    }
+}
+
+🔹 Usage
+Vehicle v = new Car();
+v.start();       // Car starts with key
+v.fuelType();   // Uses fuel
+
+
+📌 What’s abstracted?
+User knows Vehicle can start, but how it starts is hidden.
+
+2️⃣ Abstraction using Interfaces (Most Important)
+
+An interface is a blueprint of a class.
+
+🔹 Key points
+
+Methods are public & abstract by default
+
+Supports multiple inheritance
+
+Variables are public static final
+
+From Java 8:
+
+default methods allowed
+
+static methods allowed
+
+✅ Example
+interface Payment {
+    void pay();   // abstract method
+}
+
+class CreditCardPayment implements Payment {
+    public void pay() {
+        System.out.println("Payment through Credit Card");
+    }
+}
+
+class UPIPayment implements Payment {
+    public void pay() {
+        System.out.println("Payment through UPI");
+    }
+}
+
+🔹 Usage
+Payment p = new UPIPayment();
+p.pay();   // Payment through UPI
+
+
+📌 What’s abstracted?
+User only knows pay() exists — payment logic is hidden.
+
+🔍 Abstract Class vs Interface (Quick Interview Table)
+Feature	Abstract Class	Interface
+Methods	Abstract + Concrete	Abstract (default/static allowed)
+Variables	Instance variables	public static final
+Inheritance	Single	Multiple
+Constructors	Yes	No
+Use case	IS-A + shared code	Contract / Capability
+🎯 Real-Time Example (Interview Friendly)
+
+Interface → What to do
+Payment, Repository, Service
+
+Abstract Class → What + How (partially)
+AbstractService, BaseEntity
+
+🧠 One-Line Interview Answer
+
+Abstraction in Java is achieved using abstract classes and interfaces, which hide implementation details and expose only essential functionalities.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
 
 
 

@@ -4017,11 +4017,11 @@ Set<Integer> seen = new HashSet<>();
 List<List<Integer>> pairs = new ArrayList<>();
 
 for (int num : arr) {
-    int complement = target - num;
+    int complement = target - num;           //4, 2, 3
     if (seen.contains(complement)) {
-        pairs.add(List.of(complement, num));
+        pairs.add(List.of(complement, num)); //(3,2)
     }
-    seen.add(num);
+    seen.add(num);                           //1, 3
 }
 
 System.out.println(pairs);
@@ -4128,6 +4128,640 @@ Using legacy Java, we iterate through the array using nested loops or a HashSet 
 
 
 
+Project Role : Web Developer
+Project Role Description : Design, build and test web-based applications for various site components and edit site content. Document technical designs and specifications. Research and incorporate updated content for websites.                                                                                                                                                                                                                                                                                                                                       
+Must have skills : Spring Boot
+Good to have skills : NA
+Minimum 3 year(s) of experience is required
+Educational Qualification : 15 years full time education
+
+Summary: 
+As a Web Developer, you will engage in the design, construction, and testing of web-based applications tailored for various site components. Your typical day will involve editing site content, documenting technical designs and specifications, and researching to incorporate updated content for websites, ensuring they remain current and user-friendly. You will collaborate with team members to enhance the functionality and aesthetics of web applications, contributing to a seamless user experience and effective site performance.
+ 
+Roles & Responsibilities: 
+- Expected to perform independently and become an SME.
+- Required active participation/contribution in team discussions.
+- Contribute in providing solutions to work related problems.
+- Assist in the development of user-friendly web interfaces that meet client specifications.
+- Collaborate with cross-functional teams to ensure cohesive project execution.
+ 
+Professional & Technical Skills: 
+- Must To Have Skills: Proficiency in Spring Boot.
+- Experience with RESTful API development and integration.
+- Strong understanding of web technologies such as HTML, CSS, and JavaScript.
+- Familiarity with database management systems and SQL.
+- Knowledge of version control systems, particularly Git.
+ 
+Additional Information: 
+- The candidate should have minimum 3 years of experience in Spring Boot.
+- This position is based at our Bengaluru office.
+- A 15 years full time education is required.
+15 years full time education
 
 
 
+######################################################################################################################################################################################
+
+Interview Explaination based on Resume
+
+######################################################################################################################################################################################
+
+----------------------------
+Built REST and SOAP APIs with JWT-based authentication behind an API gateway, trimming average 
+response times by 25%. 
+----------------------------
+
+Below is a clear, safe, interview-ready way to explain each bullet without inviting deep probing. You can almost memorize these answers and reuse them across interviews.
+
+1️⃣ REST & SOAP APIs with JWT + API Gateway
+
+What to say (primary answer):
+
+“I worked on building REST and some SOAP APIs secured with JWT authentication and exposed them through an API gateway. We optimized request handling and reduced unnecessary processing, which helped improve overall response time.”
+
+If they ask how response time improved:
+
+Centralized auth at gateway instead of each service
+
+Reduced redundant validations
+
+Optimized request/response payloads
+
+Safe closing line:
+
+“The improvement was noticeable after refactoring and gateway-level optimizations.”
+
+--------------------------
+Integrated payment gateways (Stripe) and Kafka to enable secure transactions and asynchronous 
+workflows, supporting 4–6 partner integrations. 
+-------------------------
+
+2️⃣ Stripe + Kafka integrations (partners)
+
+What to say:
+
+“I integrated a payment gateway like Stripe for secure transactions and used Kafka for asynchronous processing so that payment events didn’t block user requests.”
+
+If they ask about partners:
+
+“We had a few external systems consuming or publishing events, around 4 to 6 integrations, mainly for payments, notifications, and reconciliation.”
+
+If they probe Kafka depth:
+
+Producer–consumer model
+
+Used for decoupling and reliability
+
+Handled retries and basic error handling
+
+👉 Avoid mentioning partitions, offsets, or throughput numbers unless asked.
+
+
+------------------------------
+Elevated observability with Zipkin, Spring Boot Admin, and Eureka; reduced incident resolution time by 
+20% and improved availability to 99%. 
+---------------------------------
+
+3️⃣ Observability with Zipkin, Spring Boot Admin, Eureka
+
+What to say:
+
+“To improve visibility, we used Zipkin for distributed tracing, Spring Boot Admin for service health monitoring, and Eureka for service discovery. This helped us identify issues faster during incidents.”
+
+If they ask about MTTR / availability:
+
+“Earlier, diagnosing issues took longer due to limited visibility. With better monitoring and tracing, we could pinpoint failures faster, which reduced incident resolution time and improved overall service stability.”
+
+Safe clarification:
+
+“Availability was improved mainly by quicker detection and recovery rather than infrastructure changes.”
+
+🔑 One universal fallback line (VERY IMPORTANT)
+
+If interviewer starts drilling numbers:
+
+“These metrics are approximate and based on release comparisons and monitoring observations, not formal SLA tracking.”
+
+🎯 How this sounds to interviewers
+
+Shows hands-on backend experience
+
+Demonstrates production exposure
+
+Avoids senior-level SRE grilling
+
+Fits perfectly for a 3-year Spring Boot engineer
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+-----------------------------------
+Refactored REST endpoints to reduce API latency by 25%, trimming end-user wait time and boosting 
+throughput by 15% across services. 
+---------------------------------
+
+Great question 👍
+The key is to explain at a high level, focus on what problem existed → what you did → what improved, and avoid deep numbers unless they insist.
+
+Below is a ready-to-speak interview explanation for each bullet, in simple, safe language that works well for a 3-year experience engineer.
+
+1️⃣ Refactored REST endpoints (latency & throughput)
+
+How to explain (say this):
+
+“Some APIs had unnecessary processing and multiple database calls. I refactored the endpoints by optimizing request/response models, reducing redundant calls, and improving query handling. After this, response times improved and overall throughput increased.”
+
+If they ask ‘how exactly?’ (safe depth):
+
+Reduced payload size
+
+Removed duplicate DB calls
+
+Used proper indexing and pagination
+
+Basic caching where applicable
+
+👉 Stop here. Don’t mention P99, TPS, etc.
+
+
+---------------------------
+Launched a lightweight feature flagging system enabling faster releases, reducing time-to-market by 25% 
+and accelerating partner onboarding for new customers. 
+--------------------------
+
+2️⃣ Feature flagging system (time-to-market)
+
+How to explain:
+
+“Earlier, even small features required full releases. I introduced a simple feature-flag approach using configuration properties, which allowed us to enable or disable features without redeploying.”
+
+If they probe further:
+
+Flags stored in config / DB
+
+Checked at service layer
+
+Used mainly for beta users
+
+👉 This shows ownership + maturity, without sounding senior-heavy.
+
+
+--------------------------------
+Implemented shard-aware routing and circuit breakers to handle peak loads, increasing concurrent user 
+capacity by 30% without outages during peaks. 
+--------------------------------
+
+3️⃣ Shard-aware routing & circuit breakers (peak load)
+
+How to explain:
+
+“During peak traffic, some services were getting overloaded. We added basic shard-aware routing so requests were distributed better, and circuit breakers to prevent cascading failures.”
+
+If they ask for tools:
+
+Circuit breaker using Resilience4j
+
+Timeouts + fallback responses
+
+Very important line:
+
+“The goal was stability, not scaling infinitely.”
+
+This line kills deep grilling instantly.
+
+
+-------------------------
+Raised unit test coverage from 50% to 80%, cutting production defects and post-release hotfixes by 30% 
+within the first quarter.
+------------------------
+
+4️⃣ Unit test coverage improvement
+
+How to explain:
+
+“Test coverage was low and regressions were common. I focused on adding unit tests for critical business logic and edge cases. This helped catch issues earlier and reduced production defects.”
+
+If they ask ‘why coverage matters?’
+
+Faster feedback
+
+Safer refactoring
+
+Fewer hotfixes
+
+Avoid talking about mutation testing, contract testing, etc.
+
+🔑 Golden Interview Rule (remember this)
+
+Always follow this pattern:
+
+Problem → Action → Outcome (without over-metrics)
+
+Example:
+
+“There were latency issues → I optimized the API and DB calls → response times improved noticeably.”
+
+🛑 What NOT to say (very important)
+
+❌ Exact dashboards
+❌ SLA penalties
+❌ P99 latency
+❌ Exact TPS numbers
+❌ “We measured precisely 22.37% improvement”
+
+🎯 One universal fallback line (use anytime)
+
+“These were approximate improvements observed across releases and basic monitoring rather than formal KPI tracking.”
+
+This line is gold for service-based company interviews.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+-------------------------
+Designed and delivered Spring Boot microservices for sales, production, purchase, finance, payroll, 
+inventory, scheduling, quality, and workflow, shortening cycle times by 20% and increasing throughput by 25%. 
+--------------------------
+
+Below is a simple, confident, and safe interview explanation you can use for each line, tailored for a 3-year Spring Boot engineer. This keeps you out of deep KPI or SRE-style questioning.
+
+1️⃣ Spring Boot microservices across business modules
+
+What to say (main answer):
+
+“I worked on designing and developing Spring Boot–based microservices for multiple business modules like sales, inventory, finance, and payroll. The idea was to split large workflows into smaller services so changes could be made and deployed faster.”
+
+If they ask about cycle time & throughput:
+
+“Earlier, changes required touching multiple areas and releases were slower. After breaking the logic into independent services and cleaning up workflows, processing became faster and overall throughput improved.”
+
+Safe technical details you can mention:
+
+Clear service boundaries
+
+Reduced cross-module dependencies
+
+Parallel processing where possible
+
+Cleaner API contracts
+
+Safe closing line:
+
+“The improvements were observed gradually across releases rather than from a single change.”
+
+
+------------------------------------
+Implemented secure REST/SOAP integrations with JWT, caching, and API gateway; cut average API 
+latency by 25% and elevated service uptime to 99%.
+------------------------------------
+
+2️⃣ Secure REST/SOAP integrations with JWT, caching & API Gateway
+
+What to say (main answer):
+
+“I implemented integrations using REST and some SOAP services, secured them using JWT authentication, and exposed them through an API gateway. This helped centralize security and routing.”
+
+If they ask about latency improvement:
+
+“We reduced latency mainly by adding caching for frequently accessed data and moving common concerns like authentication and validation to the gateway instead of repeating them in every service.”
+
+If they ask about uptime:
+
+“Uptime improved because the gateway helped with better request routing, and caching reduced dependency on downstream systems, so temporary issues didn’t impact users as much.”
+
+Safe tools you can name (only if asked):
+
+JWT for stateless auth
+
+Gateway for routing, throttling
+
+In-memory / Redis caching (generic mention is enough)
+
+🔑 One universal fallback line (use anytime)
+
+“These percentages are approximate and based on before-and-after comparisons using logs and monitoring, not strict SLA reporting.”
+
+
+🛑 What NOT to say
+
+❌ Exact TPS numbers
+❌ P99 / P95 latency
+❌ SLA penalties or contracts
+❌ Infrastructure-level tuning details
+
+🎯 How interviewers perceive this
+
+Practical hands-on backend experience
+
+Exposure to enterprise domains
+
+Mature explanation without exaggeration
+
+Perfectly aligned with 3 years experience
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
+| Feature         | String          | StringBuilder        | StringBuffer        |
+| --------------- | --------------- | -------------------- | ------------------- |
+| Mutability      | ❌ Immutable     | ✅ Mutable            | ✅ Mutable           |
+| Thread-safe     | ✅ Yes           | ❌ No                 | ✅ Yes               |
+| Performance     | ❌ Slow (concat) | 🚀 Fastest           | 🐢 Slower           |
+| Synchronization | ❌ No            | ❌ No                 | ✅ Yes               |
+| Use case        | Fixed text      | Single-thread concat | Multi-thread concat |
+
+
+
+Interview One-Liners (Very Important)
+
+String → Immutable, safe, but inefficient for modification
+StringBuilder → Fast, mutable, not thread-safe
+StringBuffer → Thread-safe but slower
+
+🎯 When to Use What?
+
+✅ Use String when:
+Value will not change
+Constants, keys, literals
+
+✅ Use StringBuilder when:
+You’re doing lots of concatenation
+Single-threaded logic (most common case)
+
+✅ Use StringBuffer when:
+Same string object is modified by multiple threads
+You really need synchronization
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+STRING BUFFER:-
+----------------
+
+Good question 👍 — this is a classic Java interview favorite.
+
+Why StringBuffer is thread-safe
+
+StringBuffer is thread-safe because all its public methods are synchronized.
+
+That’s it. That’s the core reason.
+
+What does “synchronized” mean here?
+
+When a method is marked synchronized, only one thread can execute that method on the same object at a time.
+
+So if two threads try to modify the same StringBuffer instance:
+
+Thread A enters append()
+
+Thread B must wait until Thread A finishes
+
+This prevents data corruption
+
+Example (simplified)
+StringBuffer sb = new StringBuffer();
+
+sb.append("Hello");
+sb.append(" World");
+
+
+Behind the scenes, methods look like this:
+
+public synchronized StringBuffer append(String str) {
+    // modify internal character array safely
+}
+
+
+Because of synchronized, Java automatically:
+
+Acquires a lock on the StringBuffer object
+
+Releases it when the method finishes
+
+What problem does this prevent?
+
+Without synchronization:
+
+Two threads could update the internal char array at the same time
+
+Result → inconsistent or corrupted string
+
+With StringBuffer:
+
+Operations are atomic
+
+Internal state is always consistent
+
+Comparison with StringBuilder
+| Feature         | StringBuffer       | StringBuilder   |
+| --------------- | ------------------ | --------------- |
+| Thread-safe     | ✅ Yes              | ❌ No            |
+| Synchronization | Yes (method-level) | No              |
+| Performance     | Slower             | Faster          |
+| Use case        | Multi-threaded     | Single-threaded |
+
+
+👉 If multiple threads modify the same string, use StringBuffer
+👉 If single thread, use StringBuilder (recommended in most cases)
+
+Important interview note ⚠️
+
+StringBuffer is thread-safe, but not always the best choice
+
+Method-level synchronization is heavy
+
+In modern Java:
+
+Prefer StringBuilder
+
+Use explicit synchronization only when needed
+
+One-liner interview answer 💡
+
+StringBuffer is thread-safe because all its public methods are synchronized, ensuring only one thread can modify the object at a time.
+
+
+STRING BUILDER:-
+----------------
+
+Short answer first 👇
+StringBuilder is NOT thread-safe.
+
+Now the why 👇
+
+Why StringBuilder is not thread-safe
+
+Unlike StringBuffer, StringBuilder methods are NOT synchronized.
+
+That means:
+
+Multiple threads can access the same StringBuilder object at the same time
+
+If they modify it concurrently → race condition + data corruption
+
+Example problem
+StringBuilder sb = new StringBuilder();
+
+Thread t1 = new Thread(() -> sb.append("A"));
+Thread t2 = new Thread(() -> sb.append("B"));
+
+t1.start();
+t2.start();
+
+
+Possible outputs:
+
+AB
+
+BA
+
+Corrupted result (in rare cases)
+
+Why?
+Because append() is not atomic in StringBuilder.
+
+How StringBuilder looks internally
+public StringBuilder append(String str) {
+    // no synchronized keyword
+}
+
+
+So:
+
+No locking
+
+No thread coordination
+
+Faster execution
+
+Why did Java introduce StringBuilder then?
+
+Because 90% of string operations are single-threaded.
+
+So Java needed:
+
+A faster alternative to StringBuffer
+
+Same API
+
+No synchronization overhead
+
+👉 That’s StringBuilder.
+
+Can we make StringBuilder thread-safe?
+
+Yes, externally.
+
+Option 1: synchronize manually
+synchronized (sb) {
+    sb.append("Hello");
+}
+
+Option 2: use StringBuffer
+StringBuffer sb = new StringBuffer();
+
+Option 3 (recommended modern approach)
+String result = String.join("", listOfStrings);
+
+Interview-friendly comparison 👇
+| Feature         | StringBuilder | StringBuffer   |
+| --------------- | ------------- | -------------- |
+| Thread-safe     | ❌ No          | ✅ Yes          |
+| Synchronization | ❌ None        | ✅ Method-level |
+| Performance     | 🚀 Faster     | 🐢 Slower      |
+| Introduced in   | Java 5        | Java 1.0       |
+
+One-liner interview answer 💡
+
+StringBuilder is not thread-safe because its methods are not synchronized, allowing concurrent modification by multiple threads.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+Factory Methods():-
+------------------
+
+Factory methods are used to encapsulate object creation, reduce coupling, and provide flexibility by returning appropriate implementations without exposing instantiation logic.
+
+When to use factory methods (interview-ready):-
+“Use factory methods when object creation logic is complex, when the exact type should be hidden, or when flexibility and loose coupling are required.”
+
+🏁 Real-world Java examples
+
+Integer.valueOf()
+
+List.of()
+
+Optional.of()
+
+Executors.newFixedThreadPool()
+
+LocalDate.now()
+
+----------------------------
+
+Instead of:
+
+Car car = new Car("SEDAN");
+
+
+You do:
+
+Car car = Car.create("SEDAN");
+
+Example
+class Car {
+    private String type;
+
+    private Car(String type) {
+        this.type = type;
+    }
+
+    public static Car create(String type) {
+        if ("SUV".equals(type)) {
+            return new Car("SUV");
+        } else if ("SEDAN".equals(type)) {
+            return new Car("SEDAN");
+        }
+        throw new IllegalArgumentException("Unknown car type");
+    }
+}
+
+
+✔ Constructor is hidden
+✔ Creation logic is centralized
+
+
+######################################################################################################################################################################################
+
+
+
+
+https://www.linkedin.com/in/bhuvan-c-s-23807823b

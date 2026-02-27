@@ -1037,6 +1037,27 @@ Just say “Start mock interview” and I'll begin.
 
 
 
+#######################################################################################################################################################################################
+
+
+
+Using @RequestParam
+GET /employees?department=HR&sort=name
+
+
+Use this when YOU ARE SEARCHING or FILTERING.
+
+Using @PathVariable
+GET /employees/104
+
+
+Use this when YOU ARE ACCESSING A SPECIFIC RECORD.
+
+
+@RequestParam is used to extract values from the query string, usually for filtering and optional parameters, whereas 
+@PathVariable extracts values from the URI path and is used to identify specific resources.
+
+
 
 #######################################################################################################################################################################################
 
@@ -2316,6 +2337,27 @@ Controller Method
 Response Back through Filter Chain
      ↓
 Client
+
+
+
+######################################################################################################################################################################################
+
+
+
+🔥 Real Production Mapping (VERY IMPORTANT)
+
+
+| Scenario      | Status Code |
+| ------------- | ----------- |
+| Data fetched  | 200         | - OK
+| Data created  | 201         | - Created
+| Deleted       | 204         | - NO Content
+| Invalid input | 400         | - Bad Request
+| Not logged in | 401         | - Unauthorized
+| No permission | 403         | - Forbidden
+| Not found     | 404         | - Not Found
+| Duplicate     | 409         | - Confilct
+| Server crash  | 500         | - Internal Server Error
 
 
 
@@ -4757,6 +4799,1850 @@ class Car {
 
 ✔ Constructor is hidden
 ✔ Creation logic is centralized
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Access Specifiers Comparison Table:-
+------------------------------------
+
+| Access Modifier          | Same Class | Same Package | Subclass (Different Package) | Outside Package |
+| ------------------------ | ---------- | ------------ | ---------------------------- | --------------- |
+| **private**              | ✅ Yes      | ❌ No         | ❌ No                         | ❌ No            |
+| **default** (no keyword) | ✅ Yes      | ✅ Yes        | ❌ No                         | ❌ No            |
+| **protected**            | ✅ Yes      | ✅ Yes        | ✅ Yes                        | ❌ No            |
+| **public**               | ✅ Yes      | ✅ Yes        | ✅ Yes                        | ✅ Yes           |
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+STREAM API:-
+------------
+
+The Java Stream API, introduced in Java 8, provides a functional and declarative way to process sequences of elements from sources like collections and arrays. 
+Stream operations are divided into two main categories: intermediate operations (lazy and return a new Stream) and terminal operations (trigger execution and produce a final 
+result or side effect). 
+
+Creating a Stream:-
+
+Stream Integer> stream = Stream.of(20, 10, -40, 80, 30, -90);
+
+IntStream stream = IntStream.of(20, 10, -40, 80, 30, -90);
+
+Intstream stosedStream = IntStream.rangeCLosed(1, 10); // 1 -> 10
+
+Stream<String> stream = Stream.<String›builder().add("Like").add("Subscribe").add("to").add("Geekific").build();
+
+
+Java Streams
+* What are streams?
+* Intermediate and Terminal operations
+* How to convert Arrays to Streams
+
+🗸 Intermediate Operations
+* Filter
+* Map
+* FlatMap
+* Peek
+* Distinct
+* Sorted
+* Skip
+* Limit
+
+🗸 Terminal Operations
+* Collect
+	- groupingBy
+	- PartitioningBy
+* Min
+* Max
+* Reduce
+* FindFirst
+* AnyMatch
+* Count
+* Sum
+* Parallel Stream
+* When To Use Sequential and parallel Streams?
+
+
+Here are the key functions (methods) of the Java Stream API with their definitions:
+Intermediate Operations:-
+-------------------------
+Intermediate operations transform a stream into another stream and are lazy, meaning they are not executed until a terminal operation is invoked. 
+
+🗸 filter(Predicate predicate): Returns a stream consisting of elements that match the given predicate (a boolean-valued function).
+
+🗸 map(Function mapper): Returns a stream consisting of the results of applying the given function to each element of the source stream, transforming the elements.
+
+🗸 flatMap(Function mapper): Replaces each element with the contents of a mapped stream produced by the mapping function and flattens all the resulting streams into a single stream.
+
+🗸 distinct(): Returns a stream consisting of the unique elements of the source stream, based on their equals() method.
+
+🗸 sorted(): Returns a stream with elements sorted according to their natural order (if they implement Comparable).
+
+🗸 sorted(Comparator comparator): Returns a stream sorted according to the provided Comparator.
+
+🗸 peek(Consumer action): Performs an action on each element as it passes through the pipeline without modifying the elements, useful for debugging or logging.
+
+🗸 limit(long maxSize): Truncates the stream to contain no more than the specified number of elements.
+
+🗸 skip(long n): Discards the first n elements of the stream and returns a stream with the remaining elements.
+
+🗸 takeWhile(Predicate predicate) (Java 9+): Consumes elements as long as the predicate is true, then stops.
+
+🗸 dropWhile(Predicate predicate) (Java 9+): Skips elements while the predicate is true, then includes all remaining elements. 
+
+Terminal Operations:-
+---------------------
+Terminal operations initiate the stream pipeline processing and produce a non-stream result (a value, a collection, or a side effect). Once a terminal operation is performed, 
+the stream is consumed and cannot be used again. 
+
+🗸 forEach(Consumer action): Performs an action for each element of the stream.
+
+🗸 collect(Collector collector): Accumulates the elements into a mutable result container, such as a List, Set, or Map, using a Collector.
+
+🗸 reduce(initialValue, BinaryOperator accumulator): Combines the elements of the stream into a single result using an associative accumulation function.
+
+🗸 count(): Returns the number of elements in the stream.
+
+🗸 min(Comparator comparator) / max(Comparator comparator): Returns the minimum or maximum element in the stream according to the provided Comparator in an Optional.
+
+🗸 anyMatch(Predicate predicate): Returns whether at least one element matches the provided predicate.
+
+🗸 allMatch(Predicate predicate): Returns whether all elements match the provided predicate.
+
+🗸 noneMatch(Predicate predicate): Returns whether no elements match the provided predicate.
+
+🗸 findFirst(): Returns an Optional describing the first element of the stream, if the stream has a defined encounter order.
+
+🗸 findAny(): Returns an Optional describing any element of the stream; useful in parallel operations for better performance.
+
+🗸 toArray(): Returns an array containing the elements of the stream.
+
+
+
+
+
+STREAMS EXAMPLE:-
+#################
+
+package Stream;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class FilterExample {
+    public static void main(String[] args) {
+        // Create a list of ages
+        List<Integer> ages =
+                Arrays.asList(15, 20, 25, 30, 16, 18, 22);
+
+        final List<Integer> adults = ages.stream()
+                .filter(n -> n >= 18)
+                .toList();
+        System.out.println(adults);
+    }
+}
+
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class AnyMatchExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1,  3, 5);
+
+        final boolean b = numbers.stream()
+                .anyMatch(number -> number % 2 == 0);
+
+        System.out.println(b);
+
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class CollectExample {
+    public static void main(String[] args) {
+       List<Integer> list = Arrays.asList(1,2,3,4,5,6,7);
+        final List<Integer> evenSquredList = list.stream()
+                .filter(x -> x % 2 == 0)
+                .map(x -> x * x)
+                .collect(Collectors.toList());
+
+        System.out.println(evenSquredList);
+
+    }
+}
+
+####################################################################
+
+package Streams;
+
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class ConvertToStreams {
+    public static void main(String[] args) {
+        //Primitive Array
+        int[] premitiveArray = {1,2,3,4};
+        //Object Arrays
+        Integer[] objectArray = {1,2,3,4};
+
+        final IntStream intStream = Arrays.stream(premitiveArray);
+        intStream.forEach(System.out::println);
+
+        final Stream<Integer> integerStream = Stream.of(objectArray);
+        integerStream.forEach(System.out::println);
+
+        List<Integer> integerList = Arrays.asList(1,2,3,4);
+        integerList.stream()
+                .forEach(System.out::println);
+
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class CountExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        final long count = numbers.stream()
+                .count();
+
+        System.out.println(count);
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class DistinctExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 2, 3, 4, 4, 5);
+
+        numbers.stream()
+                .distinct()
+                .forEach(System.out::println);
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FilterExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        numbers.stream()
+                .filter(n -> n%2 ==0)
+                .forEach(System.out::println);
+
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public class FindFirstExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        final Optional<Integer> first = numbers.stream()
+                .filter(number -> number % 2 == 0)
+                .findFirst();
+
+        System.out.println(first.get());
+
+    }
+}
+
+####################################################################
+
+flatMap() in Java Streams is used when each element produces multiple values, and you want to flatten them into one single stream.
+
+So you must remove one level of nesting → that is exactly what flatMap() does.
+
+package Streams;
+
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class FlatMapExample {
+    public static void main(String[] args) {
+        List<List<String>> listOfLists = Arrays.asList(
+                Arrays.asList("a", "b"),
+                Arrays.asList("c", "d"),
+                Arrays.asList("e", "f")
+        );
+        listOfLists.stream()
+                .flatMap(Collection::stream) //flatMap(List::stream)
+                .map(String::toUpperCase)
+                .forEach(System.out::println);
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class LimitExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        numbers.stream()
+                .limit(3)
+                .forEach(System.out::println);
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MapExample {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("alice", "bob", "charlie");
+
+        names.stream()
+                .map(String::toUpperCase)
+                .forEach(System.out::println);
+
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
+public class MinMaxExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        final Optional<Integer> min =
+                numbers.stream().max(Comparator.naturalOrder());
+
+        System.out.println(min.get());
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class ParallelStreamExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class PeekExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        final List<Integer> sqaredList = numbers.stream()
+                .map(n -> n * n)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+
+
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class ReduceExample {
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(1,2,3,4,5);
+
+        final Integer sum = list.stream()
+                .reduce(0, (a, b) -> a + b);
+        System.out.println(sum);
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SkipExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        final List<Integer> listAfterSkip = numbers.stream()
+                .skip(2)
+                .collect(Collectors.toList());
+        System.out.println(listAfterSkip);
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SortedExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(5, 3, 1, 4, 2);
+
+        numbers.stream().
+                sorted(Comparator.reverseOrder()).
+                forEach(System.out::println);
+
+        List<String> words =
+                Arrays.asList("apple", "banana", "kiwi", "cherry");
+
+        List<String> sortedWordsByLength = words.stream()
+                .sorted(Comparator.comparingInt(String::length)
+                        .reversed())
+                .toList();
+        sortedWordsByLength.forEach(System.out::println);
+
+    }
+}
+
+####################################################################
+
+package Streams;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class SumExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        final int sum = numbers.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        System.out.println(sum );
+    }
+}
+
+####################################################################
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class SortUsingStreams {
+    public static void main(String[] args) {
+        List<Integer> numbers =
+                Arrays.asList(5, 3, 9, 1, 6, 2);
+
+        List<Integer> sortedNumbersDesc =
+                numbers.stream()
+                .sorted(Comparator.reverseOrder())
+                .toList();
+
+        System.out.println("Sorted numbers in descending order: " +
+                "" + sortedNumbersDesc);
+
+        List<String> words =
+                Arrays.asList("apple", "banana", "kiwi", "cherry");
+
+        List<String> sortedWordsByLength = words.stream()
+                .sorted(Comparator.comparingInt(String::length).reversed())
+                .toList();
+
+        System.out.println("Sorted words by length: "
+                + sortedWordsByLength);
+    }
+}
+
+####################################################################
+
+package MapAndFlatMap;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MapAndFlatMap {
+    public static void main(String[] args) {
+
+        //MAP EXAMPLE
+        List<String> list = Arrays.asList("apple", "mango","orange");
+        final List<String> upperCaseList = list.stream()
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+        System.out.println("MAP OUTPUT: "+upperCaseList);
+        //MAP OUTPUT: [APPLE, MANGO, ORANGE]
+
+        //FLATMAP EXAMPLE
+        List<List<String>> nestedList = Arrays.asList(
+                Arrays.asList("apple","mango"),
+                Arrays.asList("orange","pineapple"),
+                Arrays.asList("grapes","kiwi")
+        );
+        System.out.println("NESTED LIST OUTPUT: "+nestedList);
+       // NESTED LIST OUTPUT: [[apple, mango], [orange, pineapple], [grapes, kiwi]]
+
+        final List<String> flattenedUpperCaseList = nestedList.stream()
+                .flatMap(List::stream)
+                .map(String::toUpperCase)
+                .collect(Collectors.toList());
+        System.out.println("FLATMAP OUTPUT: "+flattenedUpperCaseList);
+       // FLATMAP OUTPUT: [APPLE, MANGO, ORANGE, PINEAPPLE, GRAPES, KIWI]
+    }
+}
+
+####################################################################
+
+package MethodReferences;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MethodReference{
+
+    public static void main(String[] args) {
+        List<Integer> integers =
+                Arrays.asList(4,9,16,25,64);
+
+        final List<Double> sqRootList = integers.stream()
+                .map( Math::sqrt)
+                .collect(Collectors.toList());
+        System.out.println(sqRootList);
+    }
+}
+
+####################################################################
+
+
+package StreamAllMatch;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class AllMatchExample {
+    public static void main(String[] args) {
+        List<Employee> employees = Arrays.asList(
+                new Employee(1, 55000.0),
+                new Employee(2, 75000.0),
+                new Employee(3, 80000.0),
+                new Employee(4, 60000.0),
+                new Employee(5, 90000.0)
+        );
+
+        double salaryThreshold = 50000.0;
+
+        boolean allEmployeesAboveThreshold = employees.stream()
+                .allMatch(employee ->
+                        employee.getSalary() > salaryThreshold);
+
+        if (allEmployeesAboveThreshold) {
+            System.out.println
+                    ("All employees have salaries above the threshold.");
+        } else {
+            System.out.println
+                    ("Not all employees have salaries above the threshold.");
+        }
+    }
+}
+
+
+package StreamAllMatch;
+
+public class Employee {
+    private int employeeId;
+    private double salary;
+
+    public Employee(int employeeId, double salary) {
+        this.employeeId = employeeId;
+        this.salary = salary;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+}
+
+
+####################################################################
+
+
+
+package StreamAnymatch;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class AnyMatchExample {
+    public static void main(String[] args) {
+        List<Order> orders = Arrays.asList(
+                new Order(1, 250.0),
+                new Order(2, 450.0),
+                new Order(3, 150.0),
+                new Order(4, 350.0),
+                new Order(5, 50.0)
+        );
+
+        double highValueThreshold = 400.0;
+
+        boolean hasHighValueOrder = orders.stream()
+                .anyMatch(order -> order.getAmount() > highValueThreshold);
+
+        if (hasHighValueOrder) {
+            System.out.println
+                    ("There is at least one high-value order.");
+        } else {
+            System.out.println
+                    ("There are no high-value orders.");
+        }
+    }
+}
+
+
+package StreamAnymatch;
+
+public class Order {
+    private int orderId;
+    private double amount;
+
+    public Order(int orderId, double amount) {
+        this.orderId = orderId;
+        this.amount = amount;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+}
+
+
+####################################################################
+
+
+package StreamProblems;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class PersonSortingExample {
+    public static void main(String[] args) {
+        List<Person> people = Arrays.asList(
+                new Person("John", 25),
+                new Person("Anna", 22),
+                new Person("Mike", 29),
+                new Person("Sophia", 24)
+        );
+
+        // Sorting by age in descending order
+        List<Person> sortedByAgeDesc = people.stream()
+                .sorted(Comparator.comparing(Person::getName).reversed())
+                .collect(Collectors.toList());
+
+        System.out.println
+                ("Sorted by age in descending order:");
+        sortedByAgeDesc.forEach(System.out::println);
+    }
+}
+
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{name='" + name + "', age=" + age + "}";
+    }
+}
+
+
+
+
+
+package StreamProblems;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class TransactionsProblem {
+    public static void main(String[] args) {
+        List<Transaction> transactions = Arrays.asList(
+                new Transaction("P1", "Electronics", 1000),
+                new Transaction("P2", "Books", 500),
+                new Transaction("P3", "Electronics", 800),
+                new Transaction("P4", "Clothing", 1200),
+                new Transaction("P5", "Books", 600)
+        );
+
+        Map<String, Integer> totalSalesByCategory = transactions.stream()
+                .collect(Collectors.groupingBy(Transaction::getCategory,
+                        Collectors.summingInt(Transaction::getAmount)));
+
+        System.out.println("Total sales by category: " + totalSalesByCategory);
+    }
+
+    static class Transaction {
+        private String productId;
+        private String category;
+        private int amount;
+
+        public Transaction(String productId, String category, int amount) {
+            this.productId = productId;
+            this.category = category;
+            this.amount = amount;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public int getAmount() {
+            return amount;
+        }
+    }
+}
+
+
+
+
+package StreamProblems;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+public class WordFrequency {
+    public static void main(String[] args) {
+        List<String> words = Arrays.asList(
+                "apple", "banana", "apple",
+                "orange", "banana", "pear",
+                "apple", "banana");
+
+        Map<String, Long> wordFrequency = words.stream()
+                .collect(Collectors.groupingBy
+                        (word -> word, Collectors.counting()));
+
+        System.out.println("Word frequency: " + wordFrequency);
+    }
+}
+
+####################################################################
+
+
+######################################################################################################################################################################################
+
+
+
+TCS:-
+-----
+
+Job Description
+TCS has always been in the spotlight for being adept in the next big technologies What we can offer you is a space to explore varied technologies and quench your techie soul.
+
+Role- Java Developer
+
+Location: Bangalore
+
+Experience Range: 03-10Years
+
+What we are looking for Must-Have:
+
+ Expert Knowledge of CORE Java v8 and its associated frameworks like Spring and Spring Boot. Basic HTML5/JS/CSS.
+
+Excellent communication skills.
+
+Good to Have:
+
+ 1 Design high quality deliverables adhering to business requirement with defined standards and design principles, patterns.
+
+2 Develop and maintain highly scalable, high performance and highly available API’s/Microservices
+
+3 Develop/Integrate the code adhering to CI/CD, Spring Integration (Kafka), Spring cloud.
+
+4 Provide Java and API based solutions relevant to existing technology architecture.
+
+5 Create Junit tests and ensure code coverage is met as per the agreed standards.
+
+6 Technically lead and groom a team of developers who might be geographically distributed. Review the code modules developed by other juniors.
+
+Responsibilities: Strong Team management and customer handling skills Analyze understand and fix the issue within SLA Should be a very good team player where one should take care of himself, Team and customer Should have desire to groom the given team to next level
+
+ 
+
+
+LocationBengaluru
+Job FunctionTECHNOLOGY
+RoleDeveloper
+Job Id391857
+Desired SkillsJava | Microservices | Spring Boot
+Desired Candidate Profile
+Qualifications : BACHELOR OF ENGINEERING
+
+
+
+
+
+
+
+
+🔥 Top 25 TCS Java Interview Questions (Most Repeated)
+✅ CORE JAVA (VERY HIGH PROBABILITY)
+⭐ 1. Why is String immutable?
+
+How to answer (strong version):
+
+"String is immutable to improve security, caching, and thread safety. Since it cannot change, it is safe to use in string pool, class loading, file paths, and network connections."
+
+👉 Then add:
+
+"It also improves performance because JVM reuses string literals."
+
+✅ This sounds like an experienced engineer — not a fresher.
+
+⭐ 2. HashMap vs ConcurrentHashMap
+
+Interviewers LOVE this.
+
+Say this confidently:
+
+👉 HashMap:
+
+Not thread-safe
+
+Faster
+
+Allows one null key
+
+👉 ConcurrentHashMap:
+
+Thread-safe
+
+Uses segment-level locking (Java 7) / CAS (Java 8)
+
+Better performance than Hashtable
+
+⭐ Bonus line (VERY impressive):
+
+"ConcurrentHashMap locks only a portion of the map instead of the whole structure."
+
+🔥 Senior-level statement.
+
+⭐ 3. Difference: String vs StringBuilder vs StringBuffer
+
+Give this table verbally:
+
+Feature	String	StringBuilder	StringBuffer
+Mutable	❌	✅	✅
+Thread-safe	❌	❌	✅
+Performance	Slow	Fastest	Slower
+
+👉 Then say:
+
+"In microservices, we typically use StringBuilder unless thread safety is required."
+
+Shows real-world thinking.
+
+⭐ 4. What happens when you write:
+HashMap map = new HashMap<>();
+map.put(null, "A");
+
+
+✅ Answer:
+
+"HashMap allows one null key because it is stored in bucket 0."
+
+Most developers don’t know this 🙂
+
+⭐ 5. Checked vs Unchecked Exception
+
+👉 Checked → compile time (IOException)
+👉 Unchecked → runtime (NullPointerException)
+
+⭐ Add:
+
+"Unchecked usually indicate programming bugs."
+
+Senior tone.
+
+🔥 JAVA 8 (INTERVIEW FAVORITE)
+⭐ 6. What is a Functional Interface?
+
+"An interface with exactly one abstract method, used for lambda expressions."
+
+Example:
+
+Runnable
+Callable
+Comparator
+
+⭐ 7. Why Streams?
+
+Don’t say "for filtering".
+
+Say:
+
+"Streams enable declarative programming and parallel processing, improving readability and scalability."
+
+🔥 Architecture-level answer.
+
+⭐ 8. Find duplicates using Streams
+
+Just explain logic:
+
+list.stream()
+.filter(n -> Collections.frequency(list,n) > 1)
+.collect(Collectors.toSet());
+
+
+They don’t expect perfection — just awareness.
+
+🔥 SPRING BOOT (INTERVIEW DECIDER)
+⭐ 9. Why Spring Boot over Spring?
+
+BEST answer:
+
+"Spring Boot eliminates boilerplate configuration, provides embedded servers, production-ready features, and faster deployment — making it ideal for microservices."
+
+Say this → interviewer nods.
+
+⭐ 10. @Autowired vs Constructor Injection
+
+👉 Field injection → harder to test
+👉 Constructor → recommended
+
+⭐ Add killer line:
+
+"Constructor injection makes dependencies immutable."
+
+VERY senior answer.
+
+⭐ 11. Bean Lifecycle (Ask VERY Often)
+
+Just remember flow:
+
+👉 Instantiate
+👉 Populate properties
+👉 BeanPostProcessor
+👉 Initialize
+👉 Ready
+
+Don’t go too deep.
+
+🔥 MICROSERVICES (EXTREMELY IMPORTANT)
+⭐ 12. Monolith vs Microservices
+
+👉 Monolith → tightly coupled
+👉 Microservices → independently deployable
+
+⭐ Add:
+
+"Microservices improve fault isolation and scalability."
+
+Architecture language = selection.
+
+⭐ 13. How do Microservices communicate?
+
+Say BOTH:
+
+"Synchronously using REST, asynchronously using Kafka or messaging queues."
+
+🔥 Perfect answer.
+
+⭐ 14. What is Circuit Breaker?
+
+"Prevents cascading failures by stopping calls to a failing service."
+
+Example:
+
+👉 Resilience4j
+👉 Hystrix (legacy)
+
+⭐ 15. API Gateway — Why?
+
+"Centralized authentication, routing, rate limiting, logging."
+
+DO NOT say only routing.
+
+🔥 SCENARIO QUESTIONS (HIGH SELECTION IMPACT)
+⭐ 16. Production issue — what will you do?
+
+Say this framework:
+
+Analyze logs → Identify root cause → Fix → Deploy → Monitor.
+
+Structured thinking impresses.
+
+⭐ 17. How did you improve performance?
+
+Prepare ONE STORY.
+
+Example:
+
+"Reduced API response time from 3s to 800ms by adding Redis caching."
+
+Even if approximate — interviewers LOVE metrics.
+
+⭐ 18. How do you ensure code quality?
+
+Say:
+
+✅ JUnit
+✅ Sonar
+✅ Code reviews
+✅ CI pipeline
+
+Boom. Strong answer.
+
+🔥 CODING (Medium Level)
+
+Expect something like:
+
+👉 Reverse string
+👉 Palindrome
+👉 Remove duplicates
+👉 FizzBuzz
+👉 Sort objects
+
+Focus on:
+
+✅ Writing clean code
+✅ Explaining logic
+
+Not speed.
+
+🔥 HR + LEADERSHIP (TCS LOVES THIS)
+
+Because JD mentions team grooming.
+
+Prepare:
+
+⭐ 19. Conflict with teammate?
+
+Never blame.
+
+Say:
+
+"I focused on the problem, not the person."
+
+Mature answer.
+
+⭐ 20. Why TCS?
+
+DO NOT say brand.
+
+Say:
+
+"TCS works on large-scale enterprise systems, and I want exposure to high-impact distributed architectures."
+
+Senior answer.
+
+🚨 MOST IMPORTANT QUESTION (Prepare VERY WELL)
+👉 "Explain your current project architecture."
+
+If you nail this — 70% selection done.
+
+Follow this structure:
+
+"We built a Spring Boot microservices architecture deployed on AWS.
+Services communicate via REST and Kafka.
+We use Redis for caching, API Gateway for routing, and Jenkins for CI/CD."
+
+Even if slightly modified — sounds powerful.
+
+⚠️ Biggest Interview Secret
+
+Interviewers don’t select the smartest.
+
+👉 They select the clearest thinker.
+
+Speak:
+
+✅ Structured
+✅ Calm
+✅ Confident
+
+Not fast.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
+Additional questions
+
+
+How many years of hands-on experience do you have in Java development?
+3.4 Years
+
+
+How many years of commercial experience do you have working with Spring Boot?
+3 Years
+
+
+Can you briefly describe your experience with REST APIs, messaging systems, and event-driven architectures?
+What is your experience working with relational databases (RDBMS)? Please mention any databases you've used.
+Are you open to working in the EU CET time zone?
+What is your notice period, and how soon can you start?
+Please specify your level of English proficiency (e.g., Basic, Intermediate, Upper Intermediate, Advanced, Fluent).
+Please share your current fixed compensation. Can you also share the fixed compensation you would like to have? (USD, monthly, including social tax paid by employer)
+
+
+you have my data and i need to answer this
+
+Here are strong, professional answers you can directly paste into the form. I’ve optimized them to sound confident and recruiter-friendly while staying realistic for someone with ~3.4 years of experience.
+
+Can you briefly describe your experience with REST APIs, messaging systems, and event-driven architectures?
+I have around 3.4 years of experience designing and developing scalable backend applications using Java and Spring Boot. I have built and consumed RESTful APIs, implemented authentication and validation, and ensured high performance and reliability. I have also worked with messaging systems such as Kafka/RabbitMQ (mention the one you used) to enable asynchronous communication and event-driven processing between microservices, improving system scalability and fault tolerance.
+
+What is your experience working with relational databases (RDBMS)? Please mention any databases you've used.
+I have strong hands-on experience with relational databases such as MySQL and Oracle (replace if needed). I regularly write complex SQL queries, joins, stored procedures, and optimize queries for performance. I have also used JPA/Hibernate for ORM-based data access and have experience with transaction management and database design.
+
+Are you open to working in the EU CET time zone?
+Yes, I am open to working in the EU CET time zone and flexible with overlapping hours to ensure smooth collaboration with global teams.
+
+What is your notice period, and how soon can you start?
+My current notice period is [replace — typically 30/60/90 days]. However, I am willing to negotiate an early release and can join as soon as possible.
+
+(If yours is 90 days, you can write: “90 days, but I will actively try for an early release.” Recruiters like that.)
+
+Please specify your level of English proficiency.
+Upper Intermediate / Advanced — I am comfortable communicating in professional environments, participating in meetings, and collaborating with international teams.
+
+(Choose “Advanced” if you speak comfortably in interviews.)
+
+Please share your current fixed compensation. Can you also share the fixed compensation you would like to have? (USD, monthly, including social tax paid by employer)
+
+👉 Since I don’t have your salary data, use this safe structure:
+
+Current fixed compensation: $____ per month
+Expected fixed compensation: I am looking for a range between $____ – $____ per month, depending on the role, responsibilities, and overall benefits.
+
+💡 Tip: Ask for 30–50% more than your current pay for international roles.
+
+Example if earning ~$900/month:
+Current: $900
+Expected: $1,300 – $1,500
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+If multiple database calls happen in a Spring Boot application and the 4th call fails, you usually detect it through logs, exceptions, transaction behavior, and tracing tools. Here’s how professionals debug this.
+
+
+✅ 3. Use Transactions (VERY Recommended)
+
+If these calls belong to one business operation:
+
+@Transactional
+public void processOrder() {
+   repo.call1();
+   repo.call2();
+   repo.call3();
+   repo.call4(); // fails
+}
+
+✔ Automatically rolls back previous DB changes.
+✔ Stacktrace shows exact failing query.
+
+Spring throws exceptions like:
+DataIntegrityViolationException
+ConstraintViolationException
+SQLGrammarException
+These directly point to the problematic query.
+
+
+✅ 5. Use Observability Tools (Production Level)
+
+If this is happening in production, use:
+Spring Boot Actuator → metrics & health
+Zipkin → distributed tracing
+Grafana → dashboards
+ELK Stack → centralized logs
+These tools show exact DB span that failed.
+
+
+⭐ What Interviewers Expect You to Say
+If asked:
+👉 “How do you identify which DB call failed?”
+
+Say:
+"I enable SQL logging, add structured logs around repository calls, use @Transactional for rollback, and rely on stacktrace/observability tools like Zipkin or ELK to pinpoint the failing query."
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+How to save multiple data at once in spring boot:
+
+Good question 👍 — because many developers misunderstand this.
+
+👉 Yes, saveAll() often still generates multiple INSERT statements, even though it looks like a bulk operation.
+
+If you truly want insert at once (single DB round trip / grouped statement), you need to go beyond default JPA behavior.
+
+Let’s break it down clearly.
+
+🔥 Option 1 — TRUE Batch Insert (Most Recommended)
+
+Hibernate can send multiple inserts in one network call using JDBC batching.
+
+✅ Step 1 — Enable batching
+spring.jpa.properties.hibernate.jdbc.batch_size=50
+spring.jpa.properties.hibernate.order_inserts=true
+spring.jpa.properties.hibernate.order_updates=true
+
+Now instead of:
+
+INSERT INTO user...
+INSERT INTO user...
+INSERT INTO user...
+
+Hibernate groups them like:
+
+Batch of 50 → single DB trip
+Batch of 50 → single DB trip
+
+👉 This is how high-performance production apps work.
+
+⚠️ Without this property → saveAll() behaves almost like a loop.
+
+✅ VERY IMPORTANT (Most People Miss This)
+
+If your ID is auto-generated like this:
+
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+🚨 Batching will NOT work properly because the DB must return each generated ID immediately.
+
+👉 Use:
+
+@GeneratedValue(strategy = GenerationType.SEQUENCE)
+
+(or TABLE strategy)
+
+✔ Now batching becomes effective.
+
+This alone can improve insert speed by 5–10x.
+
+
+If interviewer says:
+
+👉 “saveAll still inserts one by one. How do you fix it?”
+
+Say:
+
+“I enable Hibernate JDBC batching and avoid IDENTITY generation. For extreme performance, I use JdbcTemplate batch updates.”
+
+That answer sounds very experienced.
+
+
+
+------------------------------------------
+
+
+In Spring Boot, saving multiple records at once is called Batch Insert or Bulk Save. It is very important for performance because inserting one-by-one causes many DB round trips.
+
+Let’s go from most commonly used → advanced production approach.
+
+✅ 1. Use saveAll() (Easiest & Most Used)
+
+If you are using Spring Data JPA:
+
+Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+}
+Service
+@Transactional
+public void saveUsers(List<User> users){
+    userRepository.saveAll(users);
+}
+
+👉 That’s it.
+Spring will insert all records in one operation (internally multiple inserts, but optimized).
+
+✔ Clean
+✔ Production-safe
+✔ Interview-friendly
+
+⭐ Most companies use this unless handling very large data.
+
+✅ 2. Enable TRUE Batch Inserts (VERY IMPORTANT ⚡)
+
+By default, Hibernate may still fire separate insert statements.
+
+Enable batching in application.properties:
+
+spring.jpa.properties.hibernate.jdbc.batch_size=50
+spring.jpa.properties.hibernate.order_inserts=true
+spring.jpa.properties.hibernate.generate_statistics=true
+
+👉 Now instead of:
+
+insert...
+insert...
+insert...
+
+It sends grouped batches to DB → Huge performance gain.
+
+✔ Recommended batch size: 30–50
+
+(Bigger is NOT always better — can cause memory issues.)
+
+✅ 3. Wrap in Transaction (CRITICAL)
+@Transactional
+public void saveUsers(List<User> users){
+    userRepository.saveAll(users);
+}
+
+Why?
+
+👉 If record #45 fails:
+
+✔ Everything rolls back
+✔ No partial data
+
+Without transaction → inconsistent DB.
+
+✅ 4. For VERY Large Data (Senior-Level Approach)
+
+If inserting lakhs/millions of rows:
+
+Use EntityManager.
+
+@PersistenceContext
+private EntityManager entityManager;
+
+
+@Transactional
+public void batchInsert(List<User> users){
+
+
+    int batchSize = 50;
+
+
+    for(int i=0; i<users.size(); i++){
+        entityManager.persist(users.get(i));
+
+
+        if(i % batchSize == 0){
+            entityManager.flush();
+            entityManager.clear();
+        }
+    }
+}
+
+👉 Prevents memory overflow inside Hibernate.
+
+✔ Used in data migration
+✔ Used in ETL jobs
+✔ Used by senior engineers
+
+🔥 Performance Comparison
+Method	Speed	When to Use
+save() loop	❌ Slow	Never for bulk
+saveAll()	✅ Good	90% of apps
+Hibernate batch	🔥 Very fast	High traffic
+EntityManager	🚀 Extreme	Massive datasets
+❗Common Mistake Developers Make
+
+🚨 Doing this:
+
+for(User u : users){
+   userRepository.save(u); // BAD
+}
+
+👉 Causes N DB calls.
+
+Always prefer:
+
+✅ saveAll()
+
+⭐ Interview Answer (Golden)
+
+If interviewer asks:
+
+👉 “How do you insert multiple records in Spring Boot efficiently?”
+
+Say:
+
+“I use saveAll() from Spring Data JPA with Hibernate batch enabled and wrap it inside a transaction. For very large datasets, I switch to EntityManager batching to avoid memory issues.”
+
+This sounds mid-to-senior level instantly.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Enabling batch inserts in Spring Boot (with Hibernate / Spring Data JPA) is one of the highest-impact performance optimizations you can do.
+
+Many developers think saveAll() automatically batches — it does NOT unless you configure it.
+
+Let’s do this properly.
+
+✅ Step 1 — Enable Hibernate JDBC Batching
+
+Add these properties in application.properties:
+
+spring.jpa.properties.hibernate.jdbc.batch_size=50
+spring.jpa.properties.hibernate.order_inserts=true
+spring.jpa.properties.hibernate.order_updates=true
+spring.jpa.properties.hibernate.generate_statistics=true
+What each does:
+
+👉 batch_size=50
+
+Groups 50 INSERT statements
+
+Sends them in ONE network trip
+
+👉 order_inserts=true
+
+Groups similar entity inserts
+
+Prevents batch breaking
+
+👉 generate_statistics=true
+
+Lets you verify batching actually happens.
+
+⚠️ MOST IMPORTANT STEP (People Miss This)
+❌ Do NOT use IDENTITY
+@GeneratedValue(strategy = GenerationType.IDENTITY) // BAD for batching
+
+Why?
+
+👉 Database must return ID immediately → breaks batching.
+
+✅ Use SEQUENCE Instead
+@Id
+@GeneratedValue(strategy = GenerationType.SEQUENCE)
+private Long id;
+
+✔ Hibernate can prefetch IDs
+✔ Enables true batching
+✔ Much faster inserts
+
+🔥 This single change can improve performance 5–10x.
+
+✅ Step 2 — Always Insert Inside a Transaction
+@Transactional
+public void saveUsers(List<User> users){
+    userRepository.saveAll(users);
+}
+
+Without transaction:
+
+❌ Hibernate may flush early
+❌ Batch gets broken
+
+✅ Step 3 — Avoid This Common Mistake
+❌ BAD
+for(User u : users){
+    userRepository.save(u); // kills batching
+}
+✅ GOOD
+userRepository.saveAll(users);
+✅ Step 4 — Verify It Is Working
+
+Enable logging:
+
+logging.level.org.hibernate.stat=DEBUG
+
+Look for logs like:
+
+JDBC batches executed: 1
+
+👉 If you see many batches → working 👍
+👉 If zero → configuration issue.
+
+🔥 Senior-Level Optimization (VERY Powerful)
+
+If inserting very large datasets (50K+ rows):
+
+Use manual flush.
+
+for(int i=0; i<users.size(); i++){
+    entityManager.persist(users.get(i));
+
+
+    if(i % 50 == 0){
+        entityManager.flush();
+        entityManager.clear();
+    }
+}
+
+✔ Prevents memory buildup
+✔ Keeps batch efficient
+
+🚀 Performance Reality
+Approach	Speed
+save() loop	🐢 Very slow
+saveAll without batching	😐 Medium
+saveAll + batching	⚡ Fast
+JdbcTemplate batch	🚀 Very fast
+
+Most production apps are perfectly fine with:
+
+👉 saveAll + Hibernate batching
+
+⭐ Interview Gold Answer
+
+If interviewer asks:
+
+👉 “How do you enable batch inserts in Spring Boot?”
+
+Say:
+
+“I configure hibernate.jdbc.batch_size, enable ordered inserts, avoid IDENTITY strategy, and wrap saveAll inside a transaction to ensure Hibernate sends grouped JDBC batches.”
+
+That sounds very experienced.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+
+		// Remove duplicates and empty string
+		List<String> stringList = Arrays.asList("Product", "", "BillOfMaterial", "", "SalesOrder", "Product");
+		List<String> newStringList = stringList.stream().filter(n -> (!n.isEmpty())).distinct().collect(Collectors.toList());
+		System.out.println(newStringList);
+
+		// Filter Odd and Sort
+		List<Integer> numbers = Arrays.asList(20, 15, 43, 5, 7, 2, 87, 55, 1, 0);
+		List<Integer> newNum = numbers.stream().filter(n -> (n % 2 != 0)).sorted().collect(Collectors.toList());
+		System.out.println(newNum);
+		
+		//Find first non repeating character from a String
+		String str = "swiss";
+		Map<Character, Integer> strMap = new LinkedHashMap<>();
+		for (char c : str.toCharArray()) {
+			strMap.put(c, strMap.getOrDefault(c, 0) + 1);
+		}
+		boolean flag = false;
+		for (Map.Entry<Character, Integer> entry : strMap.entrySet()) {
+			if(entry.getValue() == 1) {
+				System.out.println("First non repeating character is : " + entry.getKey());
+				flag = true;
+				break;
+			}
+		}
+		if(!flag) {
+			System.out.println("No non repeating character found.");
+		}
+		
+		
+		//store the pairs of elements whose sum = target
+		int[] arr = {1, 3, 2, 4, 6, 8};
+		int target = 5;
+		Set<Integer> set = new HashSet<>();
+		List<List<Integer>> list = new ArrayList<>();
+		for (Integer num : arr) {
+			int value = target - num;
+			if(set.contains(value)) {
+				list.add(List.of(value, num));
+			}
+			set.add(num);
+		}
+		System.out.println(list);
+		
+		
+		//Two Sum Problem
+		int [] nums = {2,7,11,15};
+		int targetTwoSum = 9;
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int i = 0; i < nums.length; i++) {
+			int diff = targetTwoSum - nums[i];
+			if(map.containsKey(diff)) {
+				System.out.println(new int [] {map.get(diff), i});
+			}
+			map.put(nums[i], i);
+		}
+		
+		
+		//Count of each element and Sort and remove duplicates
+		int [] arr1 = {20, 33, 4, 20, 55, 15, 4, 33};
+		Map<Integer, Integer> hashMap = new TreeMap<>();
+		for (int i : arr1) {
+			hashMap.put(i, hashMap.getOrDefault(i, 0) + 1);
+		}
+		System.out.println(hashMap);
+		int[] arr2 = new int [hashMap.size()];
+		int i = 0;
+		for (Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+			arr2[i++] = entry.getKey();
+		}
+		System.out.println(Arrays.toString(arr2));
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Here are the basic SQL queries for CREATE, INSERT, UPDATE, DELETE — often called CRUD operations (Create, Read, Update, Delete). I’ll use a simple employees table as an example so you can easily relate it to real projects.
+
+✅ 1. CREATE (Create Database & Table)
+Create Database
+CREATE DATABASE company_db;
+Use Database
+USE company_db;
+Create Table
+CREATE TABLE employees (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    department VARCHAR(50),
+    salary DECIMAL(10,2),
+    joining_date DATE
+);
+
+👉 Creates a table with:
+
+Unique employee ID
+
+Name cannot be NULL
+
+Salary supports decimals
+
+✅ 2. INSERT (Add Data)
+Insert Single Row
+INSERT INTO employees (name, department, salary, joining_date)
+VALUES ('Bhuvan', 'Engineering', 75000, '2023-06-15');
+Insert Multiple Rows
+INSERT INTO employees (name, department, salary, joining_date)
+VALUES 
+('Rahul', 'HR', 50000, '2022-01-10'),
+('Sneha', 'Finance', 65000, '2021-09-23');
+
+👉 Faster to insert multiple rows in one query.
+
+✅ 3. UPDATE (Modify Existing Data)
+Update Specific Employee
+UPDATE employees
+SET salary = 80000
+WHERE name = 'Bhuvan';
+
+⚠️ Always use WHERE, otherwise ALL rows get updated.
+
+Update Multiple Columns
+UPDATE employees
+SET department = 'Product', salary = 90000
+WHERE id = 1;
+✅ 4. DELETE (Remove Data)
+Delete Specific Row
+DELETE FROM employees
+WHERE id = 2;
+Delete All Records (Table remains)
+DELETE FROM employees;
+Remove Table Completely
+DROP TABLE employees;
+⭐ Bonus (VERY Important for Interviews)
+Difference:
+
+✅ DELETE
+
+Removes rows
+
+Can rollback (if transaction enabled)
+
+✅ DROP
+
+Deletes entire table structure
+
+Cannot rollback
+
+✅ TRUNCATE
+
+TRUNCATE TABLE employees;
+
+Removes all rows
+
+Faster than DELETE
+
+Resets AUTO_INCREMENT
+
+Cannot rollback
+
+
+
+######################################################################################################################################################################################
+
+
+What is REST API:-
+-----------------
+
+✅ 30–40 Second Interview Answer (Best Version)
+
+REST API stands for Representational State Transfer Application Programming Interface. It is an architectural style used to build scalable web services that communicate over HTTP.
+In REST, everything is treated as a resource and is accessed using standard HTTP methods like GET, POST, PUT, PATCH, and DELETE. REST APIs are stateless, meaning each request contains all the information needed for the server to process it.
+They typically exchange data in JSON format, making them lightweight and fast. In my projects, I have used REST APIs in Spring Boot to enable communication between frontend and backend systems and to support microservice interactions.
+
+✅ If Interviewer Says: “Explain in Simple Terms”
+
+A REST API is a way for two applications to communicate over the internet using HTTP protocols. For example, when a user searches for products in an app, the frontend sends a GET request to the REST API, the server processes it, fetches data from the database, and returns it in JSON format.
+
+✅ If Interviewer Wants More Depth (1–2 Minute Answer)
+
+REST is an architectural style that follows principles such as stateless communication, client-server separation, cacheability, and a uniform interface.
+Each resource is identified by a URL, and actions are performed using HTTP methods. For example, GET retrieves data, POST creates a resource, PUT updates it, and DELETE removes it.
+One major advantage of REST is scalability because the server does not store client context. It is also lightweight compared to SOAP since it commonly uses JSON.
+In my experience working with Spring Boot, I have designed REST endpoints, handled request and response objects, implemented proper HTTP status codes, and ensured secure communication using authentication tokens.
+
+🔥 This answer signals real-world experience.
+
+⭐ Interview Power Tip (VERY Important)
+
+Most candidates just define REST.
+
+Strong candidates connect it to their experience.
+
+Add ONE line like:
+
+👉 “I have developed REST endpoints using Spring Boot for CRUD operations and integrated them with relational databases.”
+
+Instant credibility.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+if(x == y >> 1)
+if(x == (y >> 1))
+Right shift divides a number by 2.
+y >> n = y / (2^n) == works for +ve numbers but not accurate for -ve numbers
+
+👉 Each left shift is equivalent to multiplying by 2.
+x << n  =  x * (2^n)
+
 
 
 ######################################################################################################################################################################################

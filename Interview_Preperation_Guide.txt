@@ -6631,7 +6631,1310 @@ Instant credibility.
 
 
 
+
 ######################################################################################################################################################################################
+TCS Interview Quastions:-
+##########################
+
+
+What are the solid principles in java:-
+
+SOLID is a set of 5 object-oriented design principles that help you write clean, maintainable, scalable, and flexible Java code.
+
+SOLID =
+👉 S — Single Responsibility Principle
+👉 O — Open/Closed Principle
+👉 L — Liskov Substitution Principle
+👉 I — Interface Segregation Principle
+👉 D — Dependency Inversion Principle
+
+Let’s understand each with simple Java examples 👇
+
+✅ 1. Single Responsibility Principle (SRP)
+
+Definition:
+A class should have only one reason to change (one responsibility).
+
+❌ Wrong Example
+
+class Invoice {
+    void calculateTotal() { }
+    void printInvoice() { }
+    void saveToDatabase() { }
+}
+
+This class handles:
+
+business logic
+
+printing
+
+database work
+
+✅ Correct Approach
+
+class Invoice {
+    void calculateTotal() { }
+}
+
+class InvoicePrinter {
+    void print(Invoice invoice) { }
+}
+
+class InvoiceRepository {
+    void save(Invoice invoice) { }
+}
+
+👉 Each class has one job.
+
+####################################################
+
+✅ 2. Open/Closed Principle (OCP)
+
+Definition:
+Software should be open for extension but closed for modification.
+
+You should add new behavior without changing existing code.
+
+❌ Wrong
+
+class PaymentService {
+    void pay(String type) {
+        if(type.equals("UPI")) { }
+        else if(type.equals("CARD")) { }
+    }
+}
+
+Every new payment → modify class.
+
+✅ Correct
+
+interface Payment {
+    void pay();
+}
+
+class UpiPayment implements Payment {
+    public void pay() { }
+}
+
+class CardPayment implements Payment {
+    public void pay() { }
+}
+
+Now just add new class → no modification needed.
+
+####################################################
+
+✅ 3. Liskov Substitution Principle (LSP)
+
+Definition:
+A subclass should be able to replace its parent class without breaking behavior.
+
+❌ Wrong
+
+class Bird {
+    void fly() {}
+}
+
+class Ostrich extends Bird {
+    void fly() {
+        throw new UnsupportedOperationException();
+    }
+}
+
+Ostrich cannot fly → violates LSP.
+
+✅ Correct
+
+interface Bird {}
+
+interface FlyingBird {
+    void fly();
+}
+
+class Sparrow implements Bird, FlyingBird {
+    public void fly() {}
+}
+
+class Ostrich implements Bird {}
+
+####################################################
+
+✅ 4. Interface Segregation Principle (ISP)
+
+Definition:
+Clients should not be forced to depend on methods they don’t use.
+
+❌ Wrong
+
+interface Worker {
+    void work();
+    void eat();
+}
+
+class Robot implements Worker {
+    public void work() {}
+    public void eat() {} // unnecessary
+}
+
+✅ Correct
+
+interface Workable {
+    void work();
+}
+
+interface Eatable {
+    void eat();
+}
+
+Now classes implement only what they need.
+
+####################################################
+
+✅ 5. Dependency Inversion Principle (DIP)
+
+Definition:
+High-level modules should depend on abstractions (Interfaces), not concrete classes.
+
+❌ Wrong
+
+class MySQLDatabase { }
+
+class UserService {
+    MySQLDatabase db = new MySQLDatabase();
+}
+
+Tightly coupled.
+
+✅ Correct
+
+interface Database {
+    void save();
+}
+
+class MySQLDatabase implements Database {
+    public void save() {}
+}
+
+class UserService {
+    private Database db;
+
+    UserService(Database db) {
+        this.db = db;
+    }
+}
+
+Now you can switch DB easily.
+
+🎯 Easy Memory Trick
+
+👉 S — One class → One job
+👉 O — Extend without changing
+👉 L — Child behaves like parent
+👉 I — Small specific interfaces
+👉 D — Depend on interfaces
+
+🚀 Why SOLID matters (especially in Spring Boot)
+
+You’ll see SOLID everywhere in:
+
+Spring Dependency Injection
+
+Service & Repository layers
+
+Microservices
+
+Clean Architecture
+
+Testable code
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+
+Reflection API:-
+
+✅ Reflection API in Java — Simple Explanation
+
+Reflection API allows a Java program to inspect and manipulate classes, methods, fields, and constructors at runtime, even if you don’t know them at compile time.
+
+👉 In simple words:
+
+Reflection = Getting information about a class and using it dynamically while the program is running.
+
+🎯 Normal Java vs Reflection
+Normal Java (Compile-time)
+User user = new User();
+user.setName("Bhuvan");
+
+You already know:
+
+class name
+
+methods
+
+fields
+
+Reflection (Runtime)
+Class<?> clazz = Class.forName("User");
+Object obj = clazz.newInstance();
+
+Here the class is loaded dynamically.
+
+✅ What Reflection Can Do
+
+Using reflection you can:
+
+✔ Get class name
+✔ Get methods
+✔ Access private fields
+✔ Call methods dynamically
+✔ Create objects at runtime
+
+✅ Easy Example
+Sample class
+class Student {
+    private String name = "John";
+
+    public void show() {
+        System.out.println("Hello Student");
+    }
+}
+Using Reflection
+import java.lang.reflect.*;
+
+public class Test {
+    public static void main(String[] args) throws Exception {
+
+        Class<?> cls = Class.forName("Student");
+
+        Object obj = cls.getDeclaredConstructor().newInstance();
+
+        Method method = cls.getMethod("show");
+        method.invoke(obj);
+    }
+}
+
+👉 Output:
+
+Hello Student
+
+We called the method without directly creating Student object.
+
+✅ Access Private Field (Powerful Feature)
+Field field = cls.getDeclaredField("name");
+field.setAccessible(true);
+
+System.out.println(field.get(obj));
+
+Even private data can be accessed ⚠️
+
+🔥 Where Reflection is Used (Very Important)
+
+Reflection is heavily used in frameworks:
+
+✅ Spring Framework (Dependency Injection)
+
+✅ Spring Boot
+
+✅ Hibernate / JPA
+
+✅ JUnit
+
+✅ Serialization libraries (Jackson, Gson)
+
+Example:
+
+@Autowired
+UserService service;
+
+Spring uses reflection to inject objects automatically.
+
+⚠️ Disadvantages
+
+Slower than normal code
+
+Breaks encapsulation
+
+Security risks
+
+Harder to debug
+
+🧠 Interview One-Line Answer
+
+Reflection API allows Java programs to examine and manipulate class structure, methods, and fields dynamically at runtime.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+Iterface and Abstraction difference and use cases:-
+
+This is a very common Java interview question 👍
+Let’s make it simple + practical so you can explain confidently.
+
+✅ Interface vs Abstraction (Abstract Class)
+
+First understand:
+
+👉 Abstraction = concept (hiding implementation details)
+👉 Interface = one way to achieve abstraction
+
+🔹 What is Abstraction?
+
+Abstraction means showing only essential features and hiding internal logic.
+
+Example:
+
+You drive a car 🚗
+
+You use steering & brake
+
+You don’t know engine internals
+
+In Java → achieved using:
+
+Abstract classes
+
+Interfaces
+
+✅ Abstract Class
+
+An abstract class can have both:
+
+abstract methods (no body)
+
+normal methods (with body)
+
+Example
+abstract class Animal {
+
+    abstract void sound();   // abstract method
+
+    void sleep() {           // concrete method
+        System.out.println("Sleeping...");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+✅ When to Use Abstract Class
+
+Use when classes are closely related and share common code.
+
+Example:
+
+Animal → Dog, Cat
+
+Vehicle → Car, Bike
+
+Employee → Manager, Developer
+
+👉 You want shared behavior + customization.
+
+✅ Interface
+
+An interface defines only behavior (contract).
+
+All methods are implicitly:
+
+public
+
+abstract (except default/static methods)
+
+Example
+interface Payment {
+    void pay();
+}
+
+class UpiPayment implements Payment {
+    public void pay() {
+        System.out.println("UPI Payment");
+    }
+}
+✅ When to Use Interface
+
+Use when classes are not related, but share capability.
+
+Example:
+
+Car can move
+
+Robot can move
+
+Human can move
+
+Different objects → same behavior.
+🔥 Key Differences (Interview Table)
+| Feature              | Abstract Class             | Interface                  |
+| -------------------- | -------------------------- | -------------------------- |
+| Keyword              | `abstract class`           | `interface`                |
+| Methods              | Abstract + Concrete        | Mostly abstract            |
+| Variables            | Instance variables allowed | Only `public static final` |
+| Constructors         | ✅ Allowed                  | ❌ Not allowed              |
+| Multiple Inheritance | ❌ No                       | ✅ Yes                      |
+| Access Modifiers     | Any                        | Public by default          |
+| Purpose              | Code reuse                 | Capability/contract        |
+
+
+🎯 Real-Life Understanding
+Abstract Class = "IS-A" relationship
+
+Dog is an Animal.
+
+Interface = "CAN-DO" relationship
+
+Bird can fly.
+
+🔥 Real Spring Boot Example
+@Repository
+interface UserRepository extends JpaRepository<User, Long> {
+}
+
+Spring uses interfaces because:
+
+multiple implementations possible
+
+loose coupling
+
+Dependency Injection friendly
+
+🧠 Easy Memory Trick
+
+👉 Abstract class → partial implementation
+👉 Interface → full contract
+
+✅ Interview One-Line Difference
+
+Abstract class is used for sharing common behavior among related classes, whereas interface defines a contract that unrelated classes can implement.
+
+
+
+
+######################################################################################################################################################################################
+
+
+Heap Dump vs Thread Dump:-
+
+Most probably the interviewer asked:
+
+👉 Heap Dump vs Thread Dump ✅
+(This is a very common Java interview question)
+
+Let’s make it very clear and easy.
+
+✅ 1. Heap Dump
+📌 What is Heap Dump?
+
+A Heap Dump is a snapshot of memory (Heap area) at a particular moment.
+
+It shows:
+
+All objects in memory
+
+Object count
+
+Memory usage
+
+References between objects
+
+👉 Used mainly for memory issues.
+
+🔎 Used to find:
+
+Memory leaks
+
+OutOfMemoryError
+
+Large objects consuming memory
+
+Duplicate objects
+
+Example situation
+
+Your app crashes with:
+
+java.lang.OutOfMemoryError: Java heap space
+
+➡ You take a heap dump and analyze.
+
+Tools:
+
+Eclipse MAT (Memory Analyzer Tool)
+
+VisualVM
+
+JProfiler
+
+✅ 2. Thread Dump
+📌 What is Thread Dump?
+
+A Thread Dump is a snapshot of all running threads in the JVM.
+
+It shows:
+
+Thread state (RUNNABLE, BLOCKED, WAITING)
+
+Stack trace of each thread
+
+Deadlocks
+
+CPU stuck threads
+
+👉 Used mainly for performance or hanging issues.
+
+🔎 Used to find:
+
+Application freeze
+
+Deadlock problems
+
+High CPU usage
+
+Threads waiting on locks
+
+Example situation
+
+Application is:
+
+slow
+
+stuck
+
+not responding
+
+➡ Take a thread dump.
+
+🔥 Key Difference (Interview Table)
+| Feature    | Heap Dump            | Thread Dump         |
+| ---------- | -------------------- | ------------------- |
+| Captures   | Memory objects       | Running threads     |
+| Focus      | Memory               | Execution           |
+| Used for   | Memory leak          | Deadlock / Hang     |
+| Error Type | OutOfMemoryError     | High CPU / Freeze   |
+| Contains   | Objects & references | Thread stack traces |
+| Area       | Heap memory          | JVM threads         |
+
+🎯 Easy Memory Trick
+
+👉 Heap = Objects (Memory)
+👉 Thread = Execution (CPU work)
+
+🧠 Interview One-Line Answer
+
+Heap dump analyzes memory usage and objects in JVM, whereas thread dump shows the state and stack traces of all running threads used for diagnosing performance or deadlock issues.
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+Collection and streams differences 3 main diff:-
+
+Good interview question 👍
+Interviewers usually expect 3 clear points, not a long explanation.
+
+Here are the 3 main differences between Collections and Streams in Java:
+
+✅ Collection vs Stream (3 Main Differences)
+| Feature             | Collection                     | Stream                        |
+| ------------------- | ------------------------------ | ----------------------------- |
+| **Purpose**         | Stores data                    | Processes data                |
+| **Modification**    | Can add/remove/update elements | Does NOT modify original data |
+| **Execution Style** | Immediate (eager)              | Lazy evaluation               |
+
+✅ 1. Purpose (Storage vs Processing)
+Collection
+
+Used to store objects in memory.
+
+List<String> list = new ArrayList<>();
+list.add("A");
+list.add("B");
+
+👉 Data container.
+
+Stream
+
+Used to perform operations on data.
+
+list.stream().filter(s -> s.equals("A"));
+
+👉 Data processing pipeline.
+
+✅ 2. Modification
+Collection
+
+You can change data.
+
+list.remove("A");
+Stream
+
+Stream does not change original collection.
+
+list.stream()
+    .filter(s -> s.startsWith("A"))
+    .toList();
+
+Original list remains same ✅
+
+✅ 3. Execution (Eager vs Lazy)
+Collection → Eager
+
+Operations execute immediately.
+
+list.size(); // runs instantly
+Stream → Lazy
+
+Operations run only when terminal operation is called.
+
+list.stream()
+    .filter(x -> x.length() > 2); // NOT executed yet
+
+// executes here
+.toList();
+🎯 Easy Interview Memory Trick
+
+👉 Collection = STORE
+👉 Stream = PROCESS
+
+🧠 Perfect 20-second Interview Answer
+
+Collections are used to store data in memory, whereas Streams are used to process data. Collections allow modification of elements and execute operations immediately, while Streams do not modify the source and use lazy evaluation until a terminal operation is called.
+
+
+
+##################################################
+
+
+✅ Collection vs Stream (Java)
+| Aspect                | Collection                              | Stream                                     |
+| --------------------- | --------------------------------------- | ------------------------------------------ |
+| **Definition**        | Data structure used to **store data**   | Used to **process data** from collections  |
+| **Purpose**           | Storage                                 | Computation / transformation               |
+| **Data Modification** | Can modify elements                     | Cannot modify original source              |
+| **Execution**         | Eager (runs immediately)                | Lazy (runs only at terminal operation)     |
+| **Traversal**         | External iteration (for-loop, iterator) | Internal iteration (handled by Stream API) |
+| **Reuse**             | Can reuse multiple times                | Stream can be used only once               |
+| **Performance**       | Sequential processing                   | Supports parallel processing easily        |
+
+✅ 1. Storage vs Processing (Main Difference)
+Collection → Stores data
+List<Integer> list = new ArrayList<>();
+list.add(10);
+list.add(20);
+
+👉 Collection is a container.
+
+Stream → Processes data
+list.stream()
+    .filter(n -> n > 10)
+    .forEach(System.out::println);
+
+👉 Stream is a pipeline of operations.
+
+✅ 2. Modification
+Collection
+list.remove(10);
+
+Original data changes.
+
+Stream
+List<Integer> newList =
+    list.stream().filter(n -> n > 10).toList();
+
+Original list remains unchanged ✅
+
+✅ 3. Execution Style
+Collection → Eager
+
+Runs immediately.
+
+Stream → Lazy
+
+Runs only when terminal operation is called.
+
+list.stream()
+    .filter(x -> x > 5); // not executed
+
+// execution happens here
+.forEach(System.out::println);
+✅ 4. Iteration Type
+
+Collection → You control iteration
+
+for(Integer n : list) {}
+
+Stream → Java handles iteration internally
+
+list.stream().forEach(System.out::println);
+🎯 Easy Memory Trick
+
+👉 Collection = STORE data
+👉 Stream = PROCESS data
+
+🧠 Short Interview Answer (Best Version)
+
+Collections are used to store and manage data in memory, while Streams are used to process data from collections. Collections support modification and eager execution, whereas Streams provide lazy evaluation, internal iteration, and do not modify the original data.
+
+
+######################################################################################################################################################################################
+
+
+How hashmap works internally - Hashing technique - How it will resolve collisions of hashing:-
+
+This is a very important Java interview question 👍
+Let’s explain HashMap internal working step-by-step in a simple way.
+
+✅ How HashMap Works Internally
+
+A HashMap stores data as key–value pairs.
+
+HashMap<Integer, String> map = new HashMap<>();
+map.put(101, "A");
+
+Internally HashMap uses:
+
+👉 Array of Nodes (Buckets)
+
+🔹 Step 1 — Hash Calculation
+
+When you insert a key:
+
+map.put(key, value);
+
+Java calculates:
+
+hash = key.hashCode();
+
+Then index is calculated:
+
+index = hash & (arraySize - 1)
+
+👉 This decides which bucket to store data.
+
+🔹 Step 2 — Store in Bucket
+
+Each array position is called a bucket.
+
+Internally structure looks like:
+
+Array
+[0] -> null
+[1] -> Node(key,value)
+[2] -> Node -> Node -> Node
+[3] -> null
+
+Each entry is stored as a:
+
+static class Node<K,V> {
+    final int hash;
+    final K key;
+    V value;
+    Node<K,V> next;
+}
+
+👉 So datatype used = Array + LinkedList (initially)
+
+✅ What is Collision?
+
+Collision happens when:
+
+👉 Two different keys produce the same bucket index.
+
+Example:
+
+Key1 → index 2
+Key2 → index 2
+
+Both want same location.
+
+✅ How HashMap Resolves Collisions
+✅ Java 7 (Old)
+
+Collision handled using:
+
+👉 Linked List
+
+Bucket[2]
+   ↓
+Node1 → Node2 → Node3
+
+New node added to chain.
+
+✅ Java 8+ (Important Interview Point)
+
+If collisions become too many:
+
+👉 LinkedList converts into Red-Black Tree
+
+Condition:
+
+Bucket size ≥ 8
+
+Array size ≥ 64
+
+Before:
+Node → Node → Node → Node
+
+After:
+     Tree Structure
+        (Balanced)
+🔥 Why Tree?
+Structure	Search Time
+LinkedList	O(n)
+Red-Black Tree	O(log n)
+
+Improves performance.
+
+✅ Retrieval (get operation)
+map.get(key);
+
+Steps:
+
+Calculate hashCode
+
+Find bucket index
+
+Traverse linked list / tree
+
+Compare using equals()
+
+⚠️ Important:
+
+hashCode() → finds bucket
+
+equals() → finds exact key
+
+🎯 Datatypes Used Internally
+
+👉 Array + LinkedList + Red-Black Tree (Java 8+)
+
+🧠 Interview 30-Second Answer
+
+HashMap internally uses an array of buckets where each bucket stores nodes. The index is calculated using the key’s hashCode. When multiple keys map to the same bucket, collision occurs and is handled using a LinkedList, which converts into a Red-Black Tree in Java 8 when entries exceed a threshold, improving search performance.
+
+
+
+######################################################################################################################################################################################
+
+How microservices will communicate via rest template:-
+
+✅ What does “Microservices communicate using REST” mean?
+
+It means:
+
+👉 One microservice talks to another microservice using HTTP APIs (REST endpoints).
+
+Just like:
+
+Browser calls backend API
+
+Mobile app calls server
+
+✅ Here → Service calls another service.
+
+✅ What Actually Happens Internally
+
+When we say REST communication:
+
+1️⃣ Service A creates an HTTP request
+2️⃣ Sends request to Service B URL
+3️⃣ Data sent as JSON
+4️⃣ Service B processes request
+5️⃣ Sends HTTP response back
+
+
+
+🧠 Perfect Interview Explanation (Say This)
+
+In Feign Client, microservices communicate via REST by defining an interface annotated with @FeignClient. Spring automatically generates the HTTP client implementation at runtime, so calling another microservice becomes similar to calling a local method, while internally it performs REST API communication.
+
+
+🔥 What Happens Internally
+
+Feign automatically:
+
+1️⃣ Creates REST client implementation
+2️⃣ Converts object → JSON
+3️⃣ Calls Payment Service via HTTP
+4️⃣ Gets response
+5️⃣ Converts JSON → Java object
+
+All automatically handled.
+
+
+#####################################
+
+✅ How Feign Client Works Internally
+
+When Order Service calls:
+
+paymentClient.makePayment(request);
+Internally this happens:
+🔹 1️⃣ Method Call Happens
+
+You call a normal Java method:
+
+paymentClient.makePayment(request);
+
+Feign creates a proxy object for this interface at runtime.
+
+🔹 2️⃣ Feign Builds HTTP Request
+
+Feign reads annotations:
+
+@FeignClient(name="PAYMENT-SERVICE")
+@PostMapping("/payment/pay")
+
+and prepares:
+
+POST /payment/pay
+🔹 3️⃣ Object → JSON Conversion
+
+Feign uses Jackson (Spring default) to convert:
+
+PaymentRequest
+
+➡ into JSON automatically.
+
+🔹 4️⃣ Service Discovery (if enabled)
+
+If Eureka/LoadBalancer exists:
+
+PAYMENT-SERVICE → actual running instance URL
+
+Feign resolves service name to real service instance.
+
+🔹 5️⃣ HTTP Request Sent
+
+Feign internally uses an HTTP client like:
+
+Apache HttpClient OR
+
+OkHttp
+
+to send REST request.
+
+🔹 6️⃣ Payment Service Processes Request
+
+Payment microservice:
+
+receives JSON
+
+executes controller logic
+
+sends HTTP response
+
+🔹 7️⃣ JSON → Java Object Conversion
+
+Feign converts response JSON back into:
+
+String / DTO object
+
+and returns result.
+
+##################################
+
+
+✅ Flow Diagram (Easy Memory)
+
+Order Service
+   ↓
+Feign Proxy (auto generated)
+   ↓
+Object → JSON
+   ↓
+HTTP REST Call
+   ↓
+Payment Service
+   ↓
+Response JSON
+   ↓
+JSON → Object
+   ↓
+Return to Service
+
+
+######################################################################################################################################################################################
+
+
+how api communicate like headers and urls explain:-
+
+🧠 Perfect Real Project Answer (Say Like This)
+
+In our project, REST APIs were developed using Spring Boot controllers exposing endpoints with @RestController. Microservices communicate using Feign Client, where we define an interface mapped to the target service endpoint. During the call, Feign automatically constructs an HTTP request including URL, headers like Authorization token, and JSON request body. The target service processes the request and returns a response which Feign maps back to a Java object.
+
+
+
+
+######################################################################################################################################################################################
+
+How you integrate 2 system for data exchange:-
+
+🧠 Perfect Interview Answer (Speak This)
+
+In our project, ServiceNow was our internal system and SAP was an external system. When an event occurred in ServiceNow, our Spring Boot integration service received the request, transformed the data into SAP-required format, and used a Feign Client to invoke SAP’s external REST APIs. Feign automatically handled HTTP request creation, headers, JSON conversion, and response mapping, allowing seamless data exchange between the two systems.
+
+
+
+Perfect 👍 — this is exactly how you should explain it in interview.
+
+You must show that your system (ServiceNow project) is internal and SAP is an external system, and you integrated using Feign.
+
+Here is a real-world explanation you can speak confidently 👇
+
+✅ Scenario
+
+👉 ServiceNow (our project) = Source system
+👉 SAP = External third-party system
+
+Goal:
+When an event happens in NOW → send data to SAP.
+
+✅ Architecture (How Systems Communicate)
+ServiceNow (Our System)
+        ↓
+Spring Boot Integration Service
+        ↓ (Feign Client REST Call)
+External SAP System
+
+We do NOT directly modify SAP.
+We call SAP exposed APIs.
+
+✅ Step-by-Step Flow (Practical)
+🔹 1️⃣ Event Happens in NOW
+
+Example:
+
+Ticket created
+
+Asset request raised
+
+Purchase request generated
+
+NOW sends request to our backend API.
+
+🔹 2️⃣ Our Integration API Receives Data
+@RestController
+@RequestMapping("/integration")
+public class IntegrationController {
+
+    @Autowired
+    private SapClient sapClient;
+
+    @PostMapping("/sendToSap")
+    public String sendData(
+        @RequestHeader("Authorization") String token,
+        @RequestBody NowRequest request) {
+
+        SapRequest sapReq = mapToSap(request);
+
+        return sapClient.createPR(token, sapReq);
+    }
+}
+
+👉 Here we transform NOW data → SAP format.
+
+🔹 3️⃣ Feign Client Calls External SAP
+@FeignClient(
+    name = "sap-client",
+    url = "${sap.base.url}"   // external URL
+)
+public interface SapClient {
+
+    @PostMapping("/api/purchase")
+    String createPR(
+        @RequestHeader("Authorization") String token,
+        @RequestBody SapRequest request);
+}
+
+Important point:
+
+✅ We use external SAP URL, not service name.
+
+Example:
+
+sap.base.url=https://sap.company.com
+🔹 4️⃣ What Happens Internally
+
+When Feign method is called:
+
+Feign builds HTTP request
+
+Adds headers (Authorization, Content-Type)
+
+Converts object → JSON
+
+Sends REST call over internet/network
+
+SAP processes request
+
+SAP sends response
+
+Feign converts JSON → Java object
+
+🔹 Example Actual API Call
+POST https://sap.company.com/api/purchase
+Authorization: Bearer token123
+Content-Type: application/json
+
+{
+  "PR_NO": "INC1001",
+  "ITEM_TEXT": "Laptop Request"
+}
+✅ Why Integration Layer is Needed
+
+We don’t call SAP directly from NOW because:
+
+✔ Data mapping required
+✔ Security handling
+✔ Error handling & retry
+✔ Logging & monitoring
+✔ External API isolation
+
+
+
+######################################################################################################################################################################################
+
+
+
+Customer and Account API design explain:-
+
+Good 👍 — this is a system design + REST API design question.
+Interviewer wants to know how you structure APIs, not just controller code.
+
+You should explain using:
+
+✅ Resource design
+✅ Endpoints
+✅ Relationships
+✅ Request/Response
+✅ Best practices
+
+Let’s take a Banking example (very common) 👇
+
+✅ Customer & Account API Design (Concept)
+Relationship:
+Customer  →  can have →  Multiple Accounts
+(1)                     (Many)
+
+So:
+
+Customer = Parent resource
+
+Account = Child resource
+
+✅ 1️⃣ Customer API Design
+
+Customer represents user details.
+
+Create Customer
+POST /customers
+
+Request:
+
+{
+  "name": "Bhuvan",
+  "email": "bhuvan@gmail.com",
+  "phone": "9876543210"
+}
+
+Response:
+
+{
+  "customerId": 101,
+  "status": "CREATED"
+}
+Get Customer
+GET /customers/{customerId}
+Update Customer
+PUT /customers/{customerId}
+Delete Customer
+DELETE /customers/{customerId}
+✅ 2️⃣ Account API Design
+
+Accounts belong to a customer.
+
+Create Account for Customer
+POST /customers/{customerId}/accounts
+
+Request:
+
+{
+  "accountType": "SAVINGS",
+  "balance": 5000
+}
+Get All Accounts of Customer
+GET /customers/{customerId}/accounts
+Get Specific Account
+GET /accounts/{accountId}
+Close Account
+DELETE /accounts/{accountId}
+✅ Why This Design? (Important Interview Point)
+
+We follow REST resource hierarchy:
+
+/customers
+/customers/{id}/accounts
+
+Because:
+
+Account depends on Customer
+
+Clear ownership
+
+Easy API understanding
+
+✅ Sample Spring Boot Structure
+Customer Controller
+@RestController
+@RequestMapping("/customers")
+class CustomerController { }
+Account Controller
+@RestController
+@RequestMapping("/accounts")
+class AccountController { }
+✅ Best Practices (Mention These ⭐)
+
+✔ Use nouns, not verbs
+❌ /createCustomer
+✅ /customers
+
+✔ Proper HTTP methods (GET, POST, PUT, DELETE)
+
+✔ Use status codes:
+
+201 → Created
+
+200 → Success
+
+404 → Not found
+
+✔ Validation & error handling
+
+✔ Pagination for list APIs
+
+🧠 Perfect Interview Explanation
+
+In Customer and Account API design, Customer is treated as the parent resource and Account as a child resource. We expose REST endpoints like POST /customers to create customers and POST /customers/{id}/accounts to create accounts under a customer. APIs follow REST principles using proper HTTP methods, resource hierarchy, and standard response codes.
+
+
+
+######################################################################################################################################################################################
+
 
 
 
@@ -6648,6 +7951,111 @@ x << n  =  x * (2^n)
 ######################################################################################################################################################################################
 
 
+
+
+If you want, I can also show you exact wording that makes this experience look valuable for software roles (like analytical skills, data handling, process understanding) — which actually helps during interviews.
+yes
+
+Perfect 👍 — this is very important for career switchers.
+Your goal is to translate old-domain work into software-relevant strengths without pretending it was software development.
+
+Below is how you convert your Civil + Mortgage + Process Associate experience into language that IT recruiters like.
+
+✅ How to Make Non-Software Experience Valuable for Software Roles
+
+Instead of describing what industry you worked in, describe transferable skills.
+
+Recruiters look for:
+
+Analytical thinking
+
+Data handling
+
+Process understanding
+
+Problem solving
+
+Coordination
+
+Accuracy & validation
+
+✅ 1. Civil / Construction Experience → Software-Friendly Wording
+
+❌ Normal wording (avoid):
+
+Managed construction site and RCC works.
+
+✅ Software-aligned wording:
+
+Coordinated multi-stakeholder project activities ensuring process compliance and timely execution.
+
+Worked with technical drawings and structured data (AutoCAD, BBS) requiring high accuracy and validation.
+
+Managed resource planning and tracked execution workflows similar to project lifecycle management.
+
+Performed problem analysis and on-site issue resolution under deadline constraints.
+
+👉 Shows:
+logic, planning, execution mindset (same as software delivery).
+
+✅ 2. Mortgage / Title Engineering Experience → Software-Friendly Wording
+
+❌ Normal wording:
+
+Worked on sale deed and lease deed.
+
+✅ Better wording:
+
+Analyzed and validated US mortgage documents ensuring data accuracy and regulatory compliance.
+
+Performed structured data verification and record analysis using ArcGIS tools.
+
+Handled large volumes of process-driven data with strong attention to detail.
+
+Followed standardized workflows and quality-control procedures.
+
+👉 Shows:
+data validation + business logic understanding.
+
+✅ 3. Add a Career Transition Statement (VERY POWERFUL)
+
+Place this under summary:
+
+Transitioned from Construction and Mortgage domain roles into Software Engineering, leveraging strong analytical, problem-solving, and process-oriented experience to build scalable backend applications using Java and Spring Boot.
+
+Recruiters LOVE this because it explains your story clearly.
+
+✅ 4. Interview Explanation (Golden Answer)
+
+When interviewer asks:
+
+“How is your previous experience useful in software?”
+
+Say this:
+
+My previous roles involved analyzing structured information, validating data accuracy, and following defined workflows. These skills directly help in software development where understanding business logic, debugging issues, and ensuring data correctness are critical. The transition helped me develop both domain understanding and technical implementation skills.
+
+🔥 This answer sounds very mature.
+
+✅ 5. Hidden Advantage You Actually Have (Use This)
+
+Most pure developers lack:
+
+Real business process exposure
+
+Client workflow understanding
+
+Operational thinking
+
+You can say:
+
+I understand real-world business processes, which helps me design practical software solutions rather than only focusing on coding.
+
+This is a strong differentiator.
+
+
+
+######################################################################################################################################################################################
 
 
 https://www.linkedin.com/in/bhuvan-c-s-23807823b

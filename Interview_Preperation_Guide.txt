@@ -1904,6 +1904,1294 @@ System.out.println(oddSorted); // [25, 45, 67]
 ######################################################################################################################################################################################
 
 
+
+Spring patterns
+---------------
+Singleton
+Factory
+Builder
+
+Microservices patterns
+----------------------
+API Gateway
+Saga
+Circuit Breaker
+Retry Pattern
+
+
+object-oriented design patterns:-
+---------------------------------
+
+1️⃣ Singleton Pattern
+
+Definition (2 lines):
+Singleton pattern ensures that only one instance of a class exists in the application.
+It provides a global access point to that instance.
+
+How it is used in my application
+
+In Spring Boot, all beans are Singleton by default.
+
+
+2️⃣ Factory Pattern
+
+Definition (2 lines):
+Factory pattern provides a way to create objects without exposing the object creation logic to the client.
+It delegates object creation to a factory class.
+
+How it is used in my application
+
+Spring internally uses the Factory pattern through BeanFactory and ApplicationContext to create and manage beans.
+
+
+3️⃣ Builder Pattern
+
+Definition (2 lines):
+Builder pattern is used to construct complex objects step by step.
+It helps avoid constructors with too many parameters.
+
+How it is used in my application
+
+Spring uses Builder pattern in ResponseEntity.
+
+
+
+What Microservices Design Patterns do you know?”
+----------------------------------------------
+Say:
+
+In microservices architecture we commonly use patterns like API Gateway for routing requests, Saga for distributed transactions, Circuit Breaker for fault tolerance, Retry for temporary failures, Bulkhead for isolation, CQRS for separating read and write operations, and Event Sourcing for maintaining event history.
+
+
+1️⃣ API Gateway Pattern
+
+Definition (2 lines):
+API Gateway is a single entry point for all client requests in a microservices architecture.
+It routes requests to appropriate services and handles cross-cutting concerns like authentication and logging.
+
+Role
+
+Request routing
+Authentication
+Rate limiting
+Load balancing
+
+
+2️⃣ Saga Pattern
+
+Definition (2 lines):
+Saga Pattern manages distributed transactions across multiple microservices.
+It splits a transaction into multiple local transactions with compensation steps if a failure occurs.
+
+
+3️⃣ Circuit Breaker Pattern
+
+Definition (2 lines):
+Circuit Breaker prevents an application from repeatedly calling a failing service.
+When failures exceed a threshold, the circuit opens and requests fail fast.
+
+
+4️⃣ Retry Pattern
+
+Definition (2 lines):
+Retry Pattern automatically retries failed requests after a short delay.
+It helps recover from temporary failures like network issues.
+
+######################################################################################################################################################################################
+
+
+
+How do you design a scalable microservices architecture for millions of users?
+------------------------------------------------------------------------------
+
+To design a scalable microservices architecture for millions of users, I would place a load balancer in front of the system, followed by an API Gateway for routing and authentication. Each microservice such as user, order, and payment runs independently and can scale horizontally. For asynchronous communication I would use Kafka, and for performance optimization I would use Redis caching. Databases would be separated per service with read replicas, and reliability would be ensured using patterns like Circuit Breaker and Retry.
+
+
+Client (Web/Mobile)
+        ↓
+Load Balancer
+        ↓
+API Gateway
+        ↓
+Microservices Layer
+(User, Order, Payment, Inventory)
+        ↓
+Message Broker (Kafka / RabbitMQ)
+        ↓
+Database Layer
+(MySQL / PostgreSQL / NoSQL)
+        ↓
+Cache Layer (Redis)
+
+
+
+######################################################################################################################################################################################
+
+
+
+MULTITHREADING:-
+
+if they ask how you enabled multithreading in your project and how you handled the issues of deadlock and data violation in that, explain, how to i need to answer with practical codes
+
+You don’t need to dump a lot of code in an interview — but you should show 1–2 small practical snippets + explain decisions clearly.
+For 4 years experience, the best answer is:
+
+👉 Explain flow → give small code → explain how you handled issues
+
+✅ 🔥 Perfect End-to-End Answer (With Practical Code)
+🔹 1. How you enabled multithreading
+
+"In our Spring Boot microservices (using Spring Boot), multithreading is enabled by default through the embedded server like Tomcat, which handles concurrent requests using a thread pool.
+
+Additionally, we implemented asynchronous processing using @Async for background tasks."
+
+👉 Code (Keep it short)
+@EnableAsync
+@SpringBootApplication
+public class App {
+}
+@Service
+public class NotificationService {
+
+    @Async
+    public void sendEmail(String email) {
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+🔹 2. Custom Thread Pool (Important for real-time)
+
+"We configured a custom ThreadPoolTaskExecutor to control thread usage and avoid performance issues."
+
+@Bean
+public Executor taskExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(5);
+    executor.setMaxPoolSize(10);
+    executor.setQueueCapacity(50);
+    executor.initialize();
+    return executor;
+}
+✅ 🔥 3. How you handled Data Violation (MOST IMPORTANT)
+
+"We avoided shared mutable state and used thread-safe approaches."
+
+👉 Example Problem:
+private int count = 0;
+
+@Async
+public void increment() {
+    count++; // ❌ race condition
+}
+👉 Solution 1 (Better way)
+
+Atomic Classes
+--------------
+
+AtomicInteger count = new AtomicInteger(0);
+
+@Async
+public void increment() {
+    count.incrementAndGet();
+}
+
+OR
+
+synchronized
+---------------
+private int count = 0;
+
+@Async
+public synchronized void increment() {
+    count++;
+}
+
+👉 Solution 2 (Real project level 🔥)
+
+"At the database level, we used transactions and optimistic locking."
+
+@Transactional
+public void updateOrder(Order order) {
+    orderRepository.save(order);
+}
+✅ 🔥 4. How you handled Deadlocks
+
+"We avoided deadlocks by minimizing locking and ensuring consistent lock ordering."
+
+👉 Example:
+synchronized (lock1) {
+    synchronized (lock2) {
+        // safe execution
+    }
+}
+👉 Better approach used:
+
+"Instead of heavy synchronization, we avoided nested locks and used independent async tasks."
+
+✅ 🔥 5. Final Strong Closing (VERY IMPORTANT)
+
+"Overall, we designed our services to be stateless, avoided shared mutable data, used thread-safe constructs like Atomic classes, and handled consistency at the database level using @Transactional. This helped us prevent race conditions and deadlocks while maintaining performance."
+
+🎯 🔥 How Interviewer Evaluates You
+
+They check if you:
+
+✔ Know @Async + ThreadPool
+✔ Avoid unnecessary synchronized
+✔ Understand race conditions
+✔ Use DB transactions (real-world thinking)
+❌ What NOT to do
+Don’t write long code
+Don’t say "we used synchronized everywhere"
+Don’t stay only in theory
+🚀 Pro Tip (This makes you stand out)
+
+Add this line:
+
+"We prefer handling concurrency at design and database level rather than relying heavily on in-memory synchronization."
+
+
+
+
+✅ 🔥 ThreadPoolTaskExecutor vs ExecutorService
+
+| Feature                    | ThreadPoolTaskExecutor                      | ExecutorService              |
+| -------------------------- | ------------------------------------------- | ---------------------------- |
+| Type                       | Spring Framework class                      | Java Concurrency interface   |
+| Package                    | `org.springframework.scheduling.concurrent` | `java.util.concurrent`       |
+| Framework Dependency       | Requires Spring                             | Pure Java (no Spring)        |
+| Integration with @Async    | ✅ Direct support                            | ❌ Not supported directly     |
+| Configuration              | Centralized via Spring `@Bean`              | Manual in code               |
+| Lifecycle Management       | ✅ Managed by Spring container               | ❌ Manual (shutdown required) |
+| Ease of Use in Spring Boot | ✅ Very easy                                 | ⚠️ Requires extra setup      |
+| Thread Pool Customization  | ✅ Declarative & clean                       | ✅ But more manual            |
+| Monitoring & Management    | Better with Spring (Actuator, etc.)         | Limited                      |
+| Exception Handling         | Supports Spring async handlers              | Manual handling required     |
+| Reusability                | Easily injected as Bean                     | Must pass instance manually  |
+| Use Case                   | Spring Boot async tasks                     | General Java multithreading  |
+| Internal Working           | Wraps ExecutorService                       | Core implementation          |
+
+
+
+👉 ExecutorService
+
+Low-level (Java)
+You control everything manually
+
+👉 ThreadPoolTaskExecutor
+
+High-level (Spring)
+Spring manages everything for you
+
+🔥 🔹 Perfect Interview One-Liner
+
+"ExecutorService is a core Java interface for managing threads, whereas ThreadPoolTaskExecutor is a Spring abstraction built on top of it, providing better integration, configuration, and lifecycle management in Spring Boot applications."
+
+🔥 🔹 Pro Insight (Say This to Impress)
+
+"In Spring Boot projects, we prefer ThreadPoolTaskExecutor because it works seamlessly with @Async and avoids manual thread management."
+
+
+
+
+
+
+######################################################################################################################################################################################
+
+
+
+3 to 4 Experience:-
+--------------------
+
+🔹Core Java 
+Why is String immutable in Java? What are the benefits? 
+Difference between == and equals()? 
+How does HashMap work internally? 
+How are collisions handled? 
+Difference between ArrayList and LinkedList? 
+When would you use each? What is the difference between Comparable and Comparator? 
+Explain volatile, synchronized, and Atomic classes. 
+What is the difference between ExecutorService and creating threads manually? 
+
+🔹Spring Boot 
+What happens internally when a Spring Boot application starts? 
+Difference between @Component, @Service, @Repository, and @Controller? 
+What is Spring Boot Auto-Configuration? How does it work? 
+What is the difference between @Bean and @Component? 
+Explain the lifecycle of a Spring Bean. How does Spring Boot handle dependency injection internally? 
+
+🔹Spring Security / JWT 
+How does JWT authentication work? 
+How does Spring Security validate a JWT token? 
+What is SecurityContext and SecurityContextHolder? 
+What happens in the Spring Security filter chain? 
+Difference between session-based authentication and token-based authentication? 
+
+🔹Microservices Architecture 
+How do microservices communicate with each other? What is service discovery and why is it needed? 
+What is the Circuit Breaker pattern? 
+How do you handle distributed transactions in microservices? 
+What is API Gateway and why is it used? 
+
+🔹SQL / Database 
+Difference between INNER JOIN, LEFT JOIN, and RIGHT JOIN? 
+How do indexes improve database performance? 
+Difference between WHERE and HAVING? 
+How do you find the 2nd highest salary in SQL? 
+How do you optimize slow queries? 
+
+🔹 Real Project / Architecture Questions 
+Explain the architecture of your current project. 
+How do you handle high traffic in your application? 
+How do you integrate third-party APIs? How do you ensure security in your APIs? 
+What performance optimizations have you done in your project? 
+
+💡 Pro Tip for 2026 Interviews: 
+Companies are now focusing less on theory and more on real production scenarios, such as: Handling millions of requests Scaling microservices Debugging memory/performance issues Secure API design
+
+
+🔹 Core Java
+1️⃣ Why is String immutable in Java?
+
+Definition (2 lines):
+String is immutable in Java, meaning once a String object is created its value cannot be changed. Any modification creates a new String object instead of altering the existing one.
+
+Benefits
+
+Security (used in class loaders, URLs)
+
+Thread-safe
+
+String Pool memory optimization
+
+Hashcode caching for collections
+
+Example
+
+String s = "Hello";
+s.concat("World"); // new object created
+2️⃣ Difference between == and equals()
+
+Definition (2 lines):
+== compares memory references (addresses) of two objects.
+equals() compares the actual content or values of objects.
+
+Example
+
+String a = new String("Java");
+String b = new String("Java");
+
+a == b        // false
+a.equals(b)   // true
+3️⃣ How does HashMap work internally?
+
+Definition (2 lines):
+HashMap stores data as key-value pairs using hashing.
+It calculates the hashcode of the key to determine the bucket where the entry will be stored.
+
+Working
+
+Hashcode generated
+
+Index calculated
+
+Entry stored in bucket
+
+Collision handling
+
+LinkedList (before Java 8)
+
+Red-Black Tree (Java 8+ when bucket size > 8)
+
+4️⃣ ArrayList vs LinkedList
+
+Definition (2 lines):
+ArrayList is a dynamic array implementation of List, optimized for fast access.
+LinkedList is a doubly linked list implementation, optimized for fast insertions and deletions.
+
+Feature	ArrayList	LinkedList
+Access	Fast O(1)	Slow O(n)
+Insert/Delete	Slow	Fast
+Memory	Less	More
+5️⃣ Comparable vs Comparator
+
+Definition (2 lines):
+Comparable is used to define the natural ordering of objects within the class itself.
+Comparator is used to define custom sorting logic outside the class.
+
+Example
+
+class Employee implements Comparable<Employee>{
+   public int compareTo(Employee e){
+      return this.salary - e.salary;
+   }
+}
+6️⃣ volatile vs synchronized vs Atomic
+
+Definition (2 lines):
+These are concurrency mechanisms used to handle thread safety in Java.
+volatile ensures visibility, synchronized provides mutual exclusion, and Atomic classes provide lock-free thread-safe operations.
+
+Example
+
+AtomicInteger count = new AtomicInteger();
+count.incrementAndGet();
+7️⃣ ExecutorService vs Manual Threads
+
+Definition (2 lines):
+ExecutorService is a framework that manages thread pools and asynchronous task execution.
+Creating threads manually requires direct management of thread lifecycle and resources.
+
+Example
+
+ExecutorService executor = Executors.newFixedThreadPool(5);
+executor.submit(task);
+🔹 Spring Boot
+1️⃣ What happens when Spring Boot starts?
+
+Definition (2 lines):
+Spring Boot starts by initializing the Spring Application Context and loading all beans.
+It also performs auto-configuration and starts an embedded server like Tomcat.
+
+Startup steps
+
+SpringApplication.run()
+
+Create ApplicationContext
+
+Component scanning
+
+Bean creation
+
+Auto configuration
+
+Start embedded server
+
+2️⃣ @Component vs @Service vs @Repository vs @Controller
+
+Definition (2 lines):
+These annotations mark classes as Spring-managed beans detected during component scanning.
+They represent different layers of the application architecture.
+
+Annotation	Layer
+@Component	Generic bean
+@Service	Business logic
+@Repository	Database layer
+@Controller	Web layer
+3️⃣ Spring Boot Auto Configuration
+
+Definition (2 lines):
+Auto-configuration automatically configures Spring beans based on classpath dependencies and project configuration.
+It reduces the need for manual configuration.
+
+Example
+
+If spring-boot-starter-web is present → Spring configures
+
+DispatcherServlet
+
+Tomcat
+
+JSON converters
+
+4️⃣ @Bean vs @Component
+
+Definition (2 lines):
+@Component automatically registers a class as a Spring bean using component scanning.
+@Bean explicitly defines a bean inside a @Configuration class.
+
+Example
+
+@Bean
+public ObjectMapper mapper(){
+   return new ObjectMapper();
+}
+5️⃣ Spring Bean Lifecycle
+
+Definition (2 lines):
+Spring Bean lifecycle refers to the steps a bean goes through from creation to destruction in the IoC container.
+Spring manages instantiation, dependency injection, initialization, and destruction.
+
+Steps
+
+Bean instantiation
+
+Dependency injection
+
+Initialization
+
+Bean ready
+
+Destruction
+
+6️⃣ Dependency Injection internally
+
+Definition (2 lines):
+Dependency Injection is a design pattern where objects receive their dependencies from the IoC container instead of creating them manually.
+Spring resolves and injects these dependencies automatically.
+
+Types
+
+Constructor injection
+
+Setter injection
+
+Field injection
+
+Example
+
+@Autowired
+UserService service;
+🔹 Spring Security / JWT
+1️⃣ JWT Authentication
+
+Definition (2 lines):
+JWT (JSON Web Token) is a stateless authentication mechanism where a signed token is used to verify user identity.
+The token contains user information and is sent with every request.
+
+Flow
+
+Login → Generate Token → Client stores token → Send with API requests.
+
+2️⃣ Spring Security JWT Validation
+
+Definition (2 lines):
+Spring Security validates JWT tokens using filters that intercept requests before reaching controllers.
+It verifies the token signature, expiration time, and claims.
+
+3️⃣ SecurityContext & SecurityContextHolder
+
+Definition (2 lines):
+SecurityContext stores the authentication and authorization details of the current user.
+SecurityContextHolder provides access to SecurityContext for the current thread.
+
+Example
+
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+4️⃣ Spring Security Filter Chain
+
+Definition (2 lines):
+Spring Security processes requests using a chain of security filters before the request reaches the controller.
+Each filter performs tasks like authentication, authorization, and exception handling.
+
+5️⃣ Session vs Token Authentication
+
+Definition (2 lines):
+Session-based authentication stores user session data on the server.
+Token-based authentication stores authentication data inside a token (like JWT) sent with each request.
+
+🔹 Microservices
+1️⃣ Microservice Communication
+
+Definition (2 lines):
+Microservices communicate with each other using network-based APIs.
+Communication can be synchronous (REST) or asynchronous (message brokers).
+
+Examples
+
+REST APIs
+
+Kafka
+
+RabbitMQ
+
+2️⃣ Service Discovery
+
+Definition (2 lines):
+Service discovery helps microservices find and communicate with each other dynamically.
+It maintains a registry of service instances and their locations.
+
+Example
+
+Eureka
+
+Consul
+
+3️⃣ Circuit Breaker
+
+Definition (2 lines):
+Circuit Breaker is a design pattern that prevents repeated calls to a failing service.
+It helps avoid cascading failures in distributed systems.
+
+States
+
+Closed
+
+Open
+
+Half-open
+
+4️⃣ Distributed Transactions
+
+Definition (2 lines):
+Distributed transactions ensure data consistency across multiple microservices.
+Instead of traditional transactions, patterns like Saga are used.
+
+Approaches
+
+Saga pattern
+
+Event-driven architecture
+
+Compensation transactions
+
+5️⃣ API Gateway
+
+Definition (2 lines):
+API Gateway acts as a single entry point for all client requests in a microservices system.
+It handles routing, authentication, logging, and rate limiting.
+
+Examples
+
+Spring Cloud Gateway
+
+Zuul
+
+🔹 SQL
+1️⃣ INNER vs LEFT vs RIGHT JOIN
+
+Definition (2 lines):
+SQL joins combine rows from multiple tables based on related columns.
+Different join types control which records appear in the result.
+
+INNER JOIN → matching rows
+
+LEFT JOIN → all left table rows
+
+RIGHT JOIN → all right table rows
+
+2️⃣ Indexes
+
+Definition (2 lines):
+Indexes are database structures that improve query performance by allowing faster data retrieval.
+They work similarly to indexes in a book.
+
+Benefits
+
+Faster search
+
+Reduced full table scans
+
+3️⃣ WHERE vs HAVING
+
+Definition (2 lines):
+WHERE filters individual rows before grouping.
+HAVING filters groups after GROUP BY.
+
+Example
+
+SELECT dept, COUNT(*)
+FROM emp
+GROUP BY dept
+HAVING COUNT(*) > 5;
+4️⃣ 2nd Highest Salary
+
+Definition (2 lines):
+The second highest salary can be retrieved using sorting or subqueries.
+It is a common SQL interview question to test query logic.
+
+Example
+
+SELECT salary
+FROM employees
+ORDER BY salary DESC
+LIMIT 1 OFFSET 1;
+5️⃣ Optimizing Slow Queries
+
+Definition (2 lines):
+Query optimization improves database performance by reducing execution time.
+It involves analyzing query plans and improving indexes or query structure.
+
+Techniques
+
+Indexing
+
+Avoid SELECT *
+
+Use EXPLAIN
+
+Proper joins
+
+🔹 Real Project Questions
+Explain Project Architecture
+
+Definition (2 lines):
+Project architecture describes the overall structure of the application and how components interact.
+It includes frontend, backend services, database, and infrastructure.
+
+Example answer
+
+Frontend → React
+Backend → Spring Boot Microservices
+Security → JWT + Spring Security
+Database → MySQL
+Communication → REST + Kafka
+
+Handle High Traffic
+
+Definition (2 lines):
+High traffic handling ensures the system can serve many users without performance degradation.
+This is achieved using scaling, caching, and load balancing.
+
+Techniques
+
+Load balancer
+
+Horizontal scaling
+
+Redis caching
+
+Async processing
+
+Integrating Third Party APIs
+
+Definition (2 lines):
+Third-party API integration allows applications to use external services for additional functionality.
+It is usually implemented using REST clients.
+
+Tools
+
+RestTemplate
+
+WebClient
+
+Securing APIs
+
+Definition (2 lines):
+API security protects endpoints from unauthorized access and attacks.
+Authentication and authorization mechanisms are used.
+
+Techniques
+
+JWT authentication
+
+HTTPS
+
+Role-based access
+
+Performance Optimization
+
+Definition (2 lines):
+Performance optimization improves application speed and efficiency.
+It focuses on reducing latency and improving resource usage.
+
+Examples
+
+DB indexing
+
+Redis caching
+
+Async processing
+
+Query optimization
+
+
+######################################
+
+
+🔹 Multithreading & Concurrency
+• What is Multithreading in Java?
+ • What is a Thread Pool?
+ • What is ExecutorService?
+ • What are the types of Thread Pools?
+
+🔹 Real-Time Scenario
+• In a Spring Boot REST API, if multiple users try to withdraw money at the same time, how will you handle it?
+ (Hint: Synchronization, Database locking, Transactions)
+
+🔹 Collections Framework
+• What is a Collection in Java?
+ • Types of Collections (List, Set, Queue, Map)
+ • What is the Iterable Interface?
+
+🔹 Exception Handling
+• What is Exception Handling?
+ • Types of Exceptions in Java
+ • What is ArithmeticException? (Example: divide by zero)
+
+🔹 Spring Boot Concepts
+• What is Auto Configuration in Spring Boot?
+
+🔹 HashMap
+• What is a HashMap?
+ • Internal Working of HashMap (Hashing, Buckets, Collision Handling)
+
+🔹 Project & Experience Questions
+• Explain your Current Project
+ • What are your Roles and Responsibilities?
+ • What challenges/difficulties did you face in your project?
+
+🔹 Concurrency Problem
+• How to avoid Race Condition in Java?
+
+💻 Coding Question
+Count the occurrences of characters in the String "Hello World"
+
+
+
+
+Below are interview-ready answers in the same format:
+1–2 line definition → explanation → example / real usage.
+
+🔹 Multithreading & Concurrency
+1️⃣ What is Multithreading in Java?
+
+Definition (2 lines):
+Multithreading is the ability of a Java program to execute multiple threads concurrently within a single process.
+It improves CPU utilization and application performance.
+
+Explanation
+
+Each thread represents an independent path of execution.
+
+Example
+
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread running");
+    }
+}
+
+Real use cases
+
+Web servers handling multiple requests
+
+Background processing
+
+Parallel computations
+
+2️⃣ What is a Thread Pool?
+
+Definition (2 lines):
+A Thread Pool is a group of pre-created worker threads used to execute tasks efficiently.
+It avoids the overhead of creating and destroying threads repeatedly.
+
+Explanation
+
+Tasks are submitted to the pool, and available threads execute them.
+
+Benefits
+
+Better performance
+
+Resource management
+
+Thread reuse
+
+Example
+
+ExecutorService executor = Executors.newFixedThreadPool(5);
+executor.submit(task);
+3️⃣ What is ExecutorService?
+
+Definition (2 lines):
+ExecutorService is a Java concurrency framework that manages thread execution using thread pools.
+It allows asynchronous execution of tasks.
+
+Explanation
+
+Features
+
+Submit tasks
+
+Manage thread pools
+
+Shutdown threads gracefully
+
+Example
+
+ExecutorService executor = Executors.newSingleThreadExecutor();
+executor.submit(() -> System.out.println("Task executed"));
+4️⃣ Types of Thread Pools
+
+Definition (2 lines):
+Java provides different thread pool implementations through the Executors utility class.
+Each type is designed for different workloads.
+
+Common types
+
+1️⃣ Fixed Thread Pool
+
+Executors.newFixedThreadPool(5);
+
+Fixed number of threads.
+
+2️⃣ Cached Thread Pool
+
+Executors.newCachedThreadPool();
+
+Creates threads dynamically.
+
+3️⃣ Single Thread Executor
+
+Executors.newSingleThreadExecutor();
+
+Only one thread executes tasks sequentially.
+
+4️⃣ Scheduled Thread Pool
+
+Executors.newScheduledThreadPool(2);
+
+Used for scheduled tasks.
+
+🔹 Real-Time Scenario
+Multiple users withdrawing money simultaneously
+
+Definition (2 lines):
+This situation can cause race conditions where multiple transactions modify the same data simultaneously.
+We must ensure data consistency using synchronization or database transactions.
+
+Solutions
+1️⃣ Synchronization
+public synchronized void withdraw(int amount){
+   balance = balance - amount;
+}
+
+Ensures only one thread executes at a time.
+
+2️⃣ Database Locking
+
+Use pessimistic locking
+
+SELECT * FROM account WHERE id = 1 FOR UPDATE;
+
+Locks the row until transaction completes.
+
+3️⃣ Transactions
+
+Use Spring annotation
+
+@Transactional
+public void withdrawMoney(){
+   // update balance
+}
+
+Ensures ACID properties.
+
+🔹 Collections Framework
+1️⃣ What is a Collection?
+
+Definition (2 lines):
+A Collection is a framework in Java used to store and manipulate groups of objects dynamically.
+It provides reusable data structures and algorithms.
+
+Examples
+
+List
+
+Set
+
+Queue
+
+Map
+
+2️⃣ Types of Collections
+List
+
+Definition (2 lines):
+List is an ordered collection that allows duplicates.
+
+Examples
+
+ArrayList
+
+LinkedList
+
+Vector
+
+Example
+
+List<String> list = new ArrayList<>();
+Set
+
+Definition (2 lines):
+Set is a collection that does not allow duplicate elements.
+
+Examples
+
+HashSet
+
+TreeSet
+
+LinkedHashSet
+
+Queue
+
+Definition (2 lines):
+Queue follows FIFO (First In First Out) principle.
+
+Examples
+
+PriorityQueue
+
+LinkedList
+
+Map
+
+Definition (2 lines):
+Map stores key-value pairs where each key must be unique.
+
+Examples
+
+HashMap
+
+TreeMap
+
+LinkedHashMap
+
+3️⃣ What is Iterable Interface?
+
+Definition (2 lines):
+Iterable is the root interface of the collection hierarchy that allows objects to be iterated using loops.
+It provides the iterator() method.
+
+Example
+
+for(String s : list){
+   System.out.println(s);
+}
+🔹 Exception Handling
+1️⃣ What is Exception Handling?
+
+Definition (2 lines):
+Exception handling is a mechanism used to handle runtime errors gracefully without crashing the application.
+It ensures normal program flow.
+
+Keywords
+
+try
+
+catch
+
+finally
+
+throw
+
+throws
+
+Example
+
+try {
+   int a = 10/0;
+} catch(Exception e){
+   System.out.println(e);
+}
+2️⃣ Types of Exceptions
+
+Definition (2 lines):
+Exceptions in Java are divided into checked exceptions and unchecked exceptions based on when they are detected.
+
+Checked Exceptions
+
+Checked at compile time.
+
+Examples
+
+IOException
+
+SQLException
+
+Unchecked Exceptions
+
+Occur at runtime.
+
+Examples
+
+NullPointerException
+
+ArithmeticException
+
+ArrayIndexOutOfBoundsException
+
+3️⃣ What is ArithmeticException?
+
+Definition (2 lines):
+ArithmeticException occurs when an illegal arithmetic operation happens during program execution.
+Most common case is division by zero.
+
+Example
+
+int a = 10;
+int b = 0;
+
+int c = a / b; // ArithmeticException
+🔹 Spring Boot
+What is Auto Configuration?
+
+Definition (2 lines):
+Auto-configuration automatically configures Spring beans based on project dependencies and configuration.
+It reduces manual setup.
+
+Example
+
+If dependency exists
+
+spring-boot-starter-web
+
+Spring automatically configures
+
+Tomcat
+
+DispatcherServlet
+
+Jackson
+
+Annotation used
+
+@EnableAutoConfiguration
+🔹 HashMap
+What is HashMap?
+
+Definition (2 lines):
+HashMap is a Map implementation that stores key-value pairs using hashing.
+It allows one null key and multiple null values.
+
+Example
+
+Map<Integer,String> map = new HashMap<>();
+map.put(1,"Java");
+Internal Working of HashMap
+
+Definition (2 lines):
+HashMap uses a hashing mechanism to store entries in buckets.
+Each key’s hashcode determines the bucket index.
+
+Steps
+
+1️⃣ Calculate hashcode
+
+hash = key.hashCode()
+
+2️⃣ Find bucket index
+
+index = hash % capacity
+
+3️⃣ Store entry in bucket.
+
+Collision handling
+
+LinkedList
+
+Red Black Tree (Java 8+)
+
+🔹 Project Questions
+Explain Your Current Project
+
+Definition (2 lines):
+Our project is a microservices-based backend system developed using Spring Boot.
+It provides REST APIs for business operations and integrates with external services.
+
+Example answer
+
+Frontend → Web Application
+Backend → Spring Boot Microservices
+Security → Spring Security + JWT
+Database → MySQL
+Messaging → Kafka
+Deployment → AWS
+Roles & Responsibilities
+
+Definition (2 lines):
+My role is mainly focused on backend development and API implementation.
+I work on designing, developing, and optimizing REST services.
+
+Responsibilities
+
+Develop REST APIs
+
+Implement business logic
+
+Database integration
+
+Debug production issues
+
+Code reviews
+
+Challenges faced in project
+
+Definition (2 lines):
+Challenges occur when scaling applications, handling concurrency, or integrating external services.
+These require optimized design and debugging.
+
+Examples
+
+Handling high API traffic
+
+Optimizing slow database queries
+
+Fixing concurrency issues
+
+Third-party API failures
+
+🔹 Concurrency Problem
+How to avoid Race Condition?
+
+Definition (2 lines):
+Race condition occurs when multiple threads modify shared data simultaneously causing inconsistent results.
+It can be prevented using synchronization mechanisms.
+
+Solutions
+
+1️⃣ synchronized
+
+synchronized void update(){
+   count++;
+}
+
+2️⃣ Locks
+
+ReentrantLock
+
+3️⃣ Atomic classes
+
+AtomicInteger
+
+4️⃣ Database transactions
+
+@Transactional
+💻 Coding Question
+Count characters in "Hello World"
+Approach
+
+Use HashMap to store character counts.
+
+Example
+
+import java.util.*;
+
+public class CountChars {
+    public static void main(String[] args) {
+
+        String str = "Hello World";
+        Map<Character,Integer> map = new HashMap<>();
+
+        for(char c : str.toCharArray()) {
+
+            if(c == ' ') continue;
+
+            map.put(c, map.getOrDefault(c,0)+1);
+        }
+
+        System.out.println(map);
+    }
+}
+
+Output
+
+H=1
+e=1
+l=3
+o=2
+W=1
+r=1
+d=1
+
+
+
+######################################################################################################################################################################################
+
+
+
+
 Profile in Spring Boot:-
 ------------------------
 
@@ -6630,6 +7918,32 @@ Instant credibility.
 
 
 
+######################################################################################################################################################################################
+
+
+
+What are your career objectives?*
+
+
+If this question is for a job application (like on Naukri.com), your career objective should be short, clear, and aligned with software development.
+
+Since you transitioned from Civil Engineering and Process Associate to Software Engineering, you can frame it like this:
+
+Option 1 (Best for Software Developer roles)
+
+To build a successful career as a Software Developer by applying my knowledge of Java, problem-solving skills, and software development principles, while continuously learning new technologies and contributing to the growth of the organization.
+
+Option 2 (Short and Strong)
+
+To obtain a challenging Software Developer position where I can utilize my Java programming skills and continuously improve my technical expertise while contributing to innovative software solutions.
+
+Option 3 (Mention learning mindset)
+
+To work in a growth-oriented organization where I can apply my Java development skills, learn modern technologies, and contribute effectively to building reliable and scalable software applications.
+
+💡 Tip:
+For online forms, keep career objectives 2–3 lines only. Recruiters usually scan quickly.
+
 
 
 ######################################################################################################################################################################################
@@ -7312,7 +8626,8 @@ list.stream()
 
 🧠 Perfect 20-second Interview Answer
 
-Collections are used to store data in memory, whereas Streams are used to process data. Collections allow modification of elements and execute operations immediately, while Streams do not modify the source and use lazy evaluation until a terminal operation is called.
+Collections are used to store data in memory, whereas Streams are used to process data. Collections allow modification of elements and execute operations immediately, 
+while Streams do not modify the source and use lazy evaluation until a terminal operation is called.
 
 
 
@@ -7524,7 +8839,8 @@ equals() → finds exact key
 
 🧠 Interview 30-Second Answer
 
-HashMap internally uses an array of buckets where each bucket stores nodes. The index is calculated using the key’s hashCode. When multiple keys map to the same bucket, collision occurs and is handled using a LinkedList, which converts into a Red-Black Tree in Java 8 when entries exceed a threshold, improving search performance.
+HashMap internally uses an array of buckets where each bucket stores nodes. The index is calculated using the key’s hashCode. When multiple keys map to the same bucket, 
+collision occurs and is handled using a LinkedList, which converts into a Red-Black Tree in Java 8 when entries exceed a threshold, improving search performance.
 
 
 
@@ -7560,7 +8876,8 @@ When we say REST communication:
 
 🧠 Perfect Interview Explanation (Say This)
 
-In Feign Client, microservices communicate via REST by defining an interface annotated with @FeignClient. Spring automatically generates the HTTP client implementation at runtime, so calling another microservice becomes similar to calling a local method, while internally it performs REST API communication.
+In Feign Client, microservices communicate via REST by defining an interface annotated with @FeignClient. Spring automatically generates the HTTP client implementation at runtime, 
+so calling another microservice becomes similar to calling a local method, while internally it performs REST API communication.
 
 
 🔥 What Happens Internally
@@ -7675,7 +8992,9 @@ how api communicate like headers and urls explain:-
 
 🧠 Perfect Real Project Answer (Say Like This)
 
-In our project, REST APIs were developed using Spring Boot controllers exposing endpoints with @RestController. Microservices communicate using Feign Client, where we define an interface mapped to the target service endpoint. During the call, Feign automatically constructs an HTTP request including URL, headers like Authorization token, and JSON request body. The target service processes the request and returns a response which Feign maps back to a Java object.
+In our project, REST APIs were developed using Spring Boot controllers exposing endpoints with @RestController. Microservices communicate using Feign Client, where we define an 
+interface mapped to the target service endpoint. During the call, Feign automatically constructs an HTTP request including URL, headers like Authorization token, and JSON request 
+body. The target service processes the request and returns a response which Feign maps back to a Java object.
 
 
 
@@ -7686,7 +9005,9 @@ How you integrate 2 system for data exchange:-
 
 🧠 Perfect Interview Answer (Speak This)
 
-In our project, ServiceNow was our internal system and SAP was an external system. When an event occurred in ServiceNow, our Spring Boot integration service received the request, transformed the data into SAP-required format, and used a Feign Client to invoke SAP’s external REST APIs. Feign automatically handled HTTP request creation, headers, JSON conversion, and response mapping, allowing seamless data exchange between the two systems.
+In our project, ServiceNow was our internal system and SAP was an external system. When an event occurred in ServiceNow, our Spring Boot integration service received the request, 
+transformed the data into SAP-required format, and used a Feign Client to invoke SAP’s external REST APIs. Feign automatically handled HTTP request creation, headers, 
+JSON conversion, and response mapping, allowing seamless data exchange between the two systems.
 
 
 
@@ -7929,7 +9250,8 @@ class AccountController { }
 
 🧠 Perfect Interview Explanation
 
-In Customer and Account API design, Customer is treated as the parent resource and Account as a child resource. We expose REST endpoints like POST /customers to create customers and POST /customers/{id}/accounts to create accounts under a customer. APIs follow REST principles using proper HTTP methods, resource hierarchy, and standard response codes.
+In Customer and Account API design, Customer is treated as the parent resource and Account as a child resource. We expose REST endpoints like POST /customers to create customers 
+and POST /customers/{id}/accounts to create accounts under a customer. APIs follow REST principles using proper HTTP methods, resource hierarchy, and standard response codes.
 
 
 
